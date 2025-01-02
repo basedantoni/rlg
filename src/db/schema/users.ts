@@ -1,10 +1,10 @@
 import { sql } from "drizzle-orm"
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { createInsertSchema, createSelectSchema } from "drizzle-zod";
+import { createInsertSchema, createSelectSchema, createUpdateSchema } from "drizzle-zod";
 import { z } from "zod";
 
 export const users = sqliteTable("users", {
-        id: integer("id").primaryKey({ autoIncrement: true }),
+        id: text("id").primaryKey(),
         name: text("name"),
         xp: integer("xp"),
         level: integer("level"),
@@ -18,10 +18,10 @@ export const insertUserSchema = createInsertSchema(users).omit({
         createdAt: true,
         updatedAt: true,
 });
-export const insertUserParams = baseSchema.omit({ id: true });
+export const insertUserParams = baseSchema;
 
-export const updateUserSchema = baseSchema;
-export const updateUserParams = baseSchema.extend({}).omit({});
+export const updateUserSchema = createUpdateSchema(users);
+export const updateUserParams = updateUserSchema.extend({}).omit({});
 export const userIdSchema = baseSchema.pick({ id: true });
 
 export type Users = typeof users.$inferSelect;
