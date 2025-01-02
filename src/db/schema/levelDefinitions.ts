@@ -1,6 +1,6 @@
 import { sql } from "drizzle-orm"
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { createInsertSchema, createSelectSchema } from "drizzle-zod";
+import { createInsertSchema, createSelectSchema, createUpdateSchema } from "drizzle-zod";
 import { z } from "zod";
 
 export const levelDefinitions = sqliteTable("level_definitions", {
@@ -19,8 +19,12 @@ export const insertLevelDefinitionSchema = createInsertSchema(levelDefinitions).
 });
 export const insertLevelDefinitionParams = baseSchema.omit({ id: true });
 
-export const updateLevelDefinitionSchema = baseSchema;
-export const updateLevelDefinitionParams = baseSchema.extend({}).omit({});
+export const updateLevelDefinitionSchema = createUpdateSchema(levelDefinitions).omit({
+        id: true,
+        createdAt: true,
+})
+export const updateLevelDefinitionParams = updateLevelDefinitionSchema.extend({}).omit({})
+
 export const levelDefinitionIdSchema = baseSchema.pick({ id: true });
 
 export type levelDefinitions = typeof levelDefinitions.$inferSelect;

@@ -1,7 +1,7 @@
 import { users } from "@/db/schema/users";
 import { sql } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { createInsertSchema, createSelectSchema } from "drizzle-zod";
+import { createInsertSchema, createSelectSchema, createUpdateSchema } from "drizzle-zod";
 import { z } from "zod";
 
 export const categories = sqliteTable("categories", {
@@ -21,8 +21,12 @@ export const insertCategorySchema = createInsertSchema(categories).omit({
 });
 export const insertCategoryParams = baseSchema.omit({ id: true });
 
-export const updateCategorySchema = baseSchema;
-export const updateCategoryParams = baseSchema.extend({}).omit({});
+export const updateCategorySchema = createUpdateSchema(categories).omit({
+        id: true,
+        createdAt: true,
+});
+export const updateCategoryParams = updateCategorySchema.extend({}).omit({});
+
 export const categoryIdSchema = baseSchema.pick({ id: true });
 
 export type Categories = typeof categories.$inferSelect;

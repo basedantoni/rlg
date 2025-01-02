@@ -1,6 +1,6 @@
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { relations, sql } from "drizzle-orm";
-import { createInsertSchema, createSelectSchema } from "drizzle-zod";
+import { createInsertSchema, createSelectSchema, createUpdateSchema } from "drizzle-zod";
 import { z } from "zod";
 import { questsTags } from "./questTags";
 import { dailyQuestsTags } from "./dailyQuestTags";
@@ -25,8 +25,12 @@ export const insertTagSchema = createInsertSchema(tags).omit({
 })
 export const insertTagParams = baseSchema.omit({ id: true });
 
-export const updateTagSchema = baseSchema;
-export const updateTagParams = baseSchema.extend({}).omit({});
+export const updateTagSchema = createUpdateSchema(tags).omit({
+        id: true,
+        createdAt: true,
+});
+export const updateTagParams = updateTagSchema.extend({}).omit({});
+
 export const tagIdSchema = baseSchema.pick({ id: true });
 
 export type Tags = typeof tags.$inferSelect;

@@ -20,8 +20,12 @@ export const insertUserSchema = createInsertSchema(users).omit({
 });
 export const insertUserParams = baseSchema;
 
-export const updateUserSchema = createUpdateSchema(users);
+export const updateUserSchema = createUpdateSchema(users).omit({
+        id: true,
+        createdAt: true,
+});
 export const updateUserParams = updateUserSchema.extend({}).omit({});
+
 export const userIdSchema = baseSchema.pick({ id: true });
 
 export type Users = typeof users.$inferSelect;

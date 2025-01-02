@@ -1,6 +1,6 @@
 import { sql } from "drizzle-orm"
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { createInsertSchema, createSelectSchema } from "drizzle-zod";
+import { createInsertSchema, createSelectSchema, createUpdateSchema } from "drizzle-zod";
 import { z } from "zod";
 
 export const rewards = sqliteTable("rewards", {
@@ -19,8 +19,12 @@ export const insertRewardSchema = createInsertSchema(rewards).omit({
 });
 export const insertRewardParams = baseSchema.omit({ id: true });
 
-export const updateRewardSchema = baseSchema;
-export const updateRewardParams = baseSchema.extend({}).omit({});
+export const updateRewardSchema = createUpdateSchema(rewards).omit({
+        id: true,
+        createdAt: true,
+});
+export const updateRewardParams = updateRewardSchema.extend({}).omit({});
+
 export const rewardIdSchema = baseSchema.pick({ id: true });
 
 export type rewards = typeof rewards.$inferSelect;

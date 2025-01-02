@@ -1,7 +1,7 @@
 import { quests } from "./quests";
 import { sql } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { createInsertSchema, createSelectSchema } from "drizzle-zod";
+import { createInsertSchema, createSelectSchema, createUpdateSchema } from "drizzle-zod";
 import { z } from "zod";
 
 export const dailyQuests = sqliteTable("daily_quests", {
@@ -24,8 +24,12 @@ export const insertDailyQuestSchema = createInsertSchema(dailyQuests).omit({
 });
 export const insertDailyQuestParams = baseSchema.omit({ id: true });
 
-export const updateDailyQuestSchema = baseSchema;
-export const updateDailyQuestParams = baseSchema.extend({}).omit({});
+export const updateDailyQuestSchema = createUpdateSchema(dailyQuests).omit({
+        id: true,
+        createdAt: true,
+});
+export const updateDailyQuestParams = updateDailyQuestSchema.extend({}).omit({});
+
 export const dailyQuestIdSchema = baseSchema.pick({ id: true });
 
 export type DailyQuests = typeof dailyQuests.$inferSelect;
