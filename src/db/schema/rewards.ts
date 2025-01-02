@@ -1,27 +1,31 @@
-import { sql } from "drizzle-orm"
+import { sql } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { createInsertSchema, createSelectSchema, createUpdateSchema } from "drizzle-zod";
+import {
+  createInsertSchema,
+  createSelectSchema,
+  createUpdateSchema,
+} from "drizzle-zod";
 import { z } from "zod";
 
 export const rewards = sqliteTable("rewards", {
-        id: integer("id").primaryKey({ autoIncrement: true }),
-        name: text("name").notNull(),
-        description: text("description"),
-        createdAt: text("created_at").default(sql`(CURRENT_TIMESTAMP)`),
-        updatedAt: text("updated_at").default(sql`(CURRENT_TIMESTAMP)`),
-})
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  name: text("name").notNull(),
+  description: text("description"),
+  createdAt: text("created_at").default(sql`(CURRENT_TIMESTAMP)`),
+  updatedAt: text("updated_at").default(sql`(CURRENT_TIMESTAMP)`),
+});
 
 const baseSchema = createSelectSchema(rewards);
 
 export const insertRewardSchema = createInsertSchema(rewards).omit({
-        createdAt: true,
-        updatedAt: true,
+  createdAt: true,
+  updatedAt: true,
 });
 export const insertRewardParams = baseSchema.omit({ id: true });
 
 export const updateRewardSchema = createUpdateSchema(rewards).omit({
-        id: true,
-        createdAt: true,
+  id: true,
+  createdAt: true,
 });
 export const updateRewardParams = updateRewardSchema.extend({}).omit({});
 

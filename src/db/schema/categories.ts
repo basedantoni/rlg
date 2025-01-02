@@ -1,29 +1,33 @@
 import { users } from "@/db/schema/users";
 import { sql } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { createInsertSchema, createSelectSchema, createUpdateSchema } from "drizzle-zod";
+import {
+  createInsertSchema,
+  createSelectSchema,
+  createUpdateSchema,
+} from "drizzle-zod";
 import { z } from "zod";
 
 export const categories = sqliteTable("categories", {
-        id: integer("id").primaryKey({ autoIncrement: true }),
-        userId: integer("user_id").references(() => users.id),
-        name: text("name"),
-        color: text("color"),
-        createdAt: text("created_at").default(sql`(CURRENT_TIMESTAMP)`),
-        updatedAt: text("updated_at").default(sql`(CURRENT_TIMESTAMP)`),
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  userId: integer("user_id").references(() => users.id),
+  name: text("name"),
+  color: text("color"),
+  createdAt: text("created_at").default(sql`(CURRENT_TIMESTAMP)`),
+  updatedAt: text("updated_at").default(sql`(CURRENT_TIMESTAMP)`),
 });
 
 const baseSchema = createSelectSchema(categories);
 
 export const insertCategorySchema = createInsertSchema(categories).omit({
-        createdAt: true,
-        updatedAt: true,
+  createdAt: true,
+  updatedAt: true,
 });
 export const insertCategoryParams = baseSchema.omit({ id: true });
 
 export const updateCategorySchema = createUpdateSchema(categories).omit({
-        id: true,
-        createdAt: true,
+  id: true,
+  createdAt: true,
 });
 export const updateCategoryParams = updateCategorySchema.extend({}).omit({});
 
