@@ -47,6 +47,9 @@ importers:
       drizzle-orm:
         specifier: ^0.38.2
         version: 0.38.2(@libsql/client@0.14.0)(@types/react@19.0.1)(react@19.0.0)
+      drizzle-seed:
+        specifier: ^0.3.0
+        version: 0.3.0(drizzle-orm@0.38.2(@libsql/client@0.14.0)(@types/react@19.0.1)(react@19.0.0))
       drizzle-zod:
         specifier: ^0.6.0
         version: 0.6.0(drizzle-orm@0.38.2(@libsql/client@0.14.0)(@types/react@19.0.1)(react@19.0.0))(zod@3.24.1)
@@ -1447,6 +1450,14 @@ packages:
       sqlite3:
         optional: true
 
+  drizzle-seed@0.3.0:
+    resolution: {integrity: sha512-8WSt1WdtYWqClsCxKeAmU/bw8X+weYtuA/h8M3gVc8LiHU2AZX5ZUnvUxwdBsP+SkN26ARGhmU0XIJ2OEmHmfA==}
+    peerDependencies:
+      drizzle-orm: '>=0.36.4'
+    peerDependenciesMeta:
+      drizzle-orm:
+        optional: true
+
   drizzle-zod@0.6.0:
     resolution: {integrity: sha512-7K1k7Y/5Jw9D4cTlrHL3mRTLg3oaglbi4VvBIYmSAtMvYkgqvusPtra7cnntMCe1r1cBcwxhlEkfiNdU23lp2g==}
     peerDependencies:
@@ -2270,6 +2281,9 @@ packages:
   punycode@2.3.1:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
+
+  pure-rand@6.1.0:
+    resolution: {integrity: sha512-bVWawvoZoBYpp6yIoQtQXHZjmz35RSVHnUOTefl8Vcjr8snTPY1wnpSPMWekcFwbxI6gtmT7rSYPFvz71ldiOA==}
 
   querystringify@2.2.0:
     resolution: {integrity: sha512-FIqgj2EUvTa7R50u0rGsyTftzjYmv/a3hO345bZNrqabNqjtgiDMgmo4mkUjd+nzU5oF3dClKqFIPUKybUyqoQ==}
@@ -3802,6 +3816,12 @@ snapshots:
       '@types/react': 19.0.1
       react: 19.0.0
 
+  drizzle-seed@0.3.0(drizzle-orm@0.38.2(@libsql/client@0.14.0)(@types/react@19.0.1)(react@19.0.0)):
+    dependencies:
+      pure-rand: 6.1.0
+    optionalDependencies:
+      drizzle-orm: 0.38.2(@libsql/client@0.14.0)(@types/react@19.0.1)(react@19.0.0)
+
   drizzle-zod@0.6.0(drizzle-orm@0.38.2(@libsql/client@0.14.0)(@types/react@19.0.1)(react@19.0.0))(zod@3.24.1):
     dependencies:
       drizzle-orm: 0.38.2(@libsql/client@0.14.0)(@types/react@19.0.1)(react@19.0.0)
@@ -4832,6 +4852,8 @@ snapshots:
       react-is: 16.13.1
 
   punycode@2.3.1: {}
+
+  pure-rand@6.1.0: {}
 
   querystringify@2.2.0: {}
 

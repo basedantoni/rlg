@@ -9,11 +9,13 @@
     "lint": "next lint",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx src/db/migrate.ts",
+    "db:seed": "tsx src/db/seed.ts",
     "db:drop": "drizzle-kit drop",
     "db:pull": "drizzle-kit introspect",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "db:check": "drizzle-kit check"
+    "db:check": "drizzle-kit check",
+    "db:export": "drizzle-kit export"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.9.6",
@@ -29,6 +31,7 @@
     "clsx": "^2.1.1",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.38.2",
+    "drizzle-seed": "^0.3.0",
     "drizzle-zod": "^0.6.0",
     "lucide-react": "^0.469.0",
     "nanoid": "^5.0.9",

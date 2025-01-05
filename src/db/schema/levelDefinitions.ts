@@ -5,12 +5,15 @@ import {
   createSelectSchema,
   createUpdateSchema,
 } from "drizzle-zod";
+import { nanoid } from "nanoid";
 import { z } from "zod";
 
 export const levelDefinitions = sqliteTable("level_definitions", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
-  name: text("name").notNull(),
-  description: text("description"),
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => nanoid()),
+  level: integer("level").notNull().unique(),
+  xpTreshold: integer("xp_treshold").notNull(),
   createdAt: text("created_at").default(sql`(CURRENT_TIMESTAMP)`),
   updatedAt: text("updated_at").default(sql`(CURRENT_TIMESTAMP)`),
 });
