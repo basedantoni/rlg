@@ -1,16 +1,19 @@
 import { users } from "@/db/schema/users";
 import { sql } from "drizzle-orm";
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { sqliteTable, text } from "drizzle-orm/sqlite-core";
 import {
   createInsertSchema,
   createSelectSchema,
   createUpdateSchema,
 } from "drizzle-zod";
+import { nanoid } from "nanoid";
 import { z } from "zod";
 
 export const categories = sqliteTable("categories", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
-  userId: integer("user_id").references(() => users.id),
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => nanoid()),
+  userId: text("user_id").references(() => users.id),
   name: text("name"),
   color: text("color"),
   createdAt: text("created_at").default(sql`(CURRENT_TIMESTAMP)`),

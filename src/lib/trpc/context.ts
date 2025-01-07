@@ -1,10 +1,10 @@
-import { db } from '@/db/drizzle'
-import { cache } from 'react';
+import { db } from "@/db/drizzle";
+import { cache } from "react";
 
 export const createTRPCContext = cache(async () => {
-        return {
-                db,
-        }
+  return {
+    db,
+  };
 });
 
 export type Context = Awaited<ReturnType<typeof createTRPCContext>>;

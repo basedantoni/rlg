@@ -5,10 +5,13 @@ import {
   createSelectSchema,
   createUpdateSchema,
 } from "drizzle-zod";
+import { nanoid } from "nanoid";
 import { z } from "zod";
 
 export const users = sqliteTable("users", {
-  id: text("id").primaryKey(),
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => nanoid()),
   name: text("name"),
   xp: integer("xp"),
   level: integer("level"),

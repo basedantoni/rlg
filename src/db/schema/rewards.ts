@@ -5,10 +5,13 @@ import {
   createSelectSchema,
   createUpdateSchema,
 } from "drizzle-zod";
+import { nanoid } from "nanoid";
 import { z } from "zod";
 
 export const rewards = sqliteTable("rewards", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => nanoid()),
   name: text("name").notNull(),
   description: text("description"),
   createdAt: text("created_at").default(sql`(CURRENT_TIMESTAMP)`),

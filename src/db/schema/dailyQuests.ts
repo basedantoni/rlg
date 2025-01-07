@@ -1,16 +1,19 @@
 import { quests } from "./quests";
 import { sql } from "drizzle-orm";
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { sqliteTable, text } from "drizzle-orm/sqlite-core";
 import {
   createInsertSchema,
   createSelectSchema,
   createUpdateSchema,
 } from "drizzle-zod";
+import { nanoid } from "nanoid";
 import { z } from "zod";
 
 export const dailyQuests = sqliteTable("daily_quests", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
-  questId: integer("quest_id").references(() => quests.id),
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => nanoid()),
+  questId: text("quest_id").references(() => quests.id),
   title: text("title").notNull(),
   description: text("description"),
   status: text("status").$type<"open" | "completed">().default("open"),
@@ -24,11 +27,18 @@ export const dailyQuests = sqliteTable("daily_quests", {
 
 const baseSchema = createSelectSchema(dailyQuests);
 
-export const insertDailyQuestSchema = createInsertSchema(dailyQuests).omit({
-  createdAt: true,
-  updatedAt: true,
-});
-export const insertDailyQuestParams = baseSchema.omit({ id: true });
+export const insertDailyQuestSchema = createInsertSchema(dailyQuests)
+  .omit({
+    createdAt: true,
+    updatedAt: true,
+  })
+  .extend({
+    status: z.enum(["open", "completed"]).optional(),
+    recurrence: z
+      .enum(["none", "daily", "workdays", "weekends", "weekly", "monthly"])
+      .optional(),
+  });
+export const insertDailyQuestParams = insertDailyQuestSchema.omit({ id: true });
 
 export const updateDailyQuestSchema = createUpdateSchema(dailyQuests).omit({
   id: true,

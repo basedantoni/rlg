@@ -1,4 +1,4 @@
-import { sqliteTable, integer, primaryKey } from "drizzle-orm/sqlite-core";
+import { sqliteTable, text, primaryKey } from "drizzle-orm/sqlite-core";
 import { quests } from "./quests";
 import { tags } from "./tags";
 import { relations } from "drizzle-orm";
@@ -6,10 +6,10 @@ import { relations } from "drizzle-orm";
 export const questsTags = sqliteTable(
   "quests_tags",
   {
-    questId: integer("quest_id")
+    questId: text("quest_id")
       .notNull()
       .references(() => quests.id),
-    tagId: integer("tag_id")
+    tagId: text("tag_id")
       .notNull()
       .references(() => tags.id),
   },

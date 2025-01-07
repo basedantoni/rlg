@@ -22,6 +22,20 @@
       "when": 1735918175989,
       "tag": "0002_aspiring_matthew_murdock",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1736287310979,
+      "tag": "0003_nappy_nehzno",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1736287453437,
+      "tag": "0004_nappy_bedlam",
+      "breakpoints": true
     }
   ]
 }

@@ -7,12 +7,15 @@ import {
   createSelectSchema,
   createUpdateSchema,
 } from "drizzle-zod";
+import { nanoid } from "nanoid";
 import { z } from "zod";
 
 export const quests = sqliteTable("quests", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
-  userId: integer("user_id").references(() => users.id),
-  categoryId: integer("category_id").references(() => categories.id),
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => nanoid()),
+  userId: text("user_id").references(() => users.id),
+  categoryId: text("category_id").references(() => categories.id),
   title: text("title").notNull(),
   description: text("description"),
   status: text("status").$type<"open" | "completed">().default("open"),
@@ -23,14 +26,21 @@ export const quests = sqliteTable("quests", {
 
 const baseSchema = createSelectSchema(quests);
 
-export const insertQuestSchema = createInsertSchema(quests).omit({
-  createdAt: true,
-  updatedAt: true,
+export const insertQuestSchema = createInsertSchema(quests)
+  .omit({
+    createdAt: true,
+    updatedAt: true,
+  })
+  .extend({
+    status: z.enum(["open", "completed"]).optional(),
+  });
+export const insertQuestParams = insertQuestSchema.omit({
+  id: true,
+  userId: true,
+  categoryId: true,
 });
-export const insertQuestParams = baseSchema.omit({ id: true });
 
 export const updateQuestSchema = createUpdateSchema(quests).omit({
-  id: true,
   createdAt: true,
 });
 export const updateQuestParams = updateQuestSchema.extend({}).omit({});
