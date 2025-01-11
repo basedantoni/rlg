@@ -1,7 +1,6 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import TrpcProvider from "@/lib/trpc/Provider";
 import { cookies } from "next/headers";
-import { ThemeProvider } from "@/context/theme";
 
 export default async function AppLayout({
   children,
@@ -12,11 +11,7 @@ export default async function AppLayout({
   return (
     <main>
       <ClerkProvider>
-        <TrpcProvider cookies={cookieString}>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            {children}
-          </ThemeProvider>
-        </TrpcProvider>
+        <TrpcProvider cookies={cookieString}>{children}</TrpcProvider>
       </ClerkProvider>
     </main>
   );

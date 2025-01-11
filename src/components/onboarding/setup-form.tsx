@@ -37,18 +37,17 @@ export default function SetupForm() {
           </p>
         </div>
         <div className="flex flex-col gap-3 items-center w-full relative">
-          {quests
-            .slice(0, 5)
-            .map(({ title }: { title: string }, idx: number) => (
-              <div
-                key={idx}
-                className="bg-white h-4 absolute flex gap-2.5 px-4 py-1 items-center w-full border rounded-lg"
-                style={{
-                  transform: `translateY(-${0.5 * (idx + 1.25)}rem) scaleX(${1 - (idx + 1) * 0.03})`,
-                  zIndex: `-${idx * 10}`,
-                }}
-              ></div>
-            ))}
+          {quests.slice(0, 5).map((_, idx: number) => (
+            <div
+              key={idx}
+              className="border border-background h-4 absolute flex gap-2.5 px-4 py-1 items-center w-full border rounded-lg"
+              style={{
+                background: `hsl(0 0% ${100 - (idx + 1) * 15}%`,
+                transform: `translateY(-${0.5 * (idx + 1.25)}rem) scaleX(${1 - (idx + 1) * 0.03})`,
+                zIndex: `-${idx * 10}`,
+              }}
+            ></div>
+          ))}
           <Input
             className="z-20 bg-white px-4 py-3 rounded-lg"
             type="text"
@@ -75,18 +74,17 @@ export default function SetupForm() {
         </div>
         <div className="flex flex-col gap-3 items-center w-full">
           <div className="flex flex-col gap-3 items-center w-full relative">
-            {dailyQuests
-              .slice(0, 5)
-              .map(({ title }: { title: string }, idx: number) => (
-                <div
-                  key={idx}
-                  className="bg-white h-4 absolute flex gap-2.5 px-4 py-1 items-center w-full border rounded-lg"
-                  style={{
-                    transform: `translateY(-${0.5 * (idx + 1.25)}rem) scaleX(${1 - (idx + 1) * 0.03})`,
-                    zIndex: `-${idx * 10}`,
-                  }}
-                ></div>
-              ))}
+            {dailyQuests.slice(0, 5).map((_, idx: number) => (
+              <div
+                key={idx}
+                className="border border-background h-4 absolute flex gap-2.5 px-4 py-1 items-center w-full border rounded-lg"
+                style={{
+                  background: `hsl(0 0% ${100 - (idx + 1) * 15}%`,
+                  transform: `translateY(-${0.5 * (idx + 1.25)}rem) scaleX(${1 - (idx + 1) * 0.03})`,
+                  zIndex: `-${idx * 10}`,
+                }}
+              ></div>
+            ))}
             <Input
               className="z-20 bg-white px-4 py-3 rounded-lg"
               type="text"

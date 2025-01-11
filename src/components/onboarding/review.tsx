@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components//ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { toast } from "sonner";
 
 import { NewQuestParams } from "@/db/schema/quests";
 import { NewDailyQuestParams } from "@/db/schema/dailyQuests";
@@ -25,11 +26,14 @@ export default function Review() {
     data?: { error?: string },
   ) => {
     if (data?.error) {
-      //toast.error(data.error);
+      toast.error(data.error);
       console.log(data.error);
       return;
     }
 
+    toast.error(
+      `${action.charAt(0).toUpperCase() + action.slice(1).toLowerCase()} event`,
+    );
     await utils.quests.getQuests.invalidate();
   };
 
