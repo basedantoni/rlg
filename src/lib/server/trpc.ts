@@ -1,4 +1,4 @@
-import { initTRPC } from "@trpc/server";
+import { initTRPC, TRPCError } from "@trpc/server";
 import { Context } from "@/lib/trpc/context";
 import SuperJSON from "superjson";
 import { ZodError } from "zod";
@@ -32,7 +32,20 @@ export const createCallerFactory = t.createCallerFactory;
 /**
  * TODO: middleware that enforces user authentication
  */
+const enforceUserAuth = t.middleware(({ ctx, next }) => {
+  if (!ctx.session) {
+    throw new TRPCError({ code: "UNAUTHORIZED" });
+  }
+  return next({
+    ctx: {
+      ...ctx,
+      // infers the `session` as non-nullable
+      session: { ...ctx.session, user: ctx.session.user },
+    },
+  });
+});
 
 /**
  * TODO: protected procedure for only loggedin users
  */
+export const protectedProcedure = t.procedure.use(enforceUserAuth);

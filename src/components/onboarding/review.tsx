@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components//ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { X } from "lucide-react";
 import { toast } from "sonner";
 
 import { NewQuestParams } from "@/db/schema/quests";
@@ -85,7 +86,7 @@ export default function Review() {
               <p className="font-semibold">Quests</p>
               {quests.map(({ title }: { title: string }, idx: number) => (
                 <div
-                  className="py-4 last:border-none border-b border-zinc-200"
+                  className="py-4 last:border-none border-b border-secondary"
                   key={idx}
                 >
                   <p className="font-medium text-sm">{title}</p>
@@ -98,7 +99,7 @@ export default function Review() {
               <p className="font-semibold">Side Quests</p>
               {dailyQuests.map(({ title }: { title: string }, idx: number) => (
                 <div
-                  className="py-4 last:border-none border-b border-zinc-200"
+                  className="flex justify-between py-4 last:border-none border-b border-secondary"
                   key={idx}
                 >
                   <p className="font-medium text-sm">{title}</p>

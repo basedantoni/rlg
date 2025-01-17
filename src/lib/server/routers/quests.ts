@@ -3,7 +3,7 @@ import {
   getQuests,
   getQuestsDue,
 } from "@/lib/api/quests/queries";
-import { publicProcedure, router } from "@/lib/server/trpc";
+import { protectedProcedure, router } from "@/lib/server/trpc";
 import {
   questIdSchema,
   insertQuestParams,
@@ -16,28 +16,28 @@ import {
 } from "@/lib/api/quests/mutations";
 
 export const questsRouter = router({
-  getQuests: publicProcedure.query(async () => {
+  getQuests: protectedProcedure.query(async () => {
     return getQuests();
   }),
-  getQuestsDue: publicProcedure.query(async () => {
+  getQuestsDue: protectedProcedure.query(async () => {
     return getQuestsDue();
   }),
-  getQuestById: publicProcedure
+  getQuestById: protectedProcedure
     .input(questIdSchema)
     .query(async ({ input }) => {
       return getQuestById(input.id);
     }),
-  createQuest: publicProcedure
+  createQuest: protectedProcedure
     .input(insertQuestParams)
     .mutation(async ({ input }) => {
       return createQuest(input);
     }),
-  updateQuest: publicProcedure
+  updateQuest: protectedProcedure
     .input(updateQuestParams)
     .mutation(async ({ input }) => {
       return updateQuest(input.id, input);
     }),
-  deleteQuest: publicProcedure
+  deleteQuest: protectedProcedure
     .input(questIdSchema)
     .mutation(async ({ input }) => {
       return deleteQuest(input.id);
