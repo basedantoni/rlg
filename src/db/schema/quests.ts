@@ -32,7 +32,7 @@ export const insertQuestSchema = createInsertSchema(quests)
     updatedAt: true,
   })
   .extend({
-    status: z.enum(["open", "completed"]).optional(),
+    status: z.enum(["open", "completed"]).nullable(),
   });
 export const insertQuestParams = insertQuestSchema.omit({
   id: true,

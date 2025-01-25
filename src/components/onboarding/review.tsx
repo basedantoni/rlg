@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components//ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { X } from "lucide-react";
 import { toast } from "sonner";
 
 import { NewQuestParams } from "@/db/schema/quests";
