@@ -1,20 +1,58 @@
 import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-const Card = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "rounded-lg border bg-card text-card-foreground shadow",
-      className,
-    )}
-    {...props}
-  />
-));
+const cardVariants = cva("rounded-lg shadow", {
+  variants: {
+    variant: {
+      default: "bg-card text-card-foreground border",
+      selectable:
+        "bg-gradient-to-b from-[#626262] to-[#343434] cursor-pointer hover:bg-none hover:bg-hover",
+    },
+    gradient: {
+      true: "bg-transparent",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+    gradient: false,
+  },
+});
+
+export interface CardProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof cardVariants> {}
+
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  ({ className, variant, gradient, children, ...props }, ref) => {
+    // If gradient is true, wrap the card in a gradient border
+    if (gradient) {
+      return (
+        <div className="bg-gradient-to-b from-[#828282] to-[#3C3C3C] p-[2px] rounded-lg">
+          <div
+            className={cn(cardVariants({ variant, gradient, className }))}
+            ref={ref}
+            {...props}
+          >
+            {children}
+          </div>
+        </div>
+      );
+    }
+
+    // Default card rendering
+    return (
+      <div
+        className={cn(cardVariants({ variant, gradient, className }))}
+        ref={ref}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  },
+);
 Card.displayName = "Card";
 
 const CardHeader = React.forwardRef<
