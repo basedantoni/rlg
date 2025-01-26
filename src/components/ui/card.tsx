@@ -3,12 +3,12 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-const cardVariants = cva("rounded-lg shadow", {
+const cardVariants = cva("rounded-lg shadow-sm", {
   variants: {
     variant: {
       default: "bg-card text-card-foreground border",
       selectable:
-        "bg-gradient-to-b from-[#626262] to-[#343434] cursor-pointer hover:bg-none hover:bg-hover",
+        "bg-linear-to-b from-[#626262] to-[#343434] cursor-pointer hover:bg-none hover:bg-hover",
     },
     gradient: {
       true: "bg-transparent",
@@ -29,7 +29,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     // If gradient is true, wrap the card in a gradient border
     if (gradient) {
       return (
-        <div className="bg-gradient-to-b from-[#828282] to-[#3C3C3C] p-[2px] rounded-lg">
+        <div className="bg-linear-to-b from-[#828282] to-[#3C3C3C] p-[2px] rounded-lg">
           <div
             className={cn(cardVariants({ variant, gradient, className }))}
             ref={ref}

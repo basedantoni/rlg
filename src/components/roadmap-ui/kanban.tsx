@@ -37,7 +37,7 @@ export const KanbanBoard = ({ id, children, className }: KanbanBoardProps) => {
   return (
     <div
       className={cn(
-        "flex h-full min-h-40 flex-col gap-2 rounded-md border bg-secondary p-2 text-xs shadow-sm outline outline-2 transition-all",
+        "flex h-full min-h-40 flex-col gap-2 rounded-md border bg-secondary p-2 text-xs shadow-xs outline outline-2 transition-all",
         isOver ? "outline-primary" : "outline-transparent",
         className,
       )}
@@ -72,7 +72,7 @@ export const KanbanCard = ({
   return (
     <Card
       className={cn(
-        "rounded-md p-3 shadow-sm",
+        "rounded-md p-3 shadow-xs",
         isDragging && "cursor-grabbing",
         className,
       )}
