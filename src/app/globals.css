@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @plugin 'tailwindcss-animate';
 
@@ -43,6 +43,12 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
+
+  --color-gradient-start: hsla(var(--start));
+  --color-gradient-end: hsla(var(--end));
+
+  --color-linear-top: hsl(var(--top));
+  --color-linear-bottom: hsl(var(--bottom));
 }
 
 /*
@@ -54,8 +60,7 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
-  *,
-  ::after,
+  * ::after,
   ::before,
   ::backdrop,
   ::file-selector-button {
@@ -95,6 +100,10 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+    --start: 0, 0%, 100%, 0;
+    --end: 0, 0%, 60%, 0;
+    --top: 0, 0%, 100%;
+    --bottom: 0, 0%, 75%;
   }
   .dark {
     --background: 240 10% 3.9%;
@@ -116,12 +125,16 @@
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
-    --hover: 0, 0%, 16%;
+    --hover: 0, 0%, 34%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    --start: 0, 0%, 100%, 0.55;
+    --end: 0, 0%, 60%, 0;
+    --top: 0, 0%, 38%;
+    --bottom: 0, 0%, 20%;
   }
 }
 

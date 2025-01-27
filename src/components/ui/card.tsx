@@ -8,10 +8,10 @@ const cardVariants = cva("rounded-lg shadow-sm", {
     variant: {
       default: "bg-card text-card-foreground border",
       selectable:
-        "bg-linear-to-b from-[#626262] to-[#343434] cursor-pointer hover:bg-none hover:bg-hover",
+        "cursor-pointer bg-muted text-muted-foreground hover:bg-hover hover:text-foreground",
     },
     gradient: {
-      true: "bg-transparent",
+      true: "",
     },
   },
   defaultVariants: {
@@ -29,7 +29,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     // If gradient is true, wrap the card in a gradient border
     if (gradient) {
       return (
-        <div className="bg-linear-to-b from-[#828282] to-[#3C3C3C] p-[2px] rounded-lg">
+        <div className="bg-linear-to-b from-[#828282] to-[#3C3C3C] p-[2px] rounded-[10px]">
           <div
             className={cn(cardVariants({ variant, gradient, className }))}
             ref={ref}
