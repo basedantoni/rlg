@@ -29,7 +29,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     // If gradient is true, wrap the card in a gradient border
     if (gradient) {
       return (
-        <div className="bg-linear-to-b from-[#828282] to-[#3C3C3C] p-[2px] rounded-[10px]">
+        <div className="dark:bg-linear-to-b dark:from-[#828282] dark:to-[#3C3C3C] p-[2px] rounded-[10px]">
           <div
             className={cn(cardVariants({ variant, gradient, className }))}
             ref={ref}

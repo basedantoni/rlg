@@ -51,7 +51,7 @@ const CategoryOnboard = () => {
           <Card
             variant="selectable"
             gradient={true}
-            className={`sm:w-24 sm:h-24 px-3 py-2 sm:py-4 gap-1 flex flex-col items-center justify-center ${c.selected ? "bg-linear-to-b from-linear-top to-linear-bottom text-zinc-100" : ""}`}
+            className={`sm:w-24 sm:h-24 px-3 py-2 sm:py-4 gap-1 flex flex-col items-center justify-center ${c.selected ? "bg-linear-to-b from-linear-top to-linear-bottom text-foreground" : ""}`}
             key={c.title}
             onClick={() => toggleCategory(index)}
           >
@@ -61,6 +61,7 @@ const CategoryOnboard = () => {
         ))}
         <Button
           className="[&_svg]:size-8 w-24 h-24 gap-1 flex flex-col items-center justify-center"
+          variant="ghost"
           size="icon"
         >
           <Plus size={32} strokeWidth={1} />
