@@ -1,16 +1,18 @@
 "use client";
 
 import { Layers2, Plus } from "lucide-react";
-import { DynamicIcon } from "lucide-react/dynamic";
+import { DynamicIcon, IconName } from "lucide-react/dynamic";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
 import { trpc } from "@/lib/trpc/client";
 import { useState } from "react";
+import { NewCategoryParams } from "@/db/schema/categories";
+import CategoryModal from "../categories/category-modal";
 
 interface CategoriesOnboard {
-  icon: string;
+  icon: IconName;
   title: string;
   selected: boolean;
 }
@@ -47,23 +49,26 @@ const CategoryOnboard = () => {
     toast.error(
       `${action.charAt(0).toUpperCase() + action.slice(1).toLowerCase()} event`,
     );
-    await utils.quests.getQuests.invalidate();
+    await utils.categories.getCategories.invalidate();
   };
 
-  const { mutate: createQuest } = trpc.quests.createQuest.useMutation({
-    onSuccess: () => onSuccess("create"),
-    onError: (err) => console.error("create", { error: err.message }),
-  });
+  const { mutate: createCategory, isPending: isCreating } =
+    trpc.categories.createCategory.useMutation({
+      onSuccess: () => onSuccess("create"),
+      onError: (err) => console.error("create", { error: err.message }),
+    });
 
   const handleBatchSubmit = async () => {
     try {
       await Promise.all(
-        quests.map(async (q: NewQuestParams) => {
-          return createQuest(q);
-        }),
+        categories
+          .filter((c: CategoriesOnboard) => c.selected)
+          .map(async (c) => {
+            return createCategory({ name: c.title });
+          }),
       );
     } catch (error) {
-      console.error("Error creating quests:", error);
+      console.error("Error creating categories:", error);
     }
   };
 
@@ -96,14 +101,7 @@ const CategoryOnboard = () => {
             <p className="text-xs">{c.title}</p>
           </Card>
         ))}
-        <Button
-          className="[&_svg]:size-8 w-24 h-24 gap-1 flex flex-col items-center justify-center"
-          variant="ghost"
-          size="icon"
-        >
-          <Plus size={32} strokeWidth={1} />
-          <p className="text-xs">New</p>
-        </Button>
+        <CategoryModal emptyState={true} />
       </div>
       <div className="flex flex-col gap-1 justify-center w-full">
         <Button className="w-full" onClick={handleBatchSubmit}>

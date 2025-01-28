@@ -26,17 +26,19 @@ export const insertCategorySchema = createInsertSchema(categories).omit({
   createdAt: true,
   updatedAt: true,
 });
-export const insertCategoryParams = baseSchema.omit({ id: true });
+export const insertCategoryParams = insertCategorySchema.omit({
+  id: true,
+  userId: true,
+});
 
 export const updateCategorySchema = createUpdateSchema(categories).omit({
-  id: true,
   createdAt: true,
 });
 export const updateCategoryParams = updateCategorySchema.extend({}).omit({});
 
 export const categoryIdSchema = baseSchema.pick({ id: true });
 
-export type Categories = typeof categories.$inferSelect;
+export type Category = typeof categories.$inferSelect;
 export type NewCategory = z.infer<typeof insertCategorySchema>;
 export type NewCategoryParams = z.infer<typeof insertCategoryParams>;
 export type UpdateCategoryParams = z.infer<typeof updateCategoryParams>;
