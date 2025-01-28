@@ -4,6 +4,9 @@ import { Layers2, Plus } from "lucide-react";
 import { DynamicIcon } from "lucide-react/dynamic";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+
+import { trpc } from "@/lib/trpc/client";
 import { useState } from "react";
 
 interface CategoriesOnboard {
@@ -28,6 +31,40 @@ const CategoryOnboard = () => {
     const newCategories = [...categories];
     newCategories[index].selected = !newCategories[index].selected;
     setCategories(newCategories);
+  };
+
+  const utils = trpc.useUtils();
+  const onSuccess = async (
+    action: "create" | "update" | "delete",
+    data?: { error?: string },
+  ) => {
+    if (data?.error) {
+      toast.error(data.error);
+      console.log(data.error);
+      return;
+    }
+
+    toast.error(
+      `${action.charAt(0).toUpperCase() + action.slice(1).toLowerCase()} event`,
+    );
+    await utils.quests.getQuests.invalidate();
+  };
+
+  const { mutate: createQuest } = trpc.quests.createQuest.useMutation({
+    onSuccess: () => onSuccess("create"),
+    onError: (err) => console.error("create", { error: err.message }),
+  });
+
+  const handleBatchSubmit = async () => {
+    try {
+      await Promise.all(
+        quests.map(async (q: NewQuestParams) => {
+          return createQuest(q);
+        }),
+      );
+    } catch (error) {
+      console.error("Error creating quests:", error);
+    }
   };
 
   return (
@@ -69,7 +106,9 @@ const CategoryOnboard = () => {
         </Button>
       </div>
       <div className="flex flex-col gap-1 justify-center w-full">
-        <Button className="w-full">Submit</Button>
+        <Button className="w-full" onClick={handleBatchSubmit}>
+          Submit
+        </Button>
         <Button variant="link" className="text-muted-foreground">
           Skip
         </Button>
