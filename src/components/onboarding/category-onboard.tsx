@@ -1,6 +1,6 @@
 "use client";
 
-import { Layers2, Plus } from "lucide-react";
+import { Layers2 } from "lucide-react";
 import { DynamicIcon, IconName } from "lucide-react/dynamic";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -8,8 +8,8 @@ import { toast } from "sonner";
 
 import { trpc } from "@/lib/trpc/client";
 import { useState } from "react";
-import { NewCategoryParams } from "@/db/schema/categories";
-import CategoryModal from "../categories/category-modal";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface CategoriesOnboard {
   icon: IconName;
@@ -18,6 +18,8 @@ interface CategoriesOnboard {
 }
 
 const CategoryOnboard = () => {
+  const router = useRouter();
+
   const [categories, setCategories] = useState<Array<CategoriesOnboard>>([
     { icon: "biceps-flexed", title: "Fitness", selected: false },
     { icon: "graduation-cap", title: "Education", selected: false },
@@ -27,6 +29,7 @@ const CategoryOnboard = () => {
     { icon: "feather", title: "Writing", selected: false },
     { icon: "hand-coins", title: "Finance", selected: false },
     { icon: "sun", title: "Spirtuality", selected: false },
+    { icon: "sticker", title: "Social", selected: false },
   ]);
 
   const toggleCategory = (index: number) => {
@@ -46,8 +49,8 @@ const CategoryOnboard = () => {
       return;
     }
 
-    toast.error(
-      `${action.charAt(0).toUpperCase() + action.slice(1).toLowerCase()} event`,
+    toast(
+      `${action.charAt(0).toUpperCase() + action.slice(1).toLowerCase()}d category`,
     );
     await utils.categories.getCategories.invalidate();
   };
@@ -67,6 +70,7 @@ const CategoryOnboard = () => {
             return createCategory({ name: c.title });
           }),
       );
+      router.push("/dashboard");
     } catch (error) {
       console.error("Error creating categories:", error);
     }
@@ -101,14 +105,13 @@ const CategoryOnboard = () => {
             <p className="text-xs">{c.title}</p>
           </Card>
         ))}
-        <CategoryModal emptyState={true} />
       </div>
       <div className="flex flex-col gap-1 justify-center w-full">
         <Button className="w-full" onClick={handleBatchSubmit}>
           Submit
         </Button>
-        <Button variant="link" className="text-muted-foreground">
-          Skip
+        <Button asChild variant="link" className="text-muted-foreground">
+          <Link href="/dashboard">Skip and add later</Link>
         </Button>
       </div>
     </Card>

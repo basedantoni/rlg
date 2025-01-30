@@ -17,9 +17,11 @@ import { Plus } from "lucide-react";
 const CategoryModal = ({
   category,
   emptyState,
+  onboarding,
 }: {
   category?: Category;
   emptyState?: boolean;
+  onboarding?: boolean;
 }) => {
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
@@ -29,6 +31,11 @@ const CategoryModal = ({
     <Dialog onOpenChange={setOpen} open={open}>
       <DialogTrigger asChild>
         {emptyState ? (
+          <Button>
+            <Plus size={16} />
+            New Category
+          </Button>
+        ) : onboarding ? (
           <Button
             className="[&_svg]:size-8 w-24 h-24 gap-1 flex flex-col items-center justify-center"
             variant="ghost"
