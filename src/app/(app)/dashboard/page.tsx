@@ -1,15 +1,13 @@
-"use client";
+import QuestList from "@/components/quests/quest-list";
+import { Quests } from "@/db/schema/quests";
+import { trpc } from "@/lib/trpc/api";
 
-import QuestForm from "@/components/quests/quest-form";
-import { Card } from "@/components/ui/card";
-
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const res: { quests: Quests } = await trpc.quests.getQuests();
   return (
     <>
       <h1>Dashboard</h1>
-      <Card className="w-[350px] px-6 py-4">
-        <QuestForm />
-      </Card>
+      <QuestList quests={res.quests} />
     </>
   );
 }
