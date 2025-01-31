@@ -1,7 +1,7 @@
 import { users } from "@/db/schema/users";
 import { categories } from "@/db/schema/categories";
 import { sql } from "drizzle-orm";
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { sqliteTable, text } from "drizzle-orm/sqlite-core";
 import {
   createInsertSchema,
   createSelectSchema,
@@ -9,6 +9,7 @@ import {
 } from "drizzle-zod";
 import { nanoid } from "nanoid";
 import { z } from "zod";
+import { type getQuests } from "@/lib/api/quests/queries";
 
 export const quests = sqliteTable("quests", {
   id: text("id")
@@ -52,3 +53,8 @@ export type NewQuest = z.infer<typeof insertQuestSchema>;
 export type NewQuestParams = z.infer<typeof insertQuestParams>;
 export type UpdateQuestParams = z.infer<typeof updateQuestParams>;
 export type QuestId = z.infer<typeof questIdSchema>["id"];
+
+// this type infers the return from getQuests() - meaining it will include joins
+export type CompleteQuest = Awaited<
+  ReturnType<typeof getQuests>
+>["quests"][number];
