@@ -1,6 +1,7 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
+import QuestModal from "./quest-modal";
 
 import { CompleteQuest } from "@/db/schema/quests";
 import { trpc } from "@/lib/trpc/client";
@@ -37,7 +38,9 @@ const EmptyState = () => {
       <p className="mt-1 text-sm text-muted-foreground">
         Get started by creating a new quest.
       </p>
-      <div className="mt-6">{/* <QuestModal emptyState={true} /> */}</div>
+      <div className="mt-6">
+        <QuestModal />
+      </div>
     </div>
   );
 };

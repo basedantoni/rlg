@@ -20,7 +20,13 @@ import { useRouter } from "next/navigation";
 import { trpc } from "@/lib/trpc/client";
 import { toast } from "sonner";
 
-const QuestForm = ({ quest }: { quest?: Quests }) => {
+const QuestForm = ({
+  quest,
+  closeModal,
+}: {
+  quest?: Quests;
+  closeModal?: () => void;
+}) => {
   const editing = !!quest?.id;
   const router = useRouter();
   const utils = trpc.useUtils();
@@ -46,6 +52,7 @@ const QuestForm = ({ quest }: { quest?: Quests }) => {
 
     await utils.quests.getQuests.invalidate();
     router.refresh();
+    if (closeModal) closeModal();
     toast.success(`Quest ${action}d!`);
   };
 
