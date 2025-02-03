@@ -34,11 +34,11 @@ export const insertQuestSchema = createInsertSchema(quests)
   })
   .extend({
     status: z.enum(["open", "completed"]).nullable(),
+    categoryId: z.string().nullable(),
   });
 export const insertQuestParams = insertQuestSchema.omit({
   id: true,
   userId: true,
-  categoryId: true,
 });
 
 export const updateQuestSchema = createUpdateSchema(quests).omit({

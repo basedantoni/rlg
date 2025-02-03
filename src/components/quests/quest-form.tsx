@@ -19,6 +19,8 @@ import { Input } from "../ui/input";
 import { useRouter } from "next/navigation";
 import { trpc } from "@/lib/trpc/client";
 import { toast } from "sonner";
+import { Select, SelectContent, SelectTrigger, SelectItem } from "../ui/select";
+import { SelectValue } from "@radix-ui/react-select";
 
 const QuestForm = ({
   quest,
@@ -41,6 +43,7 @@ const QuestForm = ({
       description: "",
       dueDate: "",
       status: "open",
+      categoryId: null,
     },
   });
 
@@ -65,6 +68,8 @@ const QuestForm = ({
   const handleSubmit = (values: NewQuestParams) => {
     createQuest(values);
   };
+
+  const { data: c } = trpc.categories.getCategories.useQuery();
 
   return (
     <Form {...form}>
@@ -92,6 +97,30 @@ const QuestForm = ({
                 <Input {...field} />
               </FormControl>
               <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="categoryId"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Category</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select category" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {c?.categories.map((c) => (
+                    <SelectItem key={c.id} value={c.id}>
+                      {c.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+                <FormMessage />
+              </Select>
             </FormItem>
           )}
         />

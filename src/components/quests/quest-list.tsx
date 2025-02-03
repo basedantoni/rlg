@@ -7,7 +7,12 @@ import { CompleteQuest } from "@/db/schema/quests";
 import { trpc } from "@/lib/trpc/client";
 
 const Quest = ({ quest }: { quest: CompleteQuest }) => {
-  return <Badge>{quest.title}</Badge>;
+  return (
+    <Badge className="flex justify-between w-36" variant="outline">
+      <p>{quest.title}</p>
+      <div className="h-1 w-1 rounded-full bg-primary"></div>
+    </Badge>
+  );
 };
 
 const QuestList = ({ quests }: { quests: CompleteQuest[] }) => {
@@ -23,8 +28,9 @@ const QuestList = ({ quests }: { quests: CompleteQuest[] }) => {
   return (
     <div className="flex gap-4">
       {q.quests.map((q) => (
-        <Quest quest={q} />
+        <Quest key={q.id} quest={q} />
       ))}
+      <QuestModal />
     </div>
   );
 };
