@@ -36,11 +36,7 @@ const QuestModal = ({
             New Category
           </Button>
         ) : onboarding ? (
-          <Button
-            className="[&_svg]:size-8 w-24 h-24 gap-1 flex flex-col items-center justify-center"
-            variant="ghost"
-            size="icon"
-          >
+          <Button variant="ghost" size="icon">
             <Plus size={32} strokeWidth={1} />
             <p className="text-xs">New</p>
           </Button>

@@ -47,7 +47,10 @@ const QuestForm = ({
     },
   });
 
-  const onSuccess = async (action: "create", data?: { error?: string }) => {
+  const onSuccess = async (
+    action: "create" | "update" | "delete",
+    data?: { error?: string },
+  ) => {
     if (data?.error) {
       toast(data.error);
       return;
@@ -65,8 +68,24 @@ const QuestForm = ({
       onError: (err) => console.error("create", { error: err.message }),
     });
 
+  const { mutate: updateQuest, isPending: isUpdating } =
+    trpc.quests.updateQuest.useMutation({
+      onSuccess: () => onSuccess("update"),
+      onError: (err) => console.error("update", { error: err.message }),
+    });
+
+  const { mutate: deleteQuest, isPending: isDeleting } =
+    trpc.quests.deleteQuest.useMutation({
+      onSuccess: () => onSuccess("delete"),
+      onError: (err) => console.error("delete", { error: err.message }),
+    });
+
   const handleSubmit = (values: NewQuestParams) => {
-    createQuest(values);
+    if (editing) {
+      updateQuest({ ...values, id: quest.id });
+    } else {
+      createQuest(values);
+    }
   };
 
   const { data: c } = trpc.categories.getCategories.useQuery();
