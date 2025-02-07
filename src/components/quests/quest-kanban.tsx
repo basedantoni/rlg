@@ -6,21 +6,24 @@ import {
   KanbanCards,
   KanbanHeader,
   KanbanProvider,
-} from "@/components/roadmap-ui/kanban";
-import { trpc } from "@/lib/trpc/client";
+} from "@/components/ui/kibo-ui/kanban";
+import { Spinner } from "@/components/ui/kibo-ui/spinner";
+import { CompleteQuest } from "@/db/schema/quests";
 import type { DragEndEvent } from "@dnd-kit/core";
+import { trpc } from "@/lib/trpc/client";
+import { useQueryClient } from "@tanstack/react-query";
+import { getQueryKey } from "@trpc/react-query";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { toast } from "sonner";
 
-interface Card {
-  id: string;
-  title: string;
-  status: "open" | "completed";
-  dueDate: string;
-}
+const QuestKanban = ({ quests }: { quests: CompleteQuest[] }) => {
+  const queryClient = useQueryClient();
 
-const Kanban = ({ cards }: { cards: Card[] }) => {
+  const { data, isLoading } = trpc.quests.getQuests.useQuery(undefined, {
+    initialData: { quests },
+    refetchOnMount: false,
+  });
+
   const statuses = [
     { id: "1", name: "open", color: "red" },
     { id: "3", name: "completed", color: "green" },
@@ -35,15 +38,40 @@ const Kanban = ({ cards }: { cards: Card[] }) => {
       return;
     }
 
-    await utils.quests.getQuests.invalidate();
-    router.refresh();
     toast.success(`Quest Status Updated`);
   };
 
   const { mutate: updateQuest, isPending: isUpdating } =
     trpc.quests.updateQuest.useMutation({
+      onMutate: async (updatedQuest) => {
+        // Get the query key for the quests query
+        const queryKey = getQueryKey(trpc.quests.getQuests);
+
+        // Snapshot the previous state
+        const previousCompleteQuests = utils.quests.getQuests.getData();
+
+        // Optimistically update the cache by setting the new status for the card
+        queryClient.setQueryData(queryKey, (oldQuests: CompleteQuest[]) => {
+          if (!oldQuests) return oldQuests;
+
+          return oldQuests.map((q) =>
+            q.id === updatedQuest.id
+              ? { ...q, status: updatedQuest.status }
+              : q,
+          );
+        });
+
+        return { previousCompleteQuests };
+      },
+      onError: (err, updatedQuest, context) => {
+        if (context?.previousCompleteQuests) {
+          const queryKey = getQueryKey(trpc.quests.getQuests);
+          queryClient.setQueryData(queryKey, context.previousCompleteQuests);
+        }
+        toast.error("Something went wrong with this quest");
+      },
       onSuccess: () => onSuccess("update"),
-      onError: (err) => console.error("update", { error: err.message }),
+      onSettled: () => utils.quests.getQuests.invalidate(),
     });
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -59,12 +87,14 @@ const Kanban = ({ cards }: { cards: Card[] }) => {
       return;
     }
 
-    cards.map((c) => {
+    data.quests.map((c) => {
       if (c.id === active.id && c.status !== status.name) {
         updateQuest({ ...c, status: status.name });
       }
     });
   };
+
+  if (isLoading) return <Spinner />;
 
   return (
     <KanbanProvider onDragEnd={handleDragEnd}>
@@ -72,9 +102,9 @@ const Kanban = ({ cards }: { cards: Card[] }) => {
         <KanbanBoard key={status.name} id={status.name}>
           <KanbanHeader name={status.name} color={status.color} />
           <KanbanCards>
-            {cards
+            {data.quests
               .filter((c) => c.status === status.name)
-              .map((c: Card, index: number) => (
+              .map((c: CompleteQuest, index: number) => (
                 <KanbanCard
                   key={c.id}
                   id={c.id}
@@ -92,4 +122,4 @@ const Kanban = ({ cards }: { cards: Card[] }) => {
   );
 };
 
-export default Kanban;
+export default QuestKanban;

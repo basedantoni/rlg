@@ -1,4 +1,4 @@
-import Kanban from "@/components/kanban";
+import QuestKanban from "@/components/quests/quest-kanban";
 import QuestList from "@/components/quests/quest-list";
 import { Quests } from "@/db/schema/quests";
 import { trpc } from "@/lib/trpc/api";
@@ -9,7 +9,7 @@ export default async function DashboardPage() {
     <>
       <h1>Dashboard</h1>
       <QuestList quests={q.quests} />
-      <Kanban cards={q.quests} />
+      <QuestKanban quests={q.quests} />
     </>
   );
 }
