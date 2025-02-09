@@ -4,9 +4,13 @@ import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import {
   DndContext,
+  DragOverlay,
+  MouseSensor,
   rectIntersection,
   useDraggable,
   useDroppable,
+  useSensor,
+  useSensors,
 } from "@dnd-kit/core";
 import type { DragEndEvent } from "@dnd-kit/core";
 import type { ReactNode } from "react";
@@ -14,7 +18,7 @@ import type { ReactNode } from "react";
 export type Status = {
   id: string;
   name: string;
-  color: string;
+  color?: string;
 };
 
 export type Feature = {
@@ -37,7 +41,7 @@ export const KanbanBoard = ({ id, children, className }: KanbanBoardProps) => {
   return (
     <div
       className={cn(
-        "flex h-full min-h-40 flex-col gap-2 rounded-md border bg-secondary p-2 text-xs shadow-xs outline outline-2 transition-all",
+        "flex h-full min-h-40 flex-col gap-2 p-2 text-xs transition-all",
         isOver ? "outline-primary" : "outline-transparent",
         className,
       )}
@@ -53,6 +57,16 @@ export type KanbanCardProps = Pick<Feature, "id" | "name"> & {
   parent: string;
   children?: ReactNode;
   className?: string;
+};
+
+export const KanbanOverlay = ({ id, index, parent }: KanbanCardProps) => {
+  const { isDragging } = useDraggable({ id, data: { index, parent } });
+
+  return (
+    <DragOverlay>
+      {isDragging ? <div className="h-8 w-8 bg-pink-500"></div> : null}
+    </DragOverlay>
+  );
 };
 
 export const KanbanCard = ({
@@ -105,8 +119,9 @@ export type KanbanHeaderProps =
     }
   | {
       name: Status["name"];
-      color: Status["color"];
+      color?: Status["color"];
       className?: string;
+      count: number;
     };
 
 export const KanbanHeader = (props: KanbanHeaderProps) =>
@@ -114,11 +129,14 @@ export const KanbanHeader = (props: KanbanHeaderProps) =>
     props.children
   ) : (
     <div className={cn("flex shrink-0 items-center gap-2", props.className)}>
-      <div
-        className="h-2 w-2 rounded-full"
-        style={{ backgroundColor: props.color }}
-      />
-      <p className="m-0 font-semibold text-sm">{props.name}</p>
+      {props.color && (
+        <div
+          className="h-2 w-2 rounded-full"
+          style={{ backgroundColor: props.color }}
+        />
+      )}
+      <p className="m-0 font-semibold">{props.name}</p>
+      <p className="text-muted-foreground">{props.count}</p>
     </div>
   );
 
@@ -132,12 +150,29 @@ export const KanbanProvider = ({
   children,
   onDragEnd,
   className,
-}: KanbanProviderProps) => (
-  <DndContext collisionDetection={rectIntersection} onDragEnd={onDragEnd}>
-    <div
-      className={cn("grid w-full auto-cols-fr grid-flow-col gap-4", className)}
+}: KanbanProviderProps) => {
+  const mouseSensor = useSensor(MouseSensor, {
+    activationConstraint: {
+      delay: 250,
+      tolerance: 5,
+    },
+  });
+
+  const sensors = useSensors(mouseSensor);
+  return (
+    <DndContext
+      collisionDetection={rectIntersection}
+      onDragEnd={onDragEnd}
+      sensors={sensors}
     >
-      {children}
-    </div>
-  </DndContext>
-);
+      <div
+        className={cn(
+          "grid w-full auto-cols-fr grid-flow-col gap-4",
+          className,
+        )}
+      >
+        {children}
+      </div>
+    </DndContext>
+  );
+};

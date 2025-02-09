@@ -8,8 +8,12 @@ import {
   KanbanProvider,
 } from "@/components/ui/kibo-ui/kanban";
 import { Spinner } from "@/components/ui/kibo-ui/spinner";
-import { CompleteQuest } from "@/db/schema/quests";
+import { Checkbox } from "../ui/checkbox";
+
 import type { DragEndEvent } from "@dnd-kit/core";
+import { CompleteQuest } from "@/db/schema/quests";
+import { Status } from "@/components/ui/kibo-ui/kanban";
+
 import { trpc } from "@/lib/trpc/client";
 import { useQueryClient } from "@tanstack/react-query";
 import { getQueryKey } from "@trpc/react-query";
@@ -24,9 +28,9 @@ const QuestKanban = ({ quests }: { quests: CompleteQuest[] }) => {
     refetchOnMount: false,
   });
 
-  const statuses = [
-    { id: "1", name: "open", color: "red" },
-    { id: "3", name: "completed", color: "green" },
+  const statuses: Status[] = [
+    { id: "1", name: "open" },
+    { id: "3", name: "completed" },
   ];
 
   const router = useRouter();
@@ -97,22 +101,30 @@ const QuestKanban = ({ quests }: { quests: CompleteQuest[] }) => {
   if (isLoading) return <Spinner />;
 
   return (
-    <KanbanProvider onDragEnd={handleDragEnd}>
+    <KanbanProvider className="max-w-[40rem]" onDragEnd={handleDragEnd}>
       {statuses.map((status) => (
         <KanbanBoard key={status.name} id={status.name}>
-          <KanbanHeader name={status.name} color={status.color} />
+          <KanbanHeader
+            name={status.name}
+            count={data.quests.filter((q) => q.status === status.name).length}
+          />
           <KanbanCards>
             {data.quests
-              .filter((c) => c.status === status.name)
-              .map((c: CompleteQuest, index: number) => (
+              .filter((q) => q.status === status.name)
+              .map((q: CompleteQuest, index: number) => (
                 <KanbanCard
-                  key={c.id}
-                  id={c.id}
-                  name={c.title}
+                  key={q.id}
+                  id={q.id}
+                  name={q.title}
                   parent={status.name}
                   index={index}
+                  className="flex items-center space-x-2"
                 >
-                  <p>{c.title}</p>
+                  <Checkbox
+                    id="completed"
+                    checked={status.name === "completed"}
+                  />
+                  <label htmlFor="complete">{q.title}</label>
                 </KanbanCard>
               ))}
           </KanbanCards>

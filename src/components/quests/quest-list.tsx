@@ -24,7 +24,7 @@ const Quest = ({ quest }: { quest: CompleteQuest }) => {
     <Dialog onOpenChange={setOpen} open={open}>
       <DialogTrigger asChild>
         <Badge
-          className="flex justify-between w-36 cursor-pointer hover:bg-muted"
+          className="flex justify-between px-2.5 py-2 w-36 cursor-pointer hover:bg-muted"
           variant="outline"
         >
           <p>{quest.title}</p>
