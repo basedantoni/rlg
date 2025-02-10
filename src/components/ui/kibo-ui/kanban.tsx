@@ -86,8 +86,8 @@ export const KanbanCard = ({
   return (
     <Card
       className={cn(
-        "rounded-md p-3 shadow-xs",
-        isDragging && "cursor-grabbing",
+        "rounded-md p-3 shadow-xs hover:border-hover",
+        isDragging ? "cursor-grabbing" : "cursor-grab",
         className,
       )}
       style={{

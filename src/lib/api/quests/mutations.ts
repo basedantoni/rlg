@@ -47,12 +47,12 @@ export const updateQuest = async (id: QuestId, quest: UpdateQuestParams) => {
     userId: session.user.id,
   });
   try {
-    const [c] = await db
+    const [q] = await db
       .update(quests)
       .set({ ...newQuest, updatedAt: new Date().toUTCString() })
       .where(and(eq(quests.id, questId!), eq(quests.userId, session.user.id)))
       .returning();
-    return { quest: c };
+    return { quest: q };
   } catch (err) {
     const message = (err as Error).message ?? "Error, please try again";
     console.error(message);
@@ -62,17 +62,17 @@ export const updateQuest = async (id: QuestId, quest: UpdateQuestParams) => {
 
 export const deleteQuest = async (id: QuestId) => {
   const { session } = await getUserAuth();
-  const { id: postId } = questIdSchema.parse({ id });
+  const { id: questId } = questIdSchema.parse({ id });
   if (!session?.user.id) {
     throw new Error("User is not authenticated");
   }
 
   try {
-    const [c] = await db
+    const [q] = await db
       .delete(quests)
-      .where(and(eq(quests.id, postId!), eq(quests.userId, session.user.id)))
+      .where(and(eq(quests.id, questId!), eq(quests.userId, session.user.id)))
       .returning();
-    return { post: c };
+    return { quest: q };
   } catch (err) {
     const message = (err as Error).message ?? "Error, please try again";
     console.error(message);
