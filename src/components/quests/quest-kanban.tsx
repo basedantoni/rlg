@@ -13,12 +13,15 @@ import { Checkbox } from "../ui/checkbox";
 import type { DragEndEvent } from "@dnd-kit/core";
 import { CompleteQuest } from "@/db/schema/quests";
 import { Status } from "@/components/ui/kibo-ui/kanban";
+import { ChangeEvent } from "react";
 
 import { trpc } from "@/lib/trpc/client";
 import { useQueryClient } from "@tanstack/react-query";
 import { getQueryKey } from "@trpc/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+
+type CheckedState = boolean | "indeterminate";
 
 const QuestKanban = ({ quests }: { quests: CompleteQuest[] }) => {
   const queryClient = useQueryClient();
@@ -91,11 +94,17 @@ const QuestKanban = ({ quests }: { quests: CompleteQuest[] }) => {
       return;
     }
 
-    data.quests.map((c) => {
-      if (c.id === active.id && c.status !== status.name) {
-        updateQuest({ ...c, status: status.name });
+    data.quests.map((q) => {
+      if (q.id === active.id && q.status !== status.name) {
+        updateQuest({ ...q, status: status.name });
       }
     });
+  };
+
+  const handleChange = (q: CompleteQuest, checked: CheckedState) => {
+    if (checked) {
+      updateQuest({ ...q, status: "completed" });
+    }
   };
 
   if (isLoading) return <Spinner />;
@@ -122,7 +131,9 @@ const QuestKanban = ({ quests }: { quests: CompleteQuest[] }) => {
                 >
                   <Checkbox
                     id="completed"
-                    checked={status.name === "completed"}
+                    defaultChecked={status.name === "completed"}
+                    disabled={status.name === "completed"}
+                    onCheckedChange={(checked) => handleChange(q, checked)}
                   />
                   <label htmlFor="complete">{q.title}</label>
                 </KanbanCard>
