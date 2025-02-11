@@ -49,7 +49,7 @@ export const updateCategory = async (
   try {
     const [c] = await db
       .update(categories)
-      .set({ ...newCategory, updatedAt: new Date().toUTCString() })
+      .set({ ...newCategory, updatedAt: new Date().toISOString() })
       .where(
         and(
           eq(categories.id, categoryId!),

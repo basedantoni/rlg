@@ -49,7 +49,7 @@ export const updateDailyQuest = async (
   try {
     const [dq] = await db
       .update(dailyQuests)
-      .set({ ...newDailyQuest, updatedAt: new Date().toUTCString() })
+      .set({ ...newDailyQuest, updatedAt: new Date().toISOString() })
       .where(eq(dailyQuests.id, dailyQuestId!))
       .returning();
     return { dailyQuest: dq };

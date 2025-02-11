@@ -150,8 +150,8 @@ const DailyQuestKanban = ({
                   <label htmlFor="complete">{q.title}</label>
                 </KanbanCard>
               ))}
+            {status.name === "open" && <DailyQuestModal emptyState />}
           </KanbanCards>
-          {status.name === "open" && <DailyQuestModal />}
         </KanbanBoard>
       ))}
     </KanbanProvider>

@@ -49,7 +49,7 @@ export const updateQuest = async (id: QuestId, quest: UpdateQuestParams) => {
   try {
     const [q] = await db
       .update(quests)
-      .set({ ...newQuest, updatedAt: new Date().toUTCString() })
+      .set({ ...newQuest, updatedAt: new Date().toISOString() })
       .where(and(eq(quests.id, questId!), eq(quests.userId, session.user.id)))
       .returning();
     return { quest: q };

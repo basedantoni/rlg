@@ -17,11 +17,9 @@ import { Plus } from "lucide-react";
 const DailyQuestModal = ({
   dailyQuest,
   emptyState,
-  onboarding,
 }: {
   dailyQuest?: DailyQuests;
   emptyState?: boolean;
-  onboarding?: boolean;
 }) => {
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
@@ -31,14 +29,12 @@ const DailyQuestModal = ({
     <Dialog onOpenChange={setOpen} open={open}>
       <DialogTrigger asChild>
         {emptyState ? (
-          <Button>
+          <Button
+            variant="ghost"
+            className="text-muted-foreground justify-start hover:bg-transparent"
+          >
             <Plus size={16} />
-            New Category
-          </Button>
-        ) : onboarding ? (
-          <Button variant="ghost" size="icon">
-            <Plus size={32} strokeWidth={1} />
-            <p className="text-xs">New</p>
+            Add Daily Quest
           </Button>
         ) : (
           <Button
