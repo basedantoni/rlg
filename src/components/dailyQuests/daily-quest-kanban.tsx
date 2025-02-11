@@ -9,6 +9,8 @@ import {
 } from "@/components/ui/kibo-ui/kanban";
 import { Spinner } from "@/components/ui/kibo-ui/spinner";
 import { Checkbox } from "../ui/checkbox";
+import { Calendar, RefreshCw } from "lucide-react";
+import DailyQuestModal from "./daily-quest-modal";
 
 import type { DragEndEvent } from "@dnd-kit/core";
 import { CompleteDailyQuest } from "@/db/schema/dailyQuests";
@@ -19,7 +21,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { getQueryKey } from "@trpc/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import DailyQuestModal from "./daily-quest-modal";
+import { isYesterday, isToday, isTomorrow, format } from "date-fns";
 
 type CheckedState = boolean | "indeterminate";
 
@@ -117,6 +119,18 @@ const DailyQuestKanban = ({
     }
   };
 
+  const formatDueDate = (date: string | number | Date): string => {
+    if (isYesterday(date)) {
+      return "yesterday";
+    } else if (isToday(date)) {
+      return "today";
+    } else if (isTomorrow(date)) {
+      return "tomorrow";
+    } else {
+      return format(date, "MMM d");
+    }
+  };
+
   if (isLoading) return <Spinner />;
 
   return (
@@ -139,7 +153,7 @@ const DailyQuestKanban = ({
                   name={q.title}
                   parent={status.name}
                   index={index}
-                  className="flex items-center space-x-2"
+                  className="flex space-x-2"
                 >
                   <Checkbox
                     id="completed"
@@ -147,7 +161,19 @@ const DailyQuestKanban = ({
                     disabled={status.name === "completed"}
                     onCheckedChange={(checked) => handleChange(q, checked)}
                   />
-                  <label htmlFor="complete">{q.title}</label>
+                  <div className="flex flex-col space-y-2">
+                    <label htmlFor="complete">{q.title}</label>
+                    {q.description && <p>{q.description}</p>}
+                    {q.dueDate && (
+                      <div className="text-muted-foreground flex space-x-1 items-center">
+                        <Calendar size={12} />
+                        <p className="capitalize">{formatDueDate(q.dueDate)}</p>
+                        {q.recurrence && q.recurrence !== "none" && (
+                          <RefreshCw size={12} />
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </KanbanCard>
               ))}
             {status.name === "open" && <DailyQuestModal emptyState />}
