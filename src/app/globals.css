@@ -49,6 +49,11 @@
 
   --color-linear-top: hsl(var(--top));
   --color-linear-bottom: hsl(var(--bottom));
+
+  --color-yesterday: hsl(var(--yesterday));
+  --color-today: hsl(var(--today));
+  --color-tomorrow: hsl(var(--tomorrow));
+  --color-future: hsl(var(--future));
 }
 
 /*
@@ -104,6 +109,10 @@
     --end: 0, 0%, 60%, 0;
     --top: 0, 0%, 92%;
     --bottom: 0, 0%, 84%;
+    --yesterday: 6 93% 56%;
+    --today: 120 64% 50%;
+    --tomorrow: 30, 100%, 54%;
+    --future: 274, 100%, 43%;
   }
   .dark {
     --background: 240 10% 3.9%;
@@ -135,14 +144,43 @@
     --end: 0, 0%, 60%, 0;
     --top: 0, 0%, 38%;
     --bottom: 0, 0%, 20%;
+    --yesterday: 6 74% 56%;
+    --today: 120 54% 50%;
+    --tomorrow: 30, 98%, 54%;
+    --future: 274, 82%, 53%;
   }
 }
 
 @layer base {
   * {
     @apply border-border;
+
+    scrollbar-width: thin;
+
+    .slim-scroll::-webkit-scrollbar {
+      display: none;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .slim-scroll::-webkit-scrollbar-track {
+      display: none;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .slim-scroll::-webkit-scrollbar-thumb {
+      display: none;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
   }
+  html,
   body {
     @apply bg-background text-foreground;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
   }
 }

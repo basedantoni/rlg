@@ -13,6 +13,7 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 import type { DragEndEvent } from "@dnd-kit/core";
+import { GripVertical } from "lucide-react";
 import type { ReactNode } from "react";
 
 export type Status = {
@@ -41,7 +42,7 @@ export const KanbanBoard = ({ id, children, className }: KanbanBoardProps) => {
   return (
     <div
       className={cn(
-        "flex h-full min-h-40 flex-col gap-2 p-2 text-xs transition-all",
+        "flex flex-col flex-1 max-h-full w-[17.5rem] box-border p-2 text-xs transition-all",
         isOver ? "outline-primary" : "outline-transparent",
         className,
       )}
@@ -57,16 +58,6 @@ export type KanbanCardProps = Pick<Feature, "id" | "name"> & {
   parent: string;
   children?: ReactNode;
   className?: string;
-};
-
-export const KanbanOverlay = ({ id, index, parent }: KanbanCardProps) => {
-  const { isDragging } = useDraggable({ id, data: { index, parent } });
-
-  return (
-    <DragOverlay>
-      {isDragging ? <div className="h-8 w-8 bg-pink-500"></div> : null}
-    </DragOverlay>
-  );
 };
 
 export const KanbanCard = ({
@@ -87,7 +78,7 @@ export const KanbanCard = ({
     <Card
       className={cn(
         "rounded-md p-3 shadow-xs hover:border-hover",
-        isDragging ? "cursor-grabbing" : "cursor-grab",
+        isDragging ? "cursor-grabbing" : "cursor-pointer",
         className,
       )}
       style={{
@@ -100,6 +91,10 @@ export const KanbanCard = ({
       ref={setNodeRef}
     >
       {children ?? <p className="m-0 font-medium text-sm">{name}</p>}
+      <GripVertical
+        className={`text-muted-foreground ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
+        size={14}
+      />
     </Card>
   );
 };
@@ -110,7 +105,14 @@ export type KanbanCardsProps = {
 };
 
 export const KanbanCards = ({ children, className }: KanbanCardsProps) => (
-  <div className={cn("flex flex-1 flex-col gap-2", className)}>{children}</div>
+  <div
+    className={cn(
+      "flex flex-col flex-1 gap-2 px-2 border-b box-border scroll-p-3 min-h-0 overflow-y-auto",
+      className,
+    )}
+  >
+    {children}
+  </div>
 );
 
 export type KanbanHeaderProps =
@@ -128,7 +130,12 @@ export const KanbanHeader = (props: KanbanHeaderProps) =>
   "children" in props ? (
     props.children
   ) : (
-    <div className={cn("flex shrink-0 items-center gap-2", props.className)}>
+    <div
+      className={cn(
+        "w-full h-11 flex shrink-0 items-center gap-2 border-b",
+        props.className,
+      )}
+    >
       {props.color && (
         <div
           className="h-2 w-2 rounded-full"
@@ -167,7 +174,7 @@ export const KanbanProvider = ({
     >
       <div
         className={cn(
-          "grid w-full auto-cols-fr grid-flow-col gap-4",
+          "flex flex-1 overflow-x-auto box-border h-full max-w-[40rem]",
           className,
         )}
       >

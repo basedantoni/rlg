@@ -10,10 +10,9 @@ export default async function DashboardPage() {
     await trpc.dailyQuests.getDailyQuests();
 
   return (
-    <>
-      <h1>Dashboard</h1>
+    <main className="flex flex-col flex-1 overflow-hidden h-screen slim-scroll">
       <QuestList quests={q.quests} />
       <DailyQuestKanban dailyQuests={dq.dailyQuests} />
-    </>
+    </main>
   );
 }

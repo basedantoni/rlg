@@ -27,7 +27,7 @@ const DailyQuestModal = ({
 
   return (
     <Dialog onOpenChange={setOpen} open={open}>
-      <DialogTrigger asChild>
+      <DialogTrigger className="py-2" asChild>
         {emptyState ? (
           <Button
             variant="ghost"

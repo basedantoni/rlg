@@ -16,12 +16,12 @@ import type { DragEndEvent } from "@dnd-kit/core";
 import { CompleteDailyQuest } from "@/db/schema/dailyQuests";
 import { Status } from "@/components/ui/kibo-ui/kanban";
 
+import { getDueDateColor, formatDueDate } from "@/lib/utils";
 import { trpc } from "@/lib/trpc/client";
 import { useQueryClient } from "@tanstack/react-query";
 import { getQueryKey } from "@trpc/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { isYesterday, isToday, isTomorrow, format } from "date-fns";
 
 type CheckedState = boolean | "indeterminate";
 
@@ -119,25 +119,14 @@ const DailyQuestKanban = ({
     }
   };
 
-  const formatDueDate = (date: string | number | Date): string => {
-    if (isYesterday(date)) {
-      return "yesterday";
-    } else if (isToday(date)) {
-      return "today";
-    } else if (isTomorrow(date)) {
-      return "tomorrow";
-    } else {
-      return format(date, "MMM d");
-    }
-  };
-
   if (isLoading) return <Spinner />;
 
   return (
-    <KanbanProvider className="max-w-[40rem]" onDragEnd={handleDragEnd}>
+    <KanbanProvider onDragEnd={handleDragEnd}>
       {statuses.map((status) => (
         <KanbanBoard key={status.name} id={status.name}>
           <KanbanHeader
+            className="capitalize"
             name={status.name}
             count={
               data.dailyQuests.filter((q) => q.status === status.name).length
@@ -146,6 +135,16 @@ const DailyQuestKanban = ({
           <KanbanCards>
             {data.dailyQuests
               .filter((q) => q.status === status.name)
+              .sort((a, b) => {
+                if (a.dueDate === null && b.dueDate === null) return 0;
+
+                if (a.dueDate === null) return 1;
+                if (b.dueDate === null) return -1;
+
+                return (
+                  new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
+                );
+              })
               .map((q: CompleteDailyQuest, index: number) => (
                 <KanbanCard
                   key={q.id}
@@ -153,31 +152,44 @@ const DailyQuestKanban = ({
                   name={q.title}
                   parent={status.name}
                   index={index}
-                  className="flex space-x-2"
+                  className="flex justify-between items-center"
                 >
-                  <Checkbox
-                    id="completed"
-                    defaultChecked={status.name === "completed"}
-                    disabled={status.name === "completed"}
-                    onCheckedChange={(checked) => handleChange(q, checked)}
-                  />
-                  <div className="flex flex-col space-y-2">
-                    <label htmlFor="complete">{q.title}</label>
-                    {q.description && <p>{q.description}</p>}
-                    {q.dueDate && (
-                      <div className="text-muted-foreground flex space-x-1 items-center">
-                        <Calendar size={12} />
-                        <p className="capitalize">{formatDueDate(q.dueDate)}</p>
-                        {q.recurrence && q.recurrence !== "none" && (
-                          <RefreshCw size={12} />
-                        )}
+                  <div className="flex space-x-2 text-muted-foreground">
+                    <Checkbox
+                      id="completed"
+                      defaultChecked={status.name === "completed"}
+                      disabled={status.name === "completed"}
+                      onCheckedChange={(checked) => handleChange(q, checked)}
+                    />
+                    <div className="flex flex-col space-y-2">
+                      <div className="flex flex-col space-y-0.5">
+                        <label
+                          htmlFor="complete"
+                          className="text-sm text-foreground"
+                        >
+                          {q.title}
+                        </label>
+                        {q.description && <p>{q.description}</p>}
                       </div>
-                    )}
+                      {q.dueDate && (
+                        <div
+                          className={`flex space-x-0.5 items-center ${getDueDateColor(q.dueDate)}`}
+                        >
+                          <Calendar size={10} />
+                          <p className="capitalize">
+                            {formatDueDate(q.dueDate)}
+                          </p>
+                          {q.recurrence && q.recurrence !== "none" && (
+                            <RefreshCw size={10} />
+                          )}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </KanbanCard>
               ))}
-            {status.name === "open" && <DailyQuestModal emptyState />}
           </KanbanCards>
+          {status.name === "open" && <DailyQuestModal emptyState />}
         </KanbanBoard>
       ))}
     </KanbanProvider>

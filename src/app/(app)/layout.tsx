@@ -12,10 +12,10 @@ export default async function AppLayout({
   const cookieString = (await cookies()).toString();
 
   return (
-    <main>
+    <>
       <ClerkProvider>
         <TrpcProvider cookies={cookieString}>{children}</TrpcProvider>
       </ClerkProvider>
-    </main>
+    </>
   );
 }
