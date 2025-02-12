@@ -33,6 +33,7 @@ export const insertQuestSchema = createInsertSchema(quests)
     updatedAt: true,
   })
   .extend({
+    title: z.string().min(3),
     status: z.enum(["open", "completed"]).nullable(),
     categoryId: z.string().nullable(),
   });

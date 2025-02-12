@@ -1,7 +1,7 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   DndContext,
   DragOverlay,
@@ -13,8 +13,11 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 import type { DragEndEvent } from "@dnd-kit/core";
-import { GripVertical } from "lucide-react";
 import type { ReactNode } from "react";
+import { useState } from "react";
+import { Calendar, RefreshCw, GripVertical } from "lucide-react";
+import { getDueDateColor, formatDueDate } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 export type Status = {
   id: string;
@@ -58,6 +61,7 @@ export type KanbanCardProps = Pick<Feature, "id" | "name"> & {
   parent: string;
   children?: ReactNode;
   className?: string;
+  data?: any;
 };
 
 export const KanbanCard = ({
@@ -66,12 +70,13 @@ export const KanbanCard = ({
   index,
   parent,
   children,
+  data,
   className,
 }: KanbanCardProps) => {
   const { attributes, listeners, setNodeRef, transform, isDragging } =
     useDraggable({
       id,
-      data: { index, parent },
+      data: { ...data, parent, index },
     });
 
   return (
@@ -107,7 +112,7 @@ export type KanbanCardsProps = {
 export const KanbanCards = ({ children, className }: KanbanCardsProps) => (
   <div
     className={cn(
-      "flex flex-col flex-1 gap-2 px-2 border-b box-border scroll-p-3 min-h-0 overflow-y-auto",
+      "flex flex-col flex-1 gap-2 px-2 border-b box-border scroll-p-3 min-h-0 overflow-x-hidden overflow-y-auto",
       className,
     )}
   >
@@ -166,10 +171,19 @@ export const KanbanProvider = ({
   });
 
   const sensors = useSensors(mouseSensor);
+
+  // Track the active draggable item's id
+  const [activeCard, setActiveCard] = useState<any>(null);
+
   return (
     <DndContext
       collisionDetection={rectIntersection}
-      onDragEnd={onDragEnd}
+      onDragStart={({ active }) => setActiveCard(active.data.current)}
+      onDragEnd={(event) => {
+        onDragEnd(event);
+        setActiveCard(null);
+      }}
+      onDragCancel={() => setActiveCard(null)}
       sensors={sensors}
     >
       <div
@@ -180,6 +194,50 @@ export const KanbanProvider = ({
       >
         {children}
       </div>
+
+      <DragOverlay>
+        {activeCard ? (
+          <div style={{ width: "100%" }}>
+            <KanbanCard
+              id={activeCard.id}
+              name={activeCard.title}
+              parent={activeCard.status} // adjust as needed
+              index={0} // index is not needed for the overlay copy
+              data={activeCard}
+              className="flex justify-between items-center opacity-75" // You can add styles for the overlay
+            >
+              <div className="flex space-x-2 text-muted-foreground">
+                <Checkbox id="completed" disabled />
+                <div className="flex flex-col space-y-2">
+                  <div className="flex flex-col space-y-0.5">
+                    <label
+                      htmlFor="complete"
+                      className="text-sm text-foreground"
+                    >
+                      {activeCard.title}
+                    </label>
+                    {activeCard.description && <p>{activeCard.description}</p>}
+                  </div>
+                  {activeCard.dueDate && (
+                    <div
+                      className={`flex space-x-0.5 items-center ${getDueDateColor(activeCard.dueDate)}`}
+                    >
+                      <Calendar size={10} />
+                      <p className="text-xs capitalize">
+                        {formatDueDate(activeCard.dueDate)}
+                      </p>
+                      {activeCard.recurrence &&
+                        activeCard.recurrence !== "none" && (
+                          <RefreshCw size={10} />
+                        )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </KanbanCard>
+          </div>
+        ) : null}
+      </DragOverlay>
     </DndContext>
   );
 };

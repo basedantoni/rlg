@@ -1,5 +1,5 @@
 import { db } from "@/db/drizzle";
-import { and, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import {
   DailyQuestId,
   dailyQuestIdSchema,
@@ -17,8 +17,13 @@ export const createDailyQuest = async (dailyQuest: NewDailyQuest) => {
     throw new Error("User is not authenticated");
   }
 
+  const formattedDueDate = dailyQuest.dueDate
+    ? new Date(dailyQuest.dueDate).toISOString()
+    : null;
+
   const newDailyQuest = insertDailyQuestSchema.parse({
     ...dailyQuest,
+    dueDate: formattedDueDate,
     userId: session.user.id,
   });
 

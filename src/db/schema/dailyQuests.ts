@@ -32,17 +32,23 @@ export const insertDailyQuestSchema = createInsertSchema(dailyQuests)
   .omit({
     createdAt: true,
     updatedAt: true,
+    status: true,
+    id: true,
   })
   .extend({
+    title: z.string().min(3),
+    dueDate: z
+      .string()
+      .nullable()
+      .refine((val) => val === null || !isNaN(Date.parse(val)), {
+        message: "Invalid Date",
+      }),
     questId: z.string().nullable(),
-    status: z.enum(["open", "completed"]).nullable(),
     recurrence: z
       .enum(["none", "daily", "workdays", "weekends", "weekly", "monthly"])
       .nullable(),
   });
-export const insertDailyQuestParams = insertDailyQuestSchema.omit({
-  id: true,
-});
+export const insertDailyQuestParams = insertDailyQuestSchema.omit({});
 
 export const updateDailyQuestSchema = createUpdateSchema(dailyQuests).omit({
   createdAt: true,

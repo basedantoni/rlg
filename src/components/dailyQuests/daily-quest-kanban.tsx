@@ -152,6 +152,7 @@ const DailyQuestKanban = ({
                   name={q.title}
                   parent={status.name}
                   index={index}
+                  data={q}
                   className="flex justify-between items-center"
                 >
                   <div className="flex space-x-2 text-muted-foreground">

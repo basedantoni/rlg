@@ -5,11 +5,15 @@ import {
   insertDailyQuestParams,
   NewDailyQuestParams,
 } from "@/db/schema/dailyQuests";
+import { useRouter } from "next/navigation";
+import { trpc } from "@/lib/trpc/client";
+import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 import { Button } from "../ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Form,
   FormControl,
@@ -19,12 +23,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "../ui/input";
-
-import { useRouter } from "next/navigation";
-import { trpc } from "@/lib/trpc/client";
-import { toast } from "sonner";
 import { Select, SelectContent, SelectTrigger, SelectItem } from "../ui/select";
 import { SelectValue } from "@radix-ui/react-select";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { toast } from "sonner";
+import { cn } from "@/lib/utils";
+import { CalendarIcon } from "lucide-react";
 
 const DailyQuestForm = ({
   dailyQuest,
@@ -42,14 +46,18 @@ const DailyQuestForm = ({
     // open issue: https://github.com/colinhacks/zod/issues/2663
     // errors locally but not in production
     resolver: zodResolver(insertDailyQuestParams),
-    defaultValues: dailyQuest ?? {
-      title: "",
-      description: "",
-      dueDate: "",
-      recurrence: "none",
-      status: "open",
-      questId: null,
-    },
+    defaultValues: dailyQuest
+      ? {
+          ...dailyQuest,
+          dueDate: dailyQuest.dueDate ? new Date(dailyQuest.dueDate) : null,
+        }
+      : {
+          title: "",
+          description: "",
+          dueDate: null, // or new Date() if you prefer a default date
+          recurrence: "none",
+          questId: null,
+        },
   });
 
   const onSuccess = async (
@@ -70,19 +78,22 @@ const DailyQuestForm = ({
   const { mutate: createQuest, isPending: isCreating } =
     trpc.dailyQuests.createDailyQuest.useMutation({
       onSuccess: () => onSuccess("create"),
-      onError: (err) => console.error("create", { error: err.message }),
+      onError: (err: { message: string }) =>
+        console.error("create", { error: err.message }),
     });
 
   const { mutate: updateQuest, isPending: isUpdating } =
     trpc.dailyQuests.updateDailyQuest.useMutation({
       onSuccess: () => onSuccess("update"),
-      onError: (err) => console.error("update", { error: err.message }),
+      onError: (err: { message: string }) =>
+        console.error("update", { error: err.message }),
     });
 
   const { mutate: deleteQuest, isPending: isDeleting } =
     trpc.dailyQuests.deleteDailyQuest.useMutation({
       onSuccess: () => onSuccess("delete"),
-      onError: (err) => console.error("delete", { error: err.message }),
+      onError: (err: { message: string }) =>
+        console.error("delete", { error: err.message }),
     });
 
   const handleSubmit = (values: NewDailyQuestParams) => {
@@ -97,7 +108,7 @@ const DailyQuestForm = ({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className={"space-y-8"}>
+      <form onSubmit={form.handleSubmit(handleSubmit)} className={"space-y-4"}>
         <FormField
           control={form.control}
           name="title"
@@ -126,6 +137,48 @@ const DailyQuestForm = ({
         />
         <FormField
           control={form.control}
+          name="dueDate"
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <FormLabel>Due Date</FormLabel>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        "flex justify-between font-normal",
+                        !field.value && "text-muted-foreground",
+                      )}
+                    >
+                      {field.value ? (
+                        format(field.value, "PPP")
+                      ) : (
+                        <span>Pick a date</span>
+                      )}
+                      <CalendarIcon size={14} />
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    mode="single"
+                    selected={field.value}
+                    onSelect={(date) => {
+                      const dateString = date ? date.toISOString() : null;
+                      field.onChange(dateString);
+                    }}
+                    disabled={(date) => date < new Date()}
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="questId"
           render={({ field }) => (
             <FormItem>
@@ -137,7 +190,7 @@ const DailyQuestForm = ({
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {q?.quests.map((q) => (
+                  {q?.quests.map((q: CompleteQuest) => (
                     <SelectItem key={q.id} value={q.id}>
                       {q.title}
                     </SelectItem>

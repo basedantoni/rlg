@@ -30,7 +30,8 @@ export const formatDueDate = (date: string): string => {
 
 export const getDueDateColor = (date: string) => {
   const parsedDate = parseISO(date);
-  console.log(isPast(parsedDate));
+  console.log(date);
+  console.log(parsedDate);
 
   if (isToday(parsedDate)) {
     return "text-today";
