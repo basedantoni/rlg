@@ -14,7 +14,7 @@ import {
 } from "@dnd-kit/core";
 import type { DragEndEvent } from "@dnd-kit/core";
 import type { ReactNode } from "react";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { Calendar, RefreshCw, GripVertical } from "lucide-react";
 import { getDueDateColor, formatDueDate } from "@/lib/utils";
 import { cn } from "@/lib/utils";
@@ -47,7 +47,7 @@ export const KanbanBoard = ({ id, children, className }: KanbanBoardProps) => {
       className={cn(
         "flex flex-col flex-1 max-h-full w-[17.5rem] box-border p-2 text-xs transition-all",
         isOver ? "outline-primary" : "outline-transparent",
-        className,
+        className
       )}
       ref={setNodeRef}
     >
@@ -84,7 +84,7 @@ export const KanbanCard = ({
       className={cn(
         "rounded-md p-3 shadow-xs hover:border-hover",
         isDragging ? "cursor-grabbing" : "cursor-pointer",
-        className,
+        className
       )}
       style={{
         transform: transform
@@ -97,7 +97,9 @@ export const KanbanCard = ({
     >
       {children ?? <p className="m-0 font-medium text-sm">{name}</p>}
       <GripVertical
-        className={`text-muted-foreground ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
+        className={`text-muted-foreground ${
+          isDragging ? "cursor-grabbing" : "cursor-grab"
+        }`}
         size={14}
       />
     </Card>
@@ -113,7 +115,7 @@ export const KanbanCards = ({ children, className }: KanbanCardsProps) => (
   <div
     className={cn(
       "flex flex-col flex-1 gap-2 px-2 border-b box-border scroll-p-3 min-h-0 overflow-x-hidden overflow-y-auto",
-      className,
+      className
     )}
   >
     {children}
@@ -138,7 +140,7 @@ export const KanbanHeader = (props: KanbanHeaderProps) =>
     <div
       className={cn(
         "w-full h-11 flex shrink-0 items-center gap-2 border-b",
-        props.className,
+        props.className
       )}
     >
       {props.color && (
@@ -175,8 +177,10 @@ export const KanbanProvider = ({
   // Track the active draggable item's id
   const [activeCard, setActiveCard] = useState<any>(null);
 
+  const id = useId();
   return (
     <DndContext
+      id={id}
       collisionDetection={rectIntersection}
       onDragStart={({ active }) => setActiveCard(active.data.current)}
       onDragEnd={(event) => {
@@ -189,7 +193,7 @@ export const KanbanProvider = ({
       <div
         className={cn(
           "flex flex-1 overflow-x-auto box-border h-full max-w-[40rem]",
-          className,
+          className
         )}
       >
         {children}
@@ -216,11 +220,15 @@ export const KanbanProvider = ({
                     >
                       {activeCard.title}
                     </label>
-                    {activeCard.description && <p>{activeCard.description}</p>}
+                    {activeCard.description && (
+                      <p className="text-xs">{activeCard.description}</p>
+                    )}
                   </div>
                   {activeCard.dueDate && (
                     <div
-                      className={`flex space-x-0.5 items-center ${getDueDateColor(activeCard.dueDate)}`}
+                      className={`flex space-x-0.5 items-center ${getDueDateColor(
+                        activeCard.dueDate
+                      )}`}
                     >
                       <Calendar size={10} />
                       <p className="text-xs capitalize">
