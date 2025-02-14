@@ -39,7 +39,7 @@ export const createDailyQuest = async (dailyQuest: NewDailyQuest) => {
 
 export const updateDailyQuest = async (
   id: DailyQuestId,
-  dailyQuest: UpdateDailyQuestParams,
+  dailyQuest: UpdateDailyQuestParams
 ) => {
   const { session } = await getUserAuth();
   const { id: dailyQuestId } = dailyQuestIdSchema.parse({ id });
@@ -77,6 +77,37 @@ export const deleteDailyQuest = async (id: DailyQuestId) => {
       .delete(dailyQuests)
       .where(eq(dailyQuests.id, dailyQuestId!))
       .returning();
+    return { dailyQuest: dq };
+  } catch (err) {
+    const message = (err as Error).message ?? "Error, please try again";
+    console.error(message);
+    throw { error: message };
+  }
+};
+
+export const completeDailyQuest = async (
+  id: DailyQuestId,
+  dailyQuest: UpdateDailyQuestParams
+) => {
+  const { session } = await getUserAuth();
+  const { id: dailyQuestId } = dailyQuestIdSchema.parse({ id });
+  if (!session?.user.id) {
+    throw new Error("User is not authenticated");
+  }
+
+  const newDailyQuest = updateDailyQuestSchema.parse({
+    ...dailyQuest,
+    userId: session.user.id,
+  });
+  try {
+    const [dq] = await db
+      .update(dailyQuests)
+      .set({ status: "completed", updatedAt: new Date().toISOString() })
+      .where(eq(dailyQuests.id, dailyQuestId!))
+      .returning();
+
+    console.log(dq);
+
     return { dailyQuest: dq };
   } catch (err) {
     const message = (err as Error).message ?? "Error, please try again";

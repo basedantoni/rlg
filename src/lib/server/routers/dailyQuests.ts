@@ -8,8 +8,8 @@ import {
   createDailyQuest,
   deleteDailyQuest,
   updateDailyQuest,
+  completeDailyQuest,
 } from "@/lib/api/dailyQuests/mutations";
-import { questIdSchema, updateQuestParams } from "@/db/schema/quests";
 import {
   getDailyQuestById,
   getDailyQuests,
@@ -35,8 +35,13 @@ export const dailyQuestsRouter = router({
       return updateDailyQuest(input.id, input);
     }),
   deleteDailyQuest: protectedProcedure
-    .input(questIdSchema)
+    .input(dailyQuestIdSchema)
     .mutation(async ({ input }) => {
       return deleteDailyQuest(input.id);
+    }),
+  completeDailyQuest: protectedProcedure
+    .input(dailyQuestIdSchema)
+    .mutation(async ({ input }) => {
+      return completeDailyQuest(input.id, input);
     }),
 });

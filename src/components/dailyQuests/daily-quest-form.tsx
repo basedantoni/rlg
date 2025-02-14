@@ -29,6 +29,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
+import { CompleteQuest } from "@/db/schema/quests";
 
 const DailyQuestForm = ({
   dailyQuest,
@@ -62,7 +63,7 @@ const DailyQuestForm = ({
 
   const onSuccess = async (
     action: "create" | "update" | "delete",
-    data?: { error?: string },
+    data?: { error?: string }
   ) => {
     if (data?.error) {
       toast(data.error);
@@ -148,7 +149,7 @@ const DailyQuestForm = ({
                       variant="outline"
                       className={cn(
                         "flex justify-between font-normal",
-                        !field.value && "text-muted-foreground",
+                        !field.value && "text-muted-foreground"
                       )}
                     >
                       {field.value ? (
