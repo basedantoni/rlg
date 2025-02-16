@@ -166,6 +166,7 @@ const DailyQuestKanban = ({
                   index={index}
                   data={q}
                   className="flex justify-between items-center"
+                  draggable={status.name !== "completed"}
                 >
                   <div className="flex space-x-2 text-muted-foreground">
                     <Checkbox

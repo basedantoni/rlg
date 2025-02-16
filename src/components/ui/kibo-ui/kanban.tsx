@@ -47,7 +47,7 @@ export const KanbanBoard = ({ id, children, className }: KanbanBoardProps) => {
       className={cn(
         "flex flex-col flex-1 max-h-full w-[17.5rem] box-border p-2 text-xs transition-all",
         isOver ? "outline-primary" : "outline-transparent",
-        className
+        className,
       )}
       ref={setNodeRef}
     >
@@ -55,14 +55,16 @@ export const KanbanBoard = ({ id, children, className }: KanbanBoardProps) => {
     </div>
   );
 };
-
-export type KanbanCardProps = Pick<Feature, "id" | "name"> & {
+export interface KanbanCardProps {
+  id: string;
+  name: string;
   index: number;
   parent: string;
-  children?: ReactNode;
+  children?: React.ReactNode;
+  data?: Record<string, any>;
   className?: string;
-  data?: any;
-};
+  draggable?: boolean; // New prop to control drag behavior
+}
 
 export const KanbanCard = ({
   id,
@@ -72,36 +74,45 @@ export const KanbanCard = ({
   children,
   data,
   className,
+  draggable = true, // default to true
 }: KanbanCardProps) => {
-  const { attributes, listeners, setNodeRef, transform, isDragging } =
-    useDraggable({
-      id,
-      data: { ...data, parent, index },
-    });
+  // Define a no-op function for the disabled state.
+  const noOp = () => {};
+
+  // Only initialize draggable behavior if enabled.
+  const { attributes, listeners, setNodeRef, transform, isDragging } = draggable
+    ? useDraggable({
+        id,
+        data: { ...data, parent, index },
+      })
+    : {
+        attributes: {},
+        listeners: {},
+        setNodeRef: noOp,
+        transform: null,
+        isDragging: false,
+      };
 
   return (
     <Card
       className={cn(
-        "rounded-md p-3 shadow-xs hover:border-hover",
+        "rounded-md p-3 shadow-xs",
         isDragging ? "cursor-grabbing" : "cursor-pointer",
-        className
+        draggable && "hover:border-hover",
+        !draggable && "opacity-50 cursor-default",
+        className,
       )}
       style={{
         transform: transform
           ? `translateX(${transform.x}px) translateY(${transform.y}px)`
           : "none",
       }}
-      {...listeners}
-      {...attributes}
-      ref={setNodeRef}
+      // Only attach drag event handlers if draggable is true.
+      {...(draggable ? listeners : {})}
+      {...(draggable ? attributes : {})}
+      ref={draggable ? setNodeRef : undefined}
     >
       {children ?? <p className="m-0 font-medium text-sm">{name}</p>}
-      <GripVertical
-        className={`text-muted-foreground ${
-          isDragging ? "cursor-grabbing" : "cursor-grab"
-        }`}
-        size={14}
-      />
     </Card>
   );
 };
@@ -115,7 +126,7 @@ export const KanbanCards = ({ children, className }: KanbanCardsProps) => (
   <div
     className={cn(
       "flex flex-col flex-1 gap-2 px-2 border-b box-border scroll-p-3 min-h-0 overflow-x-hidden overflow-y-auto",
-      className
+      className,
     )}
   >
     {children}
@@ -140,7 +151,7 @@ export const KanbanHeader = (props: KanbanHeaderProps) =>
     <div
       className={cn(
         "w-full h-11 flex shrink-0 items-center gap-2 border-b",
-        props.className
+        props.className,
       )}
     >
       {props.color && (
@@ -193,7 +204,7 @@ export const KanbanProvider = ({
       <div
         className={cn(
           "flex flex-1 overflow-x-auto box-border h-full max-w-[40rem]",
-          className
+          className,
         )}
       >
         {children}
@@ -227,7 +238,7 @@ export const KanbanProvider = ({
                   {activeCard.dueDate && (
                     <div
                       className={`flex space-x-0.5 items-center ${getDueDateColor(
-                        activeCard.dueDate
+                        activeCard.dueDate,
                       )}`}
                     >
                       <Calendar size={10} />
