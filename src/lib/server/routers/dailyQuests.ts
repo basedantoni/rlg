@@ -40,8 +40,8 @@ export const dailyQuestsRouter = router({
       return deleteDailyQuest(input.id);
     }),
   completeDailyQuest: protectedProcedure
-    .input(dailyQuestIdSchema)
+    .input(updateDailyQuestParams)
     .mutation(async ({ input }) => {
-      return completeDailyQuest(input.id, input);
+      return completeDailyQuest(input.id);
     }),
 });

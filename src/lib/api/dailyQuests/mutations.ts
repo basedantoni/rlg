@@ -10,6 +10,9 @@ import {
   updateDailyQuestSchema,
 } from "@/db/schema/dailyQuests";
 import { getUserAuth } from "@/lib/auth/utils";
+import { calculateNextDueDate } from "@/lib/utils";
+import { nanoid } from "nanoid";
+import { isBefore } from "date-fns";
 
 export const createDailyQuest = async (dailyQuest: NewDailyQuest) => {
   const { session } = await getUserAuth();
@@ -39,7 +42,7 @@ export const createDailyQuest = async (dailyQuest: NewDailyQuest) => {
 
 export const updateDailyQuest = async (
   id: DailyQuestId,
-  dailyQuest: UpdateDailyQuestParams
+  dailyQuest: UpdateDailyQuestParams,
 ) => {
   const { session } = await getUserAuth();
   const { id: dailyQuestId } = dailyQuestIdSchema.parse({ id });
@@ -85,20 +88,13 @@ export const deleteDailyQuest = async (id: DailyQuestId) => {
   }
 };
 
-export const completeDailyQuest = async (
-  id: DailyQuestId,
-  dailyQuest: UpdateDailyQuestParams
-) => {
+export const completeDailyQuest = async (id: DailyQuestId) => {
   const { session } = await getUserAuth();
   const { id: dailyQuestId } = dailyQuestIdSchema.parse({ id });
   if (!session?.user.id) {
     throw new Error("User is not authenticated");
   }
 
-  const newDailyQuest = updateDailyQuestSchema.parse({
-    ...dailyQuest,
-    userId: session.user.id,
-  });
   try {
     const [dq] = await db
       .update(dailyQuests)
@@ -106,7 +102,22 @@ export const completeDailyQuest = async (
       .where(eq(dailyQuests.id, dailyQuestId!))
       .returning();
 
-    console.log(dq);
+    if (dq.recurrence && dq.dueDate) {
+      const nextDueDate = calculateNextDueDate(
+        isBefore(dq.dueDate, new Date())
+          ? new Date().toISOString()
+          : dq.dueDate,
+        dq.recurrence,
+      );
+
+      await db.insert(dailyQuests).values({
+        ...dq,
+        id: nanoid(),
+        status: "open",
+        dueDate: nextDueDate,
+        createdAt: new Date().toISOString(),
+      });
+    }
 
     return { dailyQuest: dq };
   } catch (err) {

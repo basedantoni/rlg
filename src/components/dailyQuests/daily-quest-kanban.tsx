@@ -48,7 +48,10 @@ const DailyQuestKanban = ({
   const router = useRouter();
   const utils = trpc.useUtils();
 
-  const onSuccess = async (action: "update", data?: { error?: string }) => {
+  const onSuccess = async (
+    action: "update" | "complete",
+    data?: { error?: string },
+  ) => {
     if (data?.error) {
       toast(data.error);
       return;
@@ -93,6 +96,13 @@ const DailyQuestKanban = ({
       onSettled: () => utils.dailyQuests.getDailyQuests.invalidate(),
     });
 
+  const { mutate: completeQuest } =
+    trpc.dailyQuests.completeDailyQuest.useMutation({
+      onSuccess: () => onSuccess("complete"),
+      onSettled: () => utils.dailyQuests.invalidate(),
+      onError: (err) => console.error("complete", { error: err.message }),
+    });
+
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
 
@@ -108,14 +118,16 @@ const DailyQuestKanban = ({
 
     data.dailyQuests.map((q) => {
       if (q.id === active.id && q.status !== status.name) {
-        updateQuest({ ...q, status: status.name });
+        over.id === "completed"
+          ? completeQuest({ ...q })
+          : updateQuest({ ...q, status: status.name });
       }
     });
   };
 
   const handleChange = (q: CompleteDailyQuest, checked: CheckedState) => {
     if (checked) {
-      updateQuest({ ...q, status: "completed" });
+      completeQuest({ ...q });
     }
   };
 
