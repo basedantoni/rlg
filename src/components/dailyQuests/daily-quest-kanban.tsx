@@ -8,9 +8,18 @@ import {
   KanbanProvider,
 } from "@/components/ui/kibo-ui/kanban";
 import { Spinner } from "@/components/ui/kibo-ui/spinner";
+import { Button } from "@/components/ui/button";
 import { Checkbox } from "../ui/checkbox";
-import { Calendar, RefreshCw } from "lucide-react";
+import { Calendar, Ellipsis, RefreshCw } from "lucide-react";
 import DailyQuestModal from "./daily-quest-modal";
+import DailyQuestForm from "./daily-quest-form";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 import type { DragEndEvent } from "@dnd-kit/core";
 import { CompleteDailyQuest } from "@/db/schema/dailyQuests";
@@ -19,6 +28,7 @@ import { Status } from "@/components/ui/kibo-ui/kanban";
 import { getDueDateColor, formatDueDate } from "@/lib/utils";
 import { trpc } from "@/lib/trpc/client";
 import { useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 import { getQueryKey } from "@trpc/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -37,6 +47,9 @@ const DailyQuestKanbanCard = ({
   idx,
   onCheckedChange,
 }: DailyQuestKanbanCardProps) => {
+  const [open, setOpen] = useState(false);
+  const closeModal = () => setOpen(false);
+
   return (
     <KanbanCard
       key={dailyQuest.id}
@@ -48,18 +61,36 @@ const DailyQuestKanbanCard = ({
       className="flex justify-between items-center"
       draggable={status.name !== "completed"}
     >
-      <div className="flex space-x-2 text-muted-foreground">
+      <div className="flex space-x-2 w-full text-muted-foreground">
         <Checkbox
           id="completed"
           defaultChecked={status.name === "completed"}
           disabled={status.name === "completed"}
           onCheckedChange={(checked) => onCheckedChange(dailyQuest, checked)}
         />
-        <div className="flex flex-col space-y-2">
+        <div className="flex flex-col space-y-2 w-full">
           <div className="flex flex-col space-y-0.5">
-            <label htmlFor="complete" className="text-sm text-foreground">
-              {dailyQuest.title}
-            </label>
+            <div className="flex justify-between items-center">
+              <label htmlFor="complete" className="text-sm text-foreground">
+                {dailyQuest.title}
+              </label>
+              <Dialog onOpenChange={setOpen} open={open}>
+                <DialogTrigger className="py-0 px-1 h-4" asChild>
+                  <Button variant="ghost">
+                    <Ellipsis />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Edit Daily Quest</DialogTitle>
+                  </DialogHeader>
+                  <DailyQuestForm
+                    closeModal={closeModal}
+                    dailyQuest={dailyQuest}
+                  />
+                </DialogContent>
+              </Dialog>
+            </div>
             {dailyQuest.description && <p>{dailyQuest.description}</p>}
           </div>
           {dailyQuest.dueDate && (
