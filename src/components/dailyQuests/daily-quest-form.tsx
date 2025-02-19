@@ -50,7 +50,7 @@ const DailyQuestForm = ({
     defaultValues: dailyQuest
       ? {
           ...dailyQuest,
-          dueDate: dailyQuest.dueDate ? new Date(dailyQuest.dueDate) : null,
+          dueDate: dailyQuest.dueDate,
         }
       : {
           title: "",
@@ -63,7 +63,7 @@ const DailyQuestForm = ({
 
   const onSuccess = async (
     action: "create" | "update" | "delete",
-    data?: { error?: string }
+    data?: { error?: string },
   ) => {
     if (data?.error) {
       toast(data.error);
@@ -149,7 +149,7 @@ const DailyQuestForm = ({
                       variant="outline"
                       className={cn(
                         "flex justify-between font-normal",
-                        !field.value && "text-muted-foreground"
+                        !field.value && "text-muted-foreground",
                       )}
                     >
                       {field.value ? (
