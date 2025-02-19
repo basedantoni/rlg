@@ -1,9 +1,15 @@
+import { LevelProgressCard } from "@/components/levels/level-progress-card";
+
 import { Folder, Home, Settings, Shield } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+
+import { CompleteUser } from "@/db/schema/users";
+import { trpc } from "@/lib/trpc/api";
 
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -42,7 +48,13 @@ const items: MenuItem[] = [
   },
 ];
 
-export function AppSidebar() {
+export async function AppSidebar() {
+  const u: { user: CompleteUser } = await trpc.users.getUser();
+
+  const nextLevel = await trpc.levelDefinitions.getLevelDefinitionByLevel({
+    level: u.user.level + 1,
+  });
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -64,6 +76,12 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <LevelProgressCard
+          nextLevelXP={nextLevel.levelDefinition?.xpTreshold!}
+          currentXP={u.user.xp}
+        />
+      </SidebarFooter>
     </Sidebar>
   );
 }
