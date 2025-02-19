@@ -25,6 +25,60 @@ import { toast } from "sonner";
 
 type CheckedState = boolean | "indeterminate";
 
+interface DailyQuestKanbanCardProps {
+  dailyQuest: CompleteDailyQuest;
+  status: Status;
+  idx: number;
+  onCheckedChange: (q: CompleteDailyQuest, checked: CheckedState) => void;
+}
+const DailyQuestKanbanCard = ({
+  dailyQuest,
+  status,
+  idx,
+  onCheckedChange,
+}: DailyQuestKanbanCardProps) => {
+  return (
+    <KanbanCard
+      key={dailyQuest.id}
+      id={dailyQuest.id}
+      name={dailyQuest.title}
+      parent={status.name}
+      index={idx}
+      data={dailyQuest}
+      className="flex justify-between items-center"
+      draggable={status.name !== "completed"}
+    >
+      <div className="flex space-x-2 text-muted-foreground">
+        <Checkbox
+          id="completed"
+          defaultChecked={status.name === "completed"}
+          disabled={status.name === "completed"}
+          onCheckedChange={(checked) => onCheckedChange(dailyQuest, checked)}
+        />
+        <div className="flex flex-col space-y-2">
+          <div className="flex flex-col space-y-0.5">
+            <label htmlFor="complete" className="text-sm text-foreground">
+              {dailyQuest.title}
+            </label>
+            {dailyQuest.description && <p>{dailyQuest.description}</p>}
+          </div>
+          {dailyQuest.dueDate && (
+            <div
+              className={`flex space-x-0.5 items-center ${getDueDateColor(dailyQuest.dueDate)}`}
+            >
+              <Calendar size={10} />
+              <p className="capitalize">{formatDueDate(dailyQuest.dueDate)}</p>
+              {dailyQuest.recurrence && dailyQuest.recurrence !== "none" && (
+                <RefreshCw size={10} />
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </KanbanCard>
+  );
+};
+
 const DailyQuestKanban = ({
   dailyQuests,
 }: {
@@ -158,49 +212,13 @@ const DailyQuestKanban = ({
                 );
               })
               .map((q: CompleteDailyQuest, index: number) => (
-                <KanbanCard
+                <DailyQuestKanbanCard
                   key={q.id}
-                  id={q.id}
-                  name={q.title}
-                  parent={status.name}
-                  index={index}
-                  data={q}
-                  className="flex justify-between items-center"
-                  draggable={status.name !== "completed"}
-                >
-                  <div className="flex space-x-2 text-muted-foreground">
-                    <Checkbox
-                      id="completed"
-                      defaultChecked={status.name === "completed"}
-                      disabled={status.name === "completed"}
-                      onCheckedChange={(checked) => handleChange(q, checked)}
-                    />
-                    <div className="flex flex-col space-y-2">
-                      <div className="flex flex-col space-y-0.5">
-                        <label
-                          htmlFor="complete"
-                          className="text-sm text-foreground"
-                        >
-                          {q.title}
-                        </label>
-                        {q.description && <p>{q.description}</p>}
-                      </div>
-                      {q.dueDate && (
-                        <div
-                          className={`flex space-x-0.5 items-center ${getDueDateColor(q.dueDate)}`}
-                        >
-                          <Calendar size={10} />
-                          <p className="capitalize">
-                            {formatDueDate(q.dueDate)}
-                          </p>
-                          {q.recurrence && q.recurrence !== "none" && (
-                            <RefreshCw size={10} />
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </KanbanCard>
+                  dailyQuest={q}
+                  idx={index}
+                  status={status}
+                  onCheckedChange={handleChange}
+                />
               ))}
           </KanbanCards>
           {status.name === "open" && (
