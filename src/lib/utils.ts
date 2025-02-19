@@ -48,7 +48,7 @@ export const getDueDateColor = (date: string) => {
 
 export const calculateNextDueDate = (
   currentDate: string,
-  recurrence: string
+  recurrence: string,
 ): string | null => {
   const date = parseISO(currentDate);
 
@@ -70,4 +70,9 @@ export const calculateNextDueDate = (
     default:
       return null;
   }
+};
+
+export const capitalize = (str: string): string => {
+  if (!str) return "";
+  return str.charAt(0).toUpperCase() + str.slice(1);
 };

@@ -27,7 +27,7 @@ import { Select, SelectContent, SelectTrigger, SelectItem } from "../ui/select";
 import { SelectValue } from "@radix-ui/react-select";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { toast } from "sonner";
-import { cn } from "@/lib/utils";
+import { capitalize, cn } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
 import { CompleteQuest } from "@/db/schema/quests";
 
@@ -73,7 +73,7 @@ const DailyQuestForm = ({
     await utils.dailyQuests.getDailyQuests.invalidate();
     router.refresh();
     if (closeModal) closeModal();
-    toast.success(`Daily Quest ${action}d!`);
+    toast.success(`Daily Quest ${capitalize(action)}d`);
   };
 
   const { mutate: createQuest, isPending: isCreating } =
@@ -88,13 +88,6 @@ const DailyQuestForm = ({
       onSuccess: () => onSuccess("update"),
       onError: (err: { message: string }) =>
         console.error("update", { error: err.message }),
-    });
-
-  const { mutate: deleteQuest, isPending: isDeleting } =
-    trpc.dailyQuests.deleteDailyQuest.useMutation({
-      onSuccess: () => onSuccess("delete"),
-      onError: (err: { message: string }) =>
-        console.error("delete", { error: err.message }),
     });
 
   const handleSubmit = (values: NewDailyQuestParams) => {
