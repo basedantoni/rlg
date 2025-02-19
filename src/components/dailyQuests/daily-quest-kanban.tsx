@@ -203,7 +203,11 @@ const DailyQuestKanban = ({
                 </KanbanCard>
               ))}
           </KanbanCards>
-          {status.name === "open" && <DailyQuestModal emptyState />}
+          {status.name === "open" && (
+            <div className="border-t">
+              <DailyQuestModal emptyState />
+            </div>
+          )}
         </KanbanBoard>
       ))}
     </KanbanProvider>

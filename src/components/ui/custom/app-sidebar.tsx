@@ -1,4 +1,4 @@
-import { Folder, Home, Shield } from "lucide-react";
+import { Folder, Home, Settings, Shield } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 import {
@@ -34,6 +34,11 @@ const items: MenuItem[] = [
     title: "Quests",
     url: "/quests",
     icon: Shield,
+  },
+  {
+    title: "Settings",
+    url: "#",
+    icon: Settings,
   },
 ];
 

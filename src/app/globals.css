@@ -208,4 +208,10 @@
     overflow: hidden;
     padding: 0;
   }
+
+  h1 {
+    font-size: 1.625rem;
+    font-weight: 700;
+    line-height: 2.1875rem;
+  }
 }

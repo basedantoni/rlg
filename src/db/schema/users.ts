@@ -1,3 +1,4 @@
+import { getUser } from "@/lib/api/users/queries";
 import { sql } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import {
@@ -40,3 +41,6 @@ export type NewUser = z.infer<typeof insertUserSchema>;
 export type NewUserParams = z.infer<typeof insertUserParams>;
 export type UpdateUserParams = z.infer<typeof updateUserParams>;
 export type UserId = z.infer<typeof userIdSchema>["id"];
+
+// this type infers the return from getQuests() - meaining it will include joins
+export type CompleteUser = Awaited<ReturnType<typeof getUser>>["user"];

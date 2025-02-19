@@ -1,5 +1,6 @@
 import "dotenv/config";
 import { drizzle } from "drizzle-orm/libsql";
+import * as schema from "@/db/schema";
 
 export const db =
   process.env.NODE_ENV === "production"
@@ -8,5 +9,6 @@ export const db =
           url: process.env.TURSO_DATABASE_URL!,
           authToken: process.env.TURSO_AUTH_TOKEN,
         },
+        schema,
       })
-    : drizzle(process.env.DB_FILE_NAME!);
+    : drizzle({ connection: process.env.DB_FILE_NAME!, schema });

@@ -6,8 +6,9 @@ import { columns } from "./columns";
 export default async function QuestsPage() {
   const q: { quests: Quests[] } = await trpc.quests.getQuests();
   return (
-    <main className="flex flex-col flex-1 overflow-hidden h-screen slim-scroll">
+    <section className="flex flex-col flex-1 p-2 space-y-4 h-screen overflow-hidden slim-scroll">
+      <h1>Quests</h1>
       <DataTable columns={columns} data={q.quests} />
-    </main>
+    </section>
   );
 }

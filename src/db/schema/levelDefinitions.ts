@@ -39,6 +39,7 @@ export const updateLevelDefinitionParams = updateLevelDefinitionSchema
   .omit({});
 
 export const levelDefinitionIdSchema = baseSchema.pick({ id: true });
+export const levelDefinitionLevelSchema = baseSchema.pick({ level: true });
 
 export type levelDefinitions = typeof levelDefinitions.$inferSelect;
 export type NewlevelDefinition = z.infer<typeof insertLevelDefinitionSchema>;
@@ -49,3 +50,6 @@ export type UpdatelevelDefinitionParams = z.infer<
   typeof updateLevelDefinitionParams
 >;
 export type levelDefinitionId = z.infer<typeof levelDefinitionIdSchema>["id"];
+export type levelDefinitionLevel = z.infer<
+  typeof levelDefinitionLevelSchema
+>["level"];
