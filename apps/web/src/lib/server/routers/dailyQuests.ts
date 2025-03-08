@@ -3,15 +3,15 @@ import {
   insertDailyQuestParams,
   updateDailyQuestParams,
   sortOptionsSchema,
-} from '@/db/schema/dailyQuests';
-import { protectedProcedure, router } from '@/lib/server/trpc';
+} from '#db/schema/dailyQuests';
+import { protectedProcedure, router } from '#lib/server/trpc';
 import {
   createDailyQuest,
   deleteDailyQuest,
   updateDailyQuest,
   completeDailyQuest,
-} from '@/lib/api/dailyQuests/mutations';
-import { getDailyQuests } from '@/lib/api/dailyQuests/queries';
+} from '#lib/api/dailyQuests/mutations';
+import { getDailyQuests } from '#lib/api/dailyQuests/queries';
 
 export const dailyQuestsRouter = router({
   createDailyQuest: protectedProcedure

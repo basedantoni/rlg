@@ -2,10 +2,10 @@ import PenaltyToday from './penalty-today';
 import {
   AccountabilityPartnershipWithUsers,
   AccountabilityPartnershipWithAgreement,
-} from '@/db/schema/accountabilityPartnerships';
+} from '#db/schema/accountabilityPartnerships';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { getUserAuth } from '@/lib/auth/utils';
-import { getPartnershipUsers } from '@/lib/utils/partnership';
+import { getUserAuth } from '#lib/auth/utils';
+import { getPartnershipUsers } from '#lib/utils/partnership';
 
 interface PartnershipCardProps {
   partnership: AccountabilityPartnershipWithUsers &

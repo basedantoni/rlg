@@ -2,6 +2,13 @@
   "name": "web",
   "version": "0.1.0",
   "private": true,
+  "imports": {
+    "#components/*": "./src/components/*",
+    "#context/*": "./src/context/*",
+    "#db/*": "./src/db/*",
+    "#hooks/*": "./src/hooks/*",
+    "#lib/*": "./src/lib/*"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

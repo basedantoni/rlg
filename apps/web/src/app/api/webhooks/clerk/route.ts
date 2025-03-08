@@ -1,8 +1,8 @@
 import { Webhook } from 'svix';
 import { headers } from 'next/headers';
 import { UserJSON, WebhookEvent } from '@clerk/nextjs/server';
-import { env } from '@/lib/env.mjs';
-import { createUser, deleteUser, updateUser } from '@/lib/api/users/mutations';
+import { env } from '#lib/env.mjs';
+import { createUser, deleteUser, updateUser } from '#lib/api/users/mutations';
 
 export async function POST(req: Request) {
   const SIGNING_SECRET = env.CLERK_SIGNING_SECRET as string;

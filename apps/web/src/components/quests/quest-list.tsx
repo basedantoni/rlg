@@ -1,20 +1,20 @@
 'use client';
 
-import QuestModal from '@/components/quests/quest-modal';
-import QuestForm from '@/components/quests/quest-form';
+import QuestModal from '#components/quests/quest-modal';
+import QuestForm from '#components/quests/quest-form';
 
-import { CompleteQuest } from '@/db/schema/quests';
+import { CompleteQuest } from '#db/schema/quests';
 import { useState } from 'react';
-import { trpc } from '@/lib/trpc/client';
+import { trpc } from '#lib/trpc/client';
 
-import { Badge } from '@/components/ui/badge';
+import { Badge } from '#components/ui/badge';
 import {
   Dialog,
   DialogTrigger,
   DialogContent,
   DialogTitle,
   DialogHeader,
-} from '@/components/ui/dialog';
+} from '#components/ui/dialog';
 
 const Quest = ({ quest }: { quest: CompleteQuest }) => {
   const [open, setOpen] = useState(false);

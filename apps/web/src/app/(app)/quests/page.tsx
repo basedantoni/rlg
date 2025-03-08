@@ -1,6 +1,6 @@
-import { trpc } from '@/lib/trpc/api';
-import { QuestActivityCard } from '@/components/quests/quest-activity-card';
-import QuestModal from '@/components/quests/quest-modal';
+import { trpc } from '#lib/trpc/api';
+import { QuestActivityCard } from '#components/quests/quest-activity-card';
+import QuestModal from '#components/quests/quest-modal';
 
 export default async function QuestsPage() {
   const [quests] = await Promise.all([trpc.quests.getQuestsWithDailyQuests()]);

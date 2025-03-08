@@ -1,4 +1,4 @@
-import { db } from '@/db/drizzle';
+import { db } from '#db/drizzle';
 import {
   NewCategoryParams,
   insertCategorySchema,
@@ -7,8 +7,8 @@ import {
   UpdateCategoryParams,
   updateCategorySchema,
   categoryIdSchema,
-} from '@/db/schema/categories';
-import { getUserAuth } from '@/lib/auth/utils';
+} from '#db/schema/categories';
+import { getUserAuth } from '#lib/auth/utils';
 import { and, eq } from 'drizzle-orm';
 
 export const createCategory = async (category: NewCategoryParams) => {

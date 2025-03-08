@@ -1,4 +1,4 @@
-import { env } from '@/lib/env.mjs';
+import { env } from '#lib/env.mjs';
 import { defineLevelTresholds } from './levelThresholds';
 
 const runSeed = async (): Promise<void> => {

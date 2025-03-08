@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/libsql';
-import * as schema from '@/db/schema';
+import * as schema from '#db/schema';
 
 export const db =
   process.env.NODE_ENV === 'production'

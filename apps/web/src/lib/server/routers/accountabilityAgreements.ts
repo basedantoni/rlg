@@ -3,13 +3,13 @@ import {
   insertAccountabilityAgreementParams,
   updateAccountabilityAgreementParams,
   accountabilityAgreementIdSchema,
-} from '@/db/schema/accountabilityAgreements';
+} from '#db/schema/accountabilityAgreements';
 import {
   createAccountabilityAgreement,
   updateAccountabilityAgreement,
   deleteAccountabilityAgreement,
-} from '@/lib/api/accountabilityAgreements/mutations';
-import { getRecentAccountabilityAgreements } from '@/lib/api/accountabilityAgreements/queries';
+} from '#lib/api/accountabilityAgreements/mutations';
+import { getRecentAccountabilityAgreements } from '#lib/api/accountabilityAgreements/queries';
 
 export const accountabilityAgreementsRouter = router({
   create: protectedProcedure

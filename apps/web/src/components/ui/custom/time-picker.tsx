@@ -2,14 +2,14 @@
 
 import * as React from 'react';
 import { Clock } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
+import { cn } from '#lib/utils';
+import { Button } from '#components/ui/button';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
-import { Input } from '@/components/ui/input';
+} from '#components/ui/popover';
+import { Input } from '#components/ui/input';
 
 interface TimePickerProps {
   value: string;

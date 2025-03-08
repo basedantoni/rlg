@@ -1,4 +1,4 @@
-import { db } from '@/db/drizzle';
+import { db } from '#db/drizzle';
 import { eq, and } from 'drizzle-orm';
 import {
   NewQuestParams,
@@ -8,8 +8,8 @@ import {
   questIdSchema,
   insertQuestSchema,
   quests,
-} from '@/db/schema/quests';
-import { getUserAuth } from '@/lib/auth/utils';
+} from '#db/schema/quests';
+import { getUserAuth } from '#lib/auth/utils';
 
 export const createQuest = async (quest: NewQuestParams) => {
   const { session } = await getUserAuth();

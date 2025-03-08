@@ -6,7 +6,7 @@ import {
   KanbanCards,
   KanbanHeader,
   KanbanProvider,
-} from '@/components/ui/kibo-ui/kanban';
+} from '#components/ui/kibo-ui/kanban';
 import {
   AlertDialog,
   AlertDialogContent,
@@ -16,18 +16,18 @@ import {
   AlertDialogDescription,
   AlertDialogCancel,
   AlertDialogAction,
-} from '@/components/ui/alert-dialog';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Checkbox } from '@/components/ui/checkbox';
+} from '#components/ui/alert-dialog';
+import { Button } from '#components/ui/button';
+import { Card, CardContent } from '#components/ui/card';
+import { Checkbox } from '#components/ui/checkbox';
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-} from '@/components/ui/dropdown-menu';
+} from '#components/ui/dropdown-menu';
 
-import DailyQuestForm from '@/components/dailyQuests/daily-quest-form';
+import DailyQuestForm from '#components/dailyQuests/daily-quest-form';
 import {
   Calendar,
   Ellipsis,
@@ -38,18 +38,18 @@ import {
 } from 'lucide-react';
 
 import type { DragEndEvent } from '@dnd-kit/core';
-import { CompleteDailyQuest } from '@/db/schema/dailyQuests';
-import { DailyQuestId } from '@/db/schema/dailyQuests';
-import { Status } from '@/components/ui/kibo-ui/kanban';
+import { CompleteDailyQuest } from '#db/schema/dailyQuests';
+import { DailyQuestId } from '#db/schema/dailyQuests';
+import { Status } from '#components/ui/kibo-ui/kanban';
 import { UseMutateFunction } from '@tanstack/react-query';
 
-import { getDueDateColor, formatDueDate, capitalize } from '@/lib/utils';
-import { trpc } from '@/lib/trpc/client';
+import { getDueDateColor, formatDueDate, capitalize } from '#lib/utils';
+import { trpc } from '#lib/trpc/client';
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { getQueryKey } from '@trpc/react-query';
 import { toast } from 'sonner';
-import { cn } from '@/lib/utils';
+import { cn } from '#lib/utils';
 
 type CheckedState = boolean | 'indeterminate';
 

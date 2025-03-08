@@ -1,7 +1,7 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ActivityRing } from '@/components/ui/activity-ring';
-import { CompleteDailyQuest } from '@/db/schema/dailyQuests';
-import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '#components/ui/card';
+import { ActivityRing } from '#components/ui/activity-ring';
+import { CompleteDailyQuest } from '#db/schema/dailyQuests';
+import { Badge } from '#components/ui/badge';
 import { CircleDot } from 'lucide-react';
 
 interface QuestActivityCardProps {

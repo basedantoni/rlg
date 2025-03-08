@@ -2,17 +2,17 @@ import {
   accountabilityPartnershipIdSchema,
   insertAccountabilityPartnershipParams,
   updateAccountabilityPartnershipParams,
-} from '@/db/schema/accountabilityPartnerships';
+} from '#db/schema/accountabilityPartnerships';
 import { router, protectedProcedure } from '../trpc';
 import {
   createAccountabilityPartnership,
   updateAccountabilityPartnership,
   deleteAccountabilityPartnership,
-} from '@/lib/api/accountabilityPartnerships/mutations';
+} from '#lib/api/accountabilityPartnerships/mutations';
 import {
   getAccountabilityPartnershipById,
   getAccountabilityPartnerships,
-} from '@/lib/api/accountabilityPartnerships/queries';
+} from '#lib/api/accountabilityPartnerships/queries';
 
 export const accountabilityPartnershipsRouter = router({
   create: protectedProcedure

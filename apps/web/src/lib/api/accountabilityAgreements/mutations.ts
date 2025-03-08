@@ -1,16 +1,16 @@
-import { db } from '@/db/drizzle';
+import { db } from '#db/drizzle';
 import {
   AccountabilityAgreementId,
   accountabilityAgreements,
   insertAccountabilityAgreementSchema,
   updateAccountabilityAgreementSchema,
-} from '@/db/schema/accountabilityAgreements';
+} from '#db/schema/accountabilityAgreements';
 import {
   NewAccountabilityAgreement,
   UpdateAccountabilityAgreementParams,
   accountabilityAgreementIdSchema,
-} from '@/db/schema/accountabilityAgreements';
-import { getUserAuth } from '@/lib/auth/utils';
+} from '#db/schema/accountabilityAgreements';
+import { getUserAuth } from '#lib/auth/utils';
 import { eq } from 'drizzle-orm';
 
 export const createAccountabilityAgreement = async (

@@ -1,11 +1,11 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '#components/ui/button';
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-} from '@/components/ui/popover';
+} from '#components/ui/popover';
 import {
   Select,
   SelectContent,
@@ -14,8 +14,8 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Label } from '@/components/ui/label';
+} from '#components/ui/select';
+import { Label } from '#components/ui/label';
 import { SlidersHorizontal } from 'lucide-react';
 
 import { useState } from 'react';

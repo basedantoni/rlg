@@ -1,4 +1,4 @@
-import { env } from '@/lib/env.mjs';
+import { env } from '#lib/env.mjs';
 import { db } from './drizzle';
 import { levelDefinitions } from './schema/levelDefinitions';
 

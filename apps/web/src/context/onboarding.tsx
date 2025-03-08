@@ -1,7 +1,7 @@
 'use client';
 
-import { NewDailyQuest } from '@/db/schema/dailyQuests';
-import { NewQuest } from '@/db/schema/quests';
+import { NewDailyQuest } from '#db/schema/dailyQuests';
+import { NewQuest } from '#db/schema/quests';
 import { createContext, useContext, useState, ReactNode } from 'react';
 
 type OnboardingContextType = {

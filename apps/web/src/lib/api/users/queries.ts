@@ -1,7 +1,7 @@
-import { getUserAuth } from '@/lib/auth/utils';
-import { db } from '@/db/drizzle';
+import { getUserAuth } from '#lib/auth/utils';
+import { db } from '#db/drizzle';
 import { eq } from 'drizzle-orm';
-import { users } from '@/db/schema/users';
+import { users } from '#db/schema/users';
 
 export const getUser = async () => {
   const { session } = await getUserAuth();

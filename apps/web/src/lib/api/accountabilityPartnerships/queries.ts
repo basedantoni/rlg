@@ -1,9 +1,9 @@
-import { db } from '@/db/drizzle';
+import { db } from '#db/drizzle';
 import {
   AccountabilityPartnershipId,
   accountabilityPartnerships,
-} from '@/db/schema/accountabilityPartnerships';
-import { getUserAuth } from '@/lib/auth/utils';
+} from '#db/schema/accountabilityPartnerships';
+import { getUserAuth } from '#lib/auth/utils';
 import { eq, or } from 'drizzle-orm';
 
 export const getAccountabilityPartnerships = async () => {

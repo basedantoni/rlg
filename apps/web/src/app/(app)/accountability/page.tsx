@@ -1,23 +1,23 @@
-import { trpc } from '@/lib/trpc/api';
+import { trpc } from '#lib/trpc/api';
 import { Users } from 'lucide-react';
-import AgreementForm from '@/components/accountability/agreement-form';
-import PartnershipForm from '@/components/accountability/partnership-form';
-import PartnershipModal from '@/components/accountability/partnership-modal';
-import PartnershipCard from '@/components/accountability/partnership-card';
+import AgreementForm from '#components/accountability/agreement-form';
+import PartnershipForm from '#components/accountability/partnership-form';
+import PartnershipModal from '#components/accountability/partnership-modal';
+import PartnershipCard from '#components/accountability/partnership-card';
 import Link from 'next/link';
-import { CopyableArticle } from '@/components/ui/custom/copyable-article';
+import { CopyableArticle } from '#components/ui/custom/copyable-article';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from '#components/ui/card';
 import {
   AccountabilityPartnershipWithUsers,
   AccountabilityPartnershipWithAgreement,
-} from '@/db/schema/accountabilityPartnerships';
-import { env } from '@/lib/env.mjs';
+} from '#db/schema/accountabilityPartnerships';
+import { env } from '#lib/env.mjs';
 import { format } from 'date-fns';
 
 const EmptyState = () => {

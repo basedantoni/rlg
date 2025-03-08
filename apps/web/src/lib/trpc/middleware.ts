@@ -1,5 +1,5 @@
 import { TRPCError } from '@trpc/server';
-import { Context } from '@/lib/trpc/context';
+import { Context } from '#lib/trpc/context';
 import { initTRPC } from '@trpc/server';
 
 // Re-create the tRPC instance for middleware

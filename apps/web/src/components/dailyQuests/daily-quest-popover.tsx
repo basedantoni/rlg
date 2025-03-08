@@ -1,12 +1,12 @@
 'use client';
 
-import DailyQuestForm from '@/components/dailyQuests/daily-quest-form';
+import DailyQuestForm from '#components/dailyQuests/daily-quest-form';
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-} from '@/components/ui/popover';
-import { Button } from '@/components/ui/button';
+} from '#components/ui/popover';
+import { Button } from '#components/ui/button';
 import { Plus } from 'lucide-react';
 
 const DailyQuestPopover = () => {
