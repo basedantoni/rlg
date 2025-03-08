@@ -65,10 +65,10 @@
     "svix": "^1.44.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
+    "@tailwindcss/postcss": "^4.0.0",
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.0.0",
     "@tanstack/react-query-devtools": "^5.66.8",
     "@types/node": "^20",
     "@types/react": "^19",
