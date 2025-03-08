@@ -2,14 +2,14 @@ import {
   createCategory,
   deleteCategory,
   updateCategory,
-} from '#/lib/api/categories/mutations';
+} from '@/lib/api/categories/mutations';
 import { protectedProcedure, router } from '../trpc';
 import {
   categoryIdSchema,
   insertCategoryParams,
   updateCategoryParams,
-} from '#/db/schema/categories';
-import { getCategories } from '#/lib/api/categories/queries';
+} from '@/db/schema/categories';
+import { getCategories } from '@/lib/api/categories/queries';
 
 export const categoriesRouter = router({
   createCategory: protectedProcedure

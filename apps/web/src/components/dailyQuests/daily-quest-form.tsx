@@ -4,26 +4,26 @@ import {
   DailyQuests,
   insertDailyQuestParams,
   NewDailyQuestParams,
-} from '#/db/schema/dailyQuests';
-import { trpc } from '#/lib/trpc/client';
-import { capitalize } from '#/lib/utils';
+} from '@/db/schema/dailyQuests';
+import { trpc } from '@/lib/trpc/client';
+import { capitalize } from '@/lib/utils';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
-import DueDatePopover from '#/components/ui/custom/due-date-popover';
-import RecurrencePopover from '#/components/ui/custom/recurrence-popover';
-import { Button } from '#/components/ui/button';
+import DueDatePopover from '@/components/ui/custom/due-date-popover';
+import RecurrencePopover from '@/components/ui/custom/recurrence-popover';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from '#/components/ui/form';
-import { Input } from '#/components/ui/input';
-import { SearchableSelect } from '#/components/ui/custom/searchable-select';
-import { Separator } from '#/components/ui/separator';
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { SearchableSelect } from '@/components/ui/custom/searchable-select';
+import { Separator } from '@/components/ui/separator';
 import { Check, X } from 'lucide-react';
 import { toast } from 'sonner';
 

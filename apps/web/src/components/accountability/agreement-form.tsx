@@ -3,14 +3,14 @@
 import {
   AccountabilityAgreements,
   NewAccountabilityAgreementParams,
-} from '#/db/schema/accountabilityAgreements';
+} from '@/db/schema/accountabilityAgreements';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { insertAccountabilityAgreementParams } from '#/db/schema/accountabilityAgreements';
+import { insertAccountabilityAgreementParams } from '@/db/schema/accountabilityAgreements';
 import { toast } from 'sonner';
-import { trpc } from '#/lib/trpc/client';
+import { trpc } from '@/lib/trpc/client';
 import {
   Form,
   FormField,
@@ -19,11 +19,11 @@ import {
   FormControl,
   FormMessage,
   FormDescription,
-} from '#/components/ui/form';
-import { Input } from '#/components/ui/input';
-import { NumberInput } from '#/components/ui/custom/number-input';
-import { FormTimePicker } from '#/components/ui/custom/form-time-picker';
-import { Button } from '#/components/ui/button';
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { NumberInput } from '@/components/ui/custom/number-input';
+import { FormTimePicker } from '@/components/ui/custom/form-time-picker';
+import { Button } from '@/components/ui/button';
 
 interface AgreementFormProps {
   partnershipId: string;

@@ -1,4 +1,4 @@
-import { getUser } from '#/lib/api/users/queries';
+import { getUser } from '@/lib/api/users/queries';
 import { sql, relations } from 'drizzle-orm';
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 import {

@@ -1,7 +1,7 @@
-import { db } from '#/db/drizzle';
-import { accountabilityPartnerships } from '#/db/schema/accountabilityPartnerships';
-import { dailyQuests } from '#/db/schema/dailyQuests';
-import { getUserAuth } from '#/lib/auth/utils';
+import { db } from '@/db/drizzle';
+import { accountabilityPartnerships } from '@/db/schema/accountabilityPartnerships';
+import { dailyQuests } from '@/db/schema/dailyQuests';
+import { getUserAuth } from '@/lib/auth/utils';
 import { and, eq, gt, lt, or } from 'drizzle-orm';
 
 export const getRecentAccountabilityAgreements = async () => {

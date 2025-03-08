@@ -1,4 +1,4 @@
-import CategoryOnboard from '#/components/onboarding/category-onboard';
+import CategoryOnboard from '@/components/onboarding/category-onboard';
 
 export default function OnboardingPage() {
   return (

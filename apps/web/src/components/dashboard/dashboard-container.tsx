@@ -1,12 +1,12 @@
 'use client';
 
-import { Spinner } from '#/components/ui/kibo-ui/spinner';
-import DailyQuestKanban from '#/components/dailyQuests/daily-quest-kanban';
+import { Spinner } from '@/components/ui/kibo-ui/spinner';
+import DailyQuestKanban from '@/components/dailyQuests/daily-quest-kanban';
 import ViewOptionsPopover, {
   SortDirection,
-} from '#/components/ui/custom/view-options-popover';
-import { CompleteDailyQuest } from '#/db/schema/dailyQuests';
-import { trpc } from '#/lib/trpc/client';
+} from '@/components/ui/custom/view-options-popover';
+import { CompleteDailyQuest } from '@/db/schema/dailyQuests';
+import { trpc } from '@/lib/trpc/client';
 import { useState } from 'react';
 
 interface DashboardClientProps {

@@ -1,10 +1,10 @@
 'use client';
 
-import DailyQuestForm from '#/components/dailyQuests/daily-quest-form';
-import { DailyQuests } from '#/db/schema/dailyQuests';
+import DailyQuestForm from '@/components/dailyQuests/daily-quest-form';
+import { DailyQuests } from '@/db/schema/dailyQuests';
 import { useState } from 'react';
 
-import { Button } from '#/components/ui/button';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogTrigger,
@@ -12,7 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from '#/components/ui/dialog';
+} from '@/components/ui/dialog';
 import { Plus } from 'lucide-react';
 
 const DailyQuestModal = ({

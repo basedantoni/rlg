@@ -3,19 +3,19 @@
 import { useState } from 'react';
 import { RefreshCw, X } from 'lucide-react';
 import { ControllerRenderProps } from 'react-hook-form';
-import { cn } from '#/lib/utils';
-import { capitalize } from '#/lib/utils';
+import { cn } from '@/lib/utils';
+import { capitalize } from '@/lib/utils';
 
-import { Popover, PopoverTrigger } from '#/components/ui/popover';
-import { Badge } from '#/components/ui/badge';
-import { Button } from '#/components/ui/button';
+import { Popover, PopoverTrigger } from '@/components/ui/popover';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '#/components/ui/tooltip';
-import RecurrencePopoverContent from '#/components/ui/custom/recurrence-popover-content';
+} from '@/components/ui/tooltip';
+import RecurrencePopoverContent from '@/components/ui/custom/recurrence-popover-content';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type FieldType = Omit<ControllerRenderProps<any, 'recurrence'>, 'value'> & {

@@ -1,5 +1,5 @@
 import { initTRPC, TRPCError } from '@trpc/server';
-import { Context } from '#/lib/trpc/context';
+import { Context } from '@/lib/trpc/context';
 import SuperJSON from 'superjson';
 import { ZodError } from 'zod';
 

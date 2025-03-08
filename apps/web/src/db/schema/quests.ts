@@ -1,5 +1,5 @@
-import { users } from '#/db/schema/users';
-import { categories } from '#/db/schema/categories';
+import { users } from '@/db/schema/users';
+import { categories } from '@/db/schema/categories';
 import { relations, sql } from 'drizzle-orm';
 import { sqliteTable, text } from 'drizzle-orm/sqlite-core';
 import {
@@ -9,7 +9,7 @@ import {
 } from 'drizzle-zod';
 import { nanoid } from 'nanoid';
 import { z } from 'zod';
-import { type getQuests } from '#/lib/api/quests/queries';
+import { type getQuests } from '@/lib/api/quests/queries';
 import { dailyQuests } from './dailyQuests';
 
 export const quests = sqliteTable('quests', {

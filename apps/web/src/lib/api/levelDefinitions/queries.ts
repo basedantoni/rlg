@@ -1,7 +1,7 @@
-import { db } from '#/db/drizzle';
+import { db } from '@/db/drizzle';
 import { eq } from 'drizzle-orm';
-import { levelDefinitions } from '#/db/schema';
-import { getUserAuth } from '#/lib/auth/utils';
+import { levelDefinitions } from '@/db/schema';
+import { getUserAuth } from '@/lib/auth/utils';
 
 export const getLevelDefinitionByLevel = async (level: number) => {
   const { session } = await getUserAuth();

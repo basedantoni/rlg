@@ -1,4 +1,4 @@
-import { db } from '#/db/drizzle';
+import { db } from '@/db/drizzle';
 import {
   NewAccountabilityPartnership,
   AccountabilityPartnershipId,
@@ -7,8 +7,8 @@ import {
   insertAccountabilityPartnershipSchema,
   updateAccountabilityPartnershipSchema,
   accountabilityPartnershipIdSchema,
-} from '#/db/schema/accountabilityPartnerships';
-import { getUserAuth } from '#/lib/auth/utils';
+} from '@/db/schema/accountabilityPartnerships';
+import { getUserAuth } from '@/lib/auth/utils';
 import { eq } from 'drizzle-orm';
 
 export const createAccountabilityPartnership = async (

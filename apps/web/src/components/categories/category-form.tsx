@@ -4,14 +4,14 @@ import {
   Category,
   insertCategoryParams,
   NewCategoryParams,
-} from '#/db/schema/categories';
+} from '@/db/schema/categories';
 import { useRouter } from 'next/navigation';
 import { ControllerRenderProps, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { trpc } from '#/lib/trpc/client';
+import { trpc } from '@/lib/trpc/client';
 import { z } from 'zod';
 
-import { Button } from '#/components/ui/button';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -19,8 +19,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '#/components/ui/form';
-import { Input } from '#/components/ui/input';
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 
 const CategoryForm = ({

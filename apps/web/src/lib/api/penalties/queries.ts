@@ -1,8 +1,8 @@
-import { getUserAuth } from '#/lib/auth/utils';
-import { db } from '#/db/drizzle';
-import { penalties } from '#/db/schema/penalties';
+import { getUserAuth } from '@/lib/auth/utils';
+import { db } from '@/db/drizzle';
+import { penalties } from '@/db/schema/penalties';
 import { eq, and, gte, lt } from 'drizzle-orm';
-import { AccountabilityAgreementId } from '#/db/schema/accountabilityAgreements';
+import { AccountabilityAgreementId } from '@/db/schema/accountabilityAgreements';
 
 export const getPenaltyToday = async ({
   agreementId,

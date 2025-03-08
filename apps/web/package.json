@@ -1,12 +1,7 @@
 {
-  "name": "rlg-web",
+  "name": "web",
   "version": "0.1.0",
   "private": true,
-  "imports": {
-    "#*": [
-      "./src/*"
-    ]
-  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

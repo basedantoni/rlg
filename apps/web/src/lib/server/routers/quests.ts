@@ -2,18 +2,18 @@ import {
   getQuests,
   getQuestsDue,
   getQuestsWithDailyQuests,
-} from '#/lib/api/quests/queries';
-import { protectedProcedure, router } from '#/lib/server/trpc';
+} from '@/lib/api/quests/queries';
+import { protectedProcedure, router } from '@/lib/server/trpc';
 import {
   questIdSchema,
   insertQuestParams,
   updateQuestParams,
-} from '#/db/schema/quests';
+} from '@/db/schema/quests';
 import {
   createQuest,
   deleteQuest,
   updateQuest,
-} from '#/lib/api/quests/mutations';
+} from '@/lib/api/quests/mutations';
 
 export const questsRouter = router({
   getQuests: protectedProcedure.query(async () => {

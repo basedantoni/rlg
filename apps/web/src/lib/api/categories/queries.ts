@@ -1,6 +1,6 @@
-import { db } from '#/db/drizzle';
-import { categories } from '#/db/schema/categories';
-import { createUserFilter } from '#/db/utils';
+import { db } from '@/db/drizzle';
+import { categories } from '@/db/schema/categories';
+import { createUserFilter } from '@/db/utils';
 
 export const getCategories = async () => {
   const userFilter = await createUserFilter(categories);

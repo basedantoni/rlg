@@ -1,5 +1,5 @@
-import ModeToggle from '#/components/ui/mode-toggle';
-import { Separator } from '#/components/ui/separator';
+import ModeToggle from '@/components/ui/mode-toggle';
+import { Separator } from '@/components/ui/separator';
 import { UserButton } from '@clerk/nextjs';
 
 export default function SettingsPage() {

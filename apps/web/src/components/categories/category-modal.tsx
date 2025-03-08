@@ -1,17 +1,17 @@
 'use client';
 
-import CategoryForm from '#/components/categories/category-form';
-import { Category } from '#/db/schema/categories';
+import CategoryForm from '@/components/categories/category-form';
+import { Category } from '@/db/schema/categories';
 import { useState } from 'react';
 
-import { Button } from '#/components/ui/button';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogTrigger,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from '#/components/ui/dialog';
+} from '@/components/ui/dialog';
 import { Plus } from 'lucide-react';
 
 const CategoryModal = ({

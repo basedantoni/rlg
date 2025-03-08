@@ -7,10 +7,10 @@ import {
   Briefcase,
   Coffee,
 } from 'lucide-react';
-import { PopoverContent } from '#/components/ui/popover';
-import { Button } from '#/components/ui/button';
+import { PopoverContent } from '@/components/ui/popover';
+import { Button } from '@/components/ui/button';
 import { ControllerRenderProps } from 'react-hook-form';
-import { ToggleGroup, ToggleGroupItem } from '#/components/ui/toggle-group';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { useState, useEffect } from 'react';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

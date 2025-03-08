@@ -3,14 +3,14 @@ import {
   insertPenaltyParams,
   penaltyIdSchema,
   updatePenaltyParams,
-} from '#/db/schema/penalties';
+} from '@/db/schema/penalties';
 import {
   createPenalty,
   updatePenalty,
   deletePenalty,
-} from '#/lib/api/penalties/mutations';
-import { accountabilityAgreementIdSchema } from '#/db/schema/accountabilityAgreements';
-import { getPenaltyToday, getPenaltyCount } from '#/lib/api/penalties/queries';
+} from '@/lib/api/penalties/mutations';
+import { accountabilityAgreementIdSchema } from '@/db/schema/accountabilityAgreements';
+import { getPenaltyToday, getPenaltyCount } from '@/lib/api/penalties/queries';
 
 export const penaltiesRouter = router({
   create: protectedProcedure
