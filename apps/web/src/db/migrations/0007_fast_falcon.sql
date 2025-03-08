@@ -1,0 +1,1 @@
+ALTER TABLE `daily_quests` ADD `weekly_days` text;

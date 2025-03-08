@@ -1,0 +1,83 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1735540953038,
+      "tag": "0000_supreme_queen_noir",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1735723685274,
+      "tag": "0001_reflective_microbe",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1735918175989,
+      "tag": "0002_aspiring_matthew_murdock",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1736287310979,
+      "tag": "0003_nappy_nehzno",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1736287453437,
+      "tag": "0004_nappy_bedlam",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1740449699545,
+      "tag": "0005_colorful_lord_hawal",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1740547461314,
+      "tag": "0006_clumsy_captain_flint",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1740700815423,
+      "tag": "0007_fast_falcon",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1740718841245,
+      "tag": "0008_blushing_bullseye",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1741240384397,
+      "tag": "0009_bored_nick_fury",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "6",
+      "when": 1741375965509,
+      "tag": "0010_unusual_anthem",
+      "breakpoints": true
+    }
+  ]
+}

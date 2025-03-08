@@ -1,0 +1,236 @@
+@import 'tailwindcss';
+
+@plugin 'tailwindcss-animate';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-sidebar: hsl(var(--sidebar-background));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-success: hsl(var(--success));
+  --color-success-foreground: hsl(var(--success-foreground));
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-hover: hsl(var(--hover));
+
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --color-gradient-start: hsla(var(--start));
+  --color-gradient-end: hsla(var(--end));
+
+  --color-linear-top: hsl(var(--top));
+  --color-linear-bottom: hsl(var(--bottom));
+
+  --color-yesterday: hsl(var(--yesterday));
+  --color-today: hsl(var(--today));
+  --color-tomorrow: hsl(var(--tomorrow));
+  --color-future: hsl(var(--future));
+
+  --color-sidebar-background: var(--sidebar-background);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@layer utilities {
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  :root {
+    --background: oklch(100% 0 0);
+    --foreground: oklch(12.06% 0.0345 30.06);
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: oklch(60.59% 0.1875 30.06);
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --success: 101 53% 77%;
+    --success-foreground: 120 87% 34%;
+    --destructive: oklch(0.577 0.245 27.325);
+    --destructive-foreground: oklch(92.94% 0.0345 27.325);
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
+    --hover: 0, 0%, 92%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+    --start: 0, 0%, 100%, 0;
+    --end: 0, 0%, 60%, 0;
+    --top: 0, 0%, 92%;
+    --bottom: 0, 0%, 84%;
+    --yesterday: 6 93% 56%;
+    --today: 121 71% 23%;
+    --tomorrow: 30, 100%, 54%;
+    --future: 274, 100%, 43%;
+    --sidebar-background: oklch(98.48% 0 0);
+    --sidebar-foreground: oklch(12.06% 0.0345 30.06);
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: oklch(24.84% 0 0);
+    --foreground: oklch(98.48% 0 0);
+    --card: 0, 0%, 13%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: oklch(55.37% 0.1796 30.06);
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --success: 150 25% 9%;
+    --success-foreground: 133 54% 64%;
+    --destructive: oklch(0.396 0.141 25.723);
+    --destructive-foreground: oklch(0.637 0.237 25.331);
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --hover: 0, 0%, 34%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --start: 0, 0%, 100%, 0.55;
+    --end: 0, 0%, 60%, 0;
+    --top: 0, 0%, 38%;
+    --bottom: 0, 0%, 20%;
+    --yesterday: 6 74% 56%;
+    --today: 120 54% 50%;
+    --tomorrow: 30, 98%, 54%;
+    --future: 274, 82%, 53%;
+    --sidebar-background: oklch(26.86% 0 0);
+    --sidebar-foreground: oklch(98.48% 0 0);
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+
+    scrollbar-width: thin;
+
+    .slim-scroll::-webkit-scrollbar {
+      display: none;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .slim-scroll::-webkit-scrollbar-track {
+      display: none;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .slim-scroll::-webkit-scrollbar-thumb {
+      display: none;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+  }
+  html,
+  body {
+    @apply bg-background text-foreground;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  h1 {
+    font-size: 1.625rem;
+    font-weight: 700;
+    line-height: 2.1875rem;
+  }
+}
+
+/*
+  ---break---
+*/
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
