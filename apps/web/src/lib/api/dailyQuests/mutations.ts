@@ -121,6 +121,10 @@ export const completeDailyQuest = async (id: DailyQuestId) => {
       .where(eq(dailyQuests.id, dailyQuestId!))
       .returning();
 
+    if (!dq) {
+      throw new Error('Daily quest not found');
+    }
+
     if (dq.recurrence && dq.dueDate) {
       // Parse weeklyDays from string if it exists
       let weeklyDaysArray = null;

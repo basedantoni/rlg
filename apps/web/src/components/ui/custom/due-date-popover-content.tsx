@@ -20,6 +20,7 @@ import {
   startOfDay,
 } from 'date-fns';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type FieldType = Omit<ControllerRenderProps<any, 'dueDate'>, 'value'> & {
   value: Date | string | null | undefined;
 };

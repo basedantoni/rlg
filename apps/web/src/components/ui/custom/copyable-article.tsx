@@ -6,14 +6,9 @@ import { toast } from 'sonner';
 import { useState } from 'react';
 import { useCopyToClipboard } from '@uidotdev/usehooks';
 
-export const CopyableArticle = ({
-  label,
-  text,
-}: {
-  label: string;
-  text: string;
-}) => {
-  const [copiedText, copyToClipboard] = useCopyToClipboard();
+export const CopyableArticle = ({ text }: { text: string }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, copyToClipboard] = useCopyToClipboard();
   const [hasCopiedText, setHasCopiedText] = useState(false);
 
   const handleCopy = () => {

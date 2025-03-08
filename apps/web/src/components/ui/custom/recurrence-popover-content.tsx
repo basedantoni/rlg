@@ -13,6 +13,7 @@ import { ControllerRenderProps } from 'react-hook-form';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { useState, useEffect } from 'react';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type FieldType = Omit<ControllerRenderProps<any, 'recurrence'>, 'value'> & {
   value: string | null | undefined;
 };

@@ -71,11 +71,12 @@ const PartnershipForm = ({
         console.error('updateAgreement', { error: err.message }),
     });
 
-  const { mutate: deletePartnership, isPending: isDeleting } =
-    trpc.accountabilityPartnerships.delete.useMutation({
-      onSuccess: () => onSuccess('delete'),
-      onError: (err) => console.error('delete', { error: err.message }),
-    });
+  // TODO: Add delete button
+  // const { mutate: deletePartnership, isPending: isDeleting } =
+  //   trpc.accountabilityPartnerships.delete.useMutation({
+  //     onSuccess: () => onSuccess('delete'),
+  //     onError: (err) => console.error('delete', { error: err.message }),
+  //   });
 
   const handleSubmit = (values: NewAccountabilityPartnershipParams) => {
     if (editing) {
@@ -94,13 +95,15 @@ const PartnershipForm = ({
     }
   };
 
+  const isDisabled = isCreating || isUpdating || isUpdatingAgreement;
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)}>
-        <Button type='submit' className='mr-1' disabled={isCreating}>
+        <Button type='submit' className='mr-1' disabled={isDisabled}>
           {editing
-            ? `Join${isCreating ? 'ing...' : ''}`
-            : `Creat${isCreating ? 'ing...' : 'e'}`}
+            ? `Join${isDisabled ? 'ing...' : ''}`
+            : `Creat${isDisabled ? 'ing...' : 'e'}`}
         </Button>
       </form>
     </Form>

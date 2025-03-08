@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import React, { useState, useRef, useEffect } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import React, { useState, useRef, useEffect } from 'react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Plus } from 'lucide-react';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 
 interface SearchableSelectProps<T> {
   items: T[];
@@ -23,7 +23,6 @@ interface SearchableSelectProps<T> {
   filterItems: (items: T[], searchTerm: string) => T[];
   onCreateItem?: (searchTerm: string) => void;
   createButtonLabel?: (searchTerm: string) => string;
-  className?: string;
   triggerClassName?: string;
 }
 
@@ -31,17 +30,16 @@ const SearchableSelect = <T,>({
   items,
   value,
   onValueChange,
-  placeholder = "Select an option",
-  searchPlaceholder = "Search...",
+  placeholder = 'Select an option',
+  searchPlaceholder = 'Search...',
   getItemId,
   getItemLabel,
   filterItems,
   onCreateItem,
   createButtonLabel = (term) => `Create "${term}"`,
-  className,
   triggerClassName,
 }: SearchableSelectProps<T>) => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [filteredItems, setFilteredItems] = useState<T[]>(items);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -54,8 +52,8 @@ const SearchableSelect = <T,>({
   };
 
   return (
-    <Select 
-      value={value ?? undefined} 
+    <Select
+      value={value ?? undefined}
       onValueChange={onValueChange}
       onOpenChange={(open) => {
         if (open) {
@@ -63,7 +61,7 @@ const SearchableSelect = <T,>({
             searchInputRef.current?.focus();
           }, 0);
         } else {
-          setSearchTerm(""); // Reset search when closing
+          setSearchTerm(''); // Reset search when closing
         }
       }}
     >
@@ -77,16 +75,16 @@ const SearchableSelect = <T,>({
           value={searchTerm}
           onChange={handleSearch}
           onKeyDown={(e) => e.stopPropagation()}
-          className="mb-2"
+          className='mb-2'
         />
         {filteredItems.length === 0 && searchTerm && onCreateItem && (
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            className="w-full justify-start" 
+          <Button
+            variant='ghost'
+            size='sm'
+            className='w-full justify-start'
             onClick={() => onCreateItem(searchTerm)}
           >
-            <Plus size={16} className="mr-2" /> 
+            <Plus size={16} className='mr-2' />
             {createButtonLabel(searchTerm)}
           </Button>
         )}
@@ -100,4 +98,4 @@ const SearchableSelect = <T,>({
   );
 };
 
-export { SearchableSelect }; 
+export { SearchableSelect };

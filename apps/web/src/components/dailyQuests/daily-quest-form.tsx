@@ -116,6 +116,8 @@ const DailyQuestForm = ({
     }
   };
 
+  const isDisabled = isCreating || isUpdating || isCreatingQuest;
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className={'py-2'}>
@@ -236,7 +238,7 @@ const DailyQuestForm = ({
                 <X size={24} />
               </Button>
             )}
-            <Button type='submit' size='icon' disabled={isCreating}>
+            <Button type='submit' size='icon' disabled={isDisabled}>
               <Check size={24} />
             </Button>
           </div>

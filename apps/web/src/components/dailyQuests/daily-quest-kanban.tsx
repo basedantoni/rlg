@@ -275,7 +275,7 @@ const DailyQuestKanban = ({
 
     dailyQuests.map((q) => {
       if (q.id === active.id && q.status !== status.name) {
-        over.id === 'completed'
+        return over.id === 'completed'
           ? completeQuest({ ...q })
           : updateQuest({ ...q, status: status.name });
       }
@@ -311,6 +311,8 @@ const DailyQuestKanban = ({
   const closeAnyForm = () => {
     setOpenForm({ type: null });
   };
+
+  const isDisabled = isUpdating;
 
   return (
     <KanbanProvider onDragEnd={handleDragEnd}>
@@ -358,6 +360,7 @@ const DailyQuestKanban = ({
                   variant='ghost'
                   className='text-muted-foreground justify-start hover:bg-transparent'
                   onClick={handleAddFormToggle}
+                  disabled={isDisabled}
                 >
                   <Plus size={16} />
                   Add Daily Quest

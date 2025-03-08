@@ -1,4 +1,4 @@
-import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { sqliteTable, text } from 'drizzle-orm/sqlite-core';
 import { relations, sql } from 'drizzle-orm';
 import {
   createInsertSchema,

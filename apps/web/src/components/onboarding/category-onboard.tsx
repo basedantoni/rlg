@@ -34,7 +34,7 @@ const CategoryOnboard = () => {
 
   const toggleCategory = (index: number) => {
     const newCategories = [...categories];
-    newCategories[index].selected = !newCategories[index].selected;
+    newCategories[index]!.selected = !newCategories[index]!.selected;
     setCategories(newCategories);
   };
 
@@ -116,7 +116,12 @@ const CategoryOnboard = () => {
         <Button className='w-full' onClick={handleBatchSubmit}>
           Submit
         </Button>
-        <Button asChild variant='link' className='text-muted-foreground'>
+        <Button
+          asChild
+          variant='link'
+          className='text-muted-foreground'
+          disabled={isCreating}
+        >
           <Link href='/dashboard'>Skip and add later</Link>
         </Button>
       </div>

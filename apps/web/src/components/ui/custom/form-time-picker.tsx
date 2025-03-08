@@ -4,6 +4,7 @@ import * as React from 'react';
 import { TimePicker } from '@/components/ui/custom/time-picker';
 import { ControllerRenderProps } from 'react-hook-form';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type FieldType = Omit<ControllerRenderProps<any, 'cutoffTime'>, 'value'> & {
   value: string | null | undefined;
 };

@@ -17,12 +17,14 @@ import {
 } from '@/components/ui/tooltip';
 import RecurrencePopoverContent from '@/components/ui/custom/recurrence-popover-content';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type FieldType = Omit<ControllerRenderProps<any, 'recurrence'>, 'value'> & {
   value: string | null | undefined;
 };
 
 interface RecurrencePopoverProps {
   field: FieldType;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   weeklyDaysField?: ControllerRenderProps<any, 'weeklyDays'>;
 }
 

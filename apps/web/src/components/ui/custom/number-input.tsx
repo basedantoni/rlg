@@ -3,6 +3,7 @@ import { Input } from '@/components/ui/input';
 import { Minus, Plus } from 'lucide-react';
 import { ControllerRenderProps } from 'react-hook-form';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type FieldType = Omit<ControllerRenderProps<any, 'penaltyAmount'>, 'value'> & {
   value: number | null | undefined;
 };

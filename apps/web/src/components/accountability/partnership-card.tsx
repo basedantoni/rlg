@@ -1,16 +1,9 @@
-import AgreementForm from './agreement-form';
 import PenaltyToday from './penalty-today';
 import {
   AccountabilityPartnershipWithUsers,
   AccountabilityPartnershipWithAgreement,
 } from '@/db/schema/accountabilityPartnerships';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '../ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { getUserAuth } from '@/lib/auth/utils';
 import { getPartnershipUsers } from '@/lib/utils/partnership';
 

@@ -44,8 +44,8 @@ const TimePicker = React.forwardRef<HTMLDivElement, TimePickerProps>(
           // HH:MM format
           const [h, m] = value.split(':').map(Number);
           timeObj = new Date();
-          timeObj.setHours(h);
-          timeObj.setMinutes(m);
+          timeObj.setHours(h ?? 0);
+          timeObj.setMinutes(m ?? 0);
         }
 
         let hours = timeObj.getHours();
@@ -88,7 +88,7 @@ const TimePicker = React.forwardRef<HTMLDivElement, TimePickerProps>(
     };
 
     const handleHoursChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      let value = e.target.value.replace(/\D/g, '');
+      const value = e.target.value.replace(/\D/g, '');
       const num = parseInt(value, 10);
       if (isNaN(num)) {
         setHours('');
@@ -102,7 +102,7 @@ const TimePicker = React.forwardRef<HTMLDivElement, TimePickerProps>(
     };
 
     const handleMinutesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      let value = e.target.value.replace(/\D/g, '');
+      const value = e.target.value.replace(/\D/g, '');
       const num = parseInt(value, 10);
       if (isNaN(num)) {
         setMinutes('');

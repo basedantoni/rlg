@@ -13,6 +13,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import {
+  AccountabilityPartnershipWithUsers,
+  AccountabilityPartnershipWithAgreement,
+} from '@/db/schema/accountabilityPartnerships';
 import { env } from '@/lib/env.mjs';
 import { format } from 'date-fns';
 
@@ -24,7 +28,7 @@ const EmptyState = () => {
         <div className='flex flex-col gap-3'>
           <h2 className='text-2xl font-bold'>No Accountability Found</h2>
           <p className='text-sm text-muted-foreground max-w-[408px]'>
-            You don't have any accountability agreements yet. Start a new
+            You don&apos;t have any accountability agreements yet. Start a new
             agreement
           </p>
         </div>
@@ -34,7 +38,12 @@ const EmptyState = () => {
   );
 };
 
-const PartnershipCardSection = ({ partnership }: { partnership: any }) => {
+const PartnershipCardSection = ({
+  partnership,
+}: {
+  partnership: AccountabilityPartnershipWithUsers &
+    AccountabilityPartnershipWithAgreement;
+}) => {
   return (
     <div className='flex flex-col space-y-4'>
       <div className='flex gap-2 items-center'>
@@ -74,7 +83,12 @@ const AgreementFormSection = ({ partnershipId }: { partnershipId: string }) => {
   );
 };
 
-const PenaltyProposalSection = ({ partnership }: { partnership: any }) => {
+const PenaltyProposalSection = ({
+  partnership,
+}: {
+  partnership: AccountabilityPartnershipWithUsers &
+    AccountabilityPartnershipWithAgreement;
+}) => {
   return (
     <section className='flex flex-col gap-4'>
       <h1>Partnership Agreement</h1>
@@ -102,7 +116,6 @@ const PenaltyProposalSection = ({ partnership }: { partnership: any }) => {
           </p>
           <div className='flex justify-end'>
             <CopyableArticle
-              label='Shareable Link'
               text={`${env.BASE_URL}/accountability/${partnership.id}`}
             />
           </div>
@@ -128,7 +141,11 @@ export default async function AccountabilityPage() {
           return (
             <PartnershipCardSection
               key={partnership.id}
-              partnership={partnership}
+              partnership={{
+                ...partnership,
+                user1: partnership.user1!,
+                user2: partnership.user2!,
+              }}
             />
           );
         }
@@ -147,7 +164,11 @@ export default async function AccountabilityPage() {
         return (
           <PenaltyProposalSection
             key={partnership.id}
-            partnership={partnership}
+            partnership={{
+              ...partnership,
+              user1: partnership.user1!,
+              user2: partnership.user2!,
+            }}
           />
         );
       })}

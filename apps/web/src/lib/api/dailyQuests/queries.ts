@@ -1,20 +1,16 @@
-import { db } from "@/db/drizzle";
-import {
-  DailyQuestId,
-  dailyQuests,
-  DailyQuestSortOptions,
-} from "@/db/schema/dailyQuests";
+import { db } from '@/db/drizzle';
+import { dailyQuests, DailyQuestSortOptions } from '@/db/schema/dailyQuests';
 import { createUserFilter, createOrderBy } from '@/db/utils';
 
 export const getDailyQuests = async (queryParams: DailyQuestSortOptions) => {
   // Column mapping function specific to dailyQuests
   const mapDailyQuestColumn = (field: string) => {
     switch (field) {
-      case "title":
+      case 'title':
         return dailyQuests.title;
-      case "dueDate":
+      case 'dueDate':
         return dailyQuests.dueDate;
-      case "createdAt":
+      case 'createdAt':
         return dailyQuests.createdAt;
       default:
         return dailyQuests.dueDate;
@@ -32,5 +28,3 @@ export const getDailyQuests = async (queryParams: DailyQuestSortOptions) => {
   const dq = rows;
   return { dailyQuests: dq };
 };
-
-export const getDailyQuestById = async (id: DailyQuestId) => {};

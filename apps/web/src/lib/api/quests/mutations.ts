@@ -1,8 +1,5 @@
-import { db } from "@/db/drizzle";
-import { eq, and } from "drizzle-orm";
-{
-  eq;
-}
+import { db } from '@/db/drizzle';
+import { eq, and } from 'drizzle-orm';
 import {
   NewQuestParams,
   UpdateQuestParams,
@@ -11,13 +8,13 @@ import {
   questIdSchema,
   insertQuestSchema,
   quests,
-} from "@/db/schema/quests";
-import { getUserAuth } from "@/lib/auth/utils";
+} from '@/db/schema/quests';
+import { getUserAuth } from '@/lib/auth/utils';
 
 export const createQuest = async (quest: NewQuestParams) => {
   const { session } = await getUserAuth();
   if (!session?.user.id) {
-    throw new Error("User is not authenticated");
+    throw new Error('User is not authenticated');
   }
 
   const newQuest = insertQuestSchema.parse({
@@ -29,7 +26,7 @@ export const createQuest = async (quest: NewQuestParams) => {
     const [q] = await db.insert(quests).values(newQuest).returning();
     return { quest: q };
   } catch (err) {
-    const message = (err as Error).message ?? "Error, please try again";
+    const message = (err as Error).message ?? 'Error, please try again';
     console.error(message);
     throw { error: message };
   }
@@ -39,7 +36,7 @@ export const updateQuest = async (id: QuestId, quest: UpdateQuestParams) => {
   const { session } = await getUserAuth();
   const { id: questId } = questIdSchema.parse({ id });
   if (!session?.user.id) {
-    throw new Error("User is not authenticated");
+    throw new Error('User is not authenticated');
   }
 
   const newQuest = updateQuestSchema.parse({
@@ -54,7 +51,7 @@ export const updateQuest = async (id: QuestId, quest: UpdateQuestParams) => {
       .returning();
     return { quest: q };
   } catch (err) {
-    const message = (err as Error).message ?? "Error, please try again";
+    const message = (err as Error).message ?? 'Error, please try again';
     console.error(message);
     throw { error: message };
   }
@@ -64,7 +61,7 @@ export const deleteQuest = async (id: QuestId) => {
   const { session } = await getUserAuth();
   const { id: questId } = questIdSchema.parse({ id });
   if (!session?.user.id) {
-    throw new Error("User is not authenticated");
+    throw new Error('User is not authenticated');
   }
 
   try {
@@ -74,7 +71,7 @@ export const deleteQuest = async (id: QuestId) => {
       .returning();
     return { quest: q };
   } catch (err) {
-    const message = (err as Error).message ?? "Error, please try again";
+    const message = (err as Error).message ?? 'Error, please try again';
     console.error(message);
     throw { error: message };
   }

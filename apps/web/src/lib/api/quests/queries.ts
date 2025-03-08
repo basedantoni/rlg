@@ -1,14 +1,10 @@
-import { db } from "@/db/drizzle";
-import { QuestId, quests } from "@/db/schema/quests";
-import { createUserFilter } from "@/db/utils";
+import { db } from '@/db/drizzle';
+import { quests } from '@/db/schema/quests';
+import { createUserFilter } from '@/db/utils';
 
 export const getQuests = async () => {
   const userFilter = await createUserFilter(quests);
-  const rows = await db
-    .select()
-    .from(quests)
-    .limit(20)
-    .where(userFilter);
+  const rows = await db.select().from(quests).limit(20).where(userFilter);
   const q = rows;
   return { quests: q };
 };
@@ -24,5 +20,4 @@ export const getQuestsWithDailyQuests = async () => {
   return q;
 };
 
-export const getQuestById = async (id: QuestId) => {};
 export const getQuestsDue = async () => {};

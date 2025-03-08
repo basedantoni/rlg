@@ -74,11 +74,12 @@ const QuestForm = ({
       onError: (err) => console.error('update', { error: err.message }),
     });
 
-  const { mutate: deleteQuest, isPending: isDeleting } =
-    trpc.quests.deleteQuest.useMutation({
-      onSuccess: () => onSuccess('delete'),
-      onError: (err) => console.error('delete', { error: err.message }),
-    });
+  // TODO: Add delete button
+  // const { mutate: deleteQuest, isPending: isDeleting } =
+  //   trpc.quests.deleteQuest.useMutation({
+  //     onSuccess: () => onSuccess('delete'),
+  //     onError: (err) => console.error('delete', { error: err.message }),
+  //   });
 
   const handleSubmit = (values: NewQuestParams) => {
     if (editing) {
@@ -87,6 +88,8 @@ const QuestForm = ({
       createQuest(values);
     }
   };
+
+  const isDisabled = isCreating || isUpdating;
 
   const { data: categories } = trpc.categories.getAll.useQuery();
 
@@ -149,10 +152,10 @@ const QuestForm = ({
             </FormItem>
           )}
         />
-        <Button type='submit' className='mr-1' disabled={isCreating}>
+        <Button type='submit' className='mr-1' disabled={isDisabled}>
           {editing
-            ? `Sav${isCreating ? 'ing...' : 'e'}`
-            : `Creat${isCreating ? 'ing...' : 'e'}`}
+            ? `Sav${isDisabled ? 'ing...' : 'e'}`
+            : `Creat${isDisabled ? 'ing...' : 'e'}`}
         </Button>
       </form>
     </Form>

@@ -96,7 +96,15 @@ export const calculateNextDueDate = (
         return addDays(date, nextDay - currentDay).toISOString();
       } else {
         // Wrap around to the first day in the next week
-        return addDays(date, 7 - currentDay + sortedDays[0]).toISOString();
+        // Handle case where sortedDays[0] is undefined
+        if (sortedDays.length === 0) {
+          return addDays(date, 7).toISOString(); // Default to weekly if no valid days
+        }
+        // Ensure sortedDays[0] exists before using it
+        return addDays(
+          date,
+          7 - currentDay + (sortedDays[0] ?? 0)
+        ).toISOString();
       }
     }
     case 'monthly':

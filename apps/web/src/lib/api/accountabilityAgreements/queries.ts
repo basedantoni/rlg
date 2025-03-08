@@ -13,7 +13,6 @@ export const getRecentAccountabilityAgreements = async () => {
   const now = new Date();
   const twentyFourHoursAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
   // Convert to UTC ISO strings
-  const nowUTC = now.toISOString();
   const twentyFourHoursAgoUTC = twentyFourHoursAgo.toISOString();
 
   // First get all partnerships where the user is either user1 or user2
@@ -58,7 +57,6 @@ export const getAllActiveAgreementsWithMissedQuests = async () => {
   const now = new Date();
   const twentyFourHoursAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
   // Convert to UTC ISO strings
-  const nowUTC = now.toISOString();
   const twentyFourHoursAgoUTC = twentyFourHoursAgo.toISOString();
 
   // Get all active partnerships with their agreements and users
