@@ -1,6 +1,6 @@
-import AgreementForm from '@/components/accountability/agreement-form';
-import PartnershipCard from '@/components/accountability/partnership-card';
-import PartnershipForm from '@/components/accountability/partnership-form';
+import AgreementForm from '../../../../components/accountability/agreement-form';
+import PartnershipCard from '../../../../components/accountability/partnership-card';
+import PartnershipForm from '../../../../components/accountability/partnership-form';
 
 import {
   Card,
