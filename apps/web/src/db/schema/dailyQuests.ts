@@ -1,4 +1,4 @@
-import { getDailyQuests } from '@/lib/api/dailyQuests/queries';
+import { getDailyQuests } from '#/lib/api/dailyQuests/queries';
 import { quests } from './quests';
 import { users } from './users';
 import { sql, relations } from 'drizzle-orm';

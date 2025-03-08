@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '#/components/ui/button';
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-} from "@/components/ui/popover";
+} from '#/components/ui/popover';
 import {
   Select,
   SelectContent,
@@ -14,21 +14,21 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Label } from "@/components/ui/label";
-import { SlidersHorizontal } from "lucide-react";
+} from '#/components/ui/select';
+import { Label } from '#/components/ui/label';
+import { SlidersHorizontal } from 'lucide-react';
 
-import { useState } from "react";
+import { useState } from 'react';
 
-export type SortDirection = "asc" | "desc";
-export type SortColumns = "title" | "dueDate" | "createdAt";
+export type SortDirection = 'asc' | 'desc';
+export type SortColumns = 'title' | 'dueDate' | 'createdAt';
 
 interface SelectItemOption {
   placeholder: string;
   value: string;
 }
 
-interface SelectItemDirection extends Omit<SelectItemOption, "value"> {
+interface SelectItemDirection extends Omit<SelectItemOption, 'value'> {
   value: SortDirection;
 }
 
@@ -48,24 +48,24 @@ interface ViewOptionsPopoverProps {
 
 const ViewOptionsPopover = ({ onSortChange }: ViewOptionsPopoverProps) => {
   const sortingConfig: SortingConfig = {
-    label: "Sorting",
+    label: 'Sorting',
     options: [
-      { placeholder: "Name", value: "title" },
-      { placeholder: "Date", value: "dueDate" },
-      { placeholder: "Date Added", value: "createdAt" },
+      { placeholder: 'Name', value: 'title' },
+      { placeholder: 'Date', value: 'dueDate' },
+      { placeholder: 'Date Added', value: 'createdAt' },
     ],
   };
 
   const directionConfig: DirectionConfig = {
-    label: "Direction",
+    label: 'Direction',
     options: [
-      { placeholder: "Ascending", value: "asc" },
-      { placeholder: "Descending", value: "desc" },
+      { placeholder: 'Ascending', value: 'asc' },
+      { placeholder: 'Descending', value: 'desc' },
     ],
   };
 
-  const [sort, setSort] = useState<SortColumns>("dueDate");
-  const [direction, setDirection] = useState<SortDirection>("asc");
+  const [sort, setSort] = useState<SortColumns>('dueDate');
+  const [direction, setDirection] = useState<SortDirection>('asc');
 
   const handleSortChange = (value: SortColumns) => {
     setSort(value);
@@ -80,18 +80,18 @@ const ViewOptionsPopover = ({ onSortChange }: ViewOptionsPopoverProps) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="ghost" size="icon">
+        <Button variant='ghost' size='icon'>
           <SlidersHorizontal />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="flex flex-col space-y-1.5 w-80 text-sm">
+      <PopoverContent className='flex flex-col space-y-1.5 w-80 text-sm'>
         <Label>Sort</Label>
         <Select onValueChange={(value: SortColumns) => handleSortChange(value)}>
-          <SelectGroup className="flex justify-between items-center">
-            <SelectLabel className="p-0 font-normal">
+          <SelectGroup className='flex justify-between items-center'>
+            <SelectLabel className='p-0 font-normal'>
               {sortingConfig.label}
             </SelectLabel>
-            <SelectTrigger className="w-40">
+            <SelectTrigger className='w-40'>
               <SelectValue
                 placeholder={
                   sortingConfig.options.find((option) => option.value === sort)
@@ -111,15 +111,15 @@ const ViewOptionsPopover = ({ onSortChange }: ViewOptionsPopoverProps) => {
         <Select
           onValueChange={(value: SortDirection) => handleDirectionChange(value)}
         >
-          <SelectGroup className="flex justify-between items-center">
-            <SelectLabel className="p-0 font-normal">
+          <SelectGroup className='flex justify-between items-center'>
+            <SelectLabel className='p-0 font-normal'>
               {directionConfig.label}
             </SelectLabel>
-            <SelectTrigger className="w-40">
+            <SelectTrigger className='w-40'>
               <SelectValue
                 placeholder={
                   directionConfig.options.find(
-                    (option) => option.value === direction,
+                    (option) => option.value === direction
                   )?.placeholder
                 }
               />

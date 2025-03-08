@@ -1,7 +1,7 @@
-import { initTRPC, TRPCError } from "@trpc/server";
-import { Context } from "@/lib/trpc/context";
-import SuperJSON from "superjson";
-import { ZodError } from "zod";
+import { initTRPC, TRPCError } from '@trpc/server';
+import { Context } from '#/lib/trpc/context';
+import SuperJSON from 'superjson';
+import { ZodError } from 'zod';
 
 /**
  * Initialize tRPC backend
@@ -34,7 +34,7 @@ export const createCallerFactory = t.createCallerFactory;
  */
 const enforceUserAuth = t.middleware(({ ctx, next }) => {
   if (!ctx.session) {
-    throw new TRPCError({ code: "UNAUTHORIZED" });
+    throw new TRPCError({ code: 'UNAUTHORIZED' });
   }
   return next({
     ctx: {

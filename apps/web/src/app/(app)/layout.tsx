@@ -1,9 +1,9 @@
-import TrpcProvider from '@/lib/trpc/Provider';
-import Header from '@/components/ui/custom/header';
-import { AppSidebar } from '@/components/ui/custom/app-sidebar';
+import TrpcProvider from '#/lib/trpc/Provider';
+import Header from '#/components/ui/custom/header';
+import { AppSidebar } from '#/components/ui/custom/app-sidebar';
 import { ClerkProvider } from '@clerk/nextjs';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { SidebarProvider } from '@/components/ui/sidebar';
+import { SidebarProvider } from '#/components/ui/sidebar';
 import { Toaster } from 'sonner';
 import { cookies } from 'next/headers';
 

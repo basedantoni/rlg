@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { TimePicker } from '@/components/ui/custom/time-picker';
+import { TimePicker } from '#/components/ui/custom/time-picker';
 import { ControllerRenderProps } from 'react-hook-form';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

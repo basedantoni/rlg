@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import DailyQuestForm from "@/components/dailyQuests/daily-quest-form";
-import { DailyQuests } from "@/db/schema/dailyQuests";
-import { useState } from "react";
+import DailyQuestForm from '#/components/dailyQuests/daily-quest-form';
+import { DailyQuests } from '#/db/schema/dailyQuests';
+import { useState } from 'react';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '#/components/ui/button';
 import {
   Dialog,
   DialogTrigger,
@@ -12,8 +12,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from "@/components/ui/dialog";
-import { Plus } from "lucide-react";
+} from '#/components/ui/dialog';
+import { Plus } from 'lucide-react';
 
 const DailyQuestModal = ({
   dailyQuest,
@@ -28,32 +28,32 @@ const DailyQuestModal = ({
 
   return (
     <Dialog onOpenChange={setOpen} open={open}>
-      <DialogTrigger className="py-2" asChild>
+      <DialogTrigger className='py-2' asChild>
         {emptyState ? (
           <Button
-            variant="ghost"
-            className="text-muted-foreground justify-start hover:bg-transparent"
+            variant='ghost'
+            className='text-muted-foreground justify-start hover:bg-transparent'
           >
             <Plus size={16} />
             Add Daily Quest
           </Button>
         ) : (
           <Button
-            variant={editing ? "ghost" : "outline"}
-            size={editing ? "sm" : "icon"}
+            variant={editing ? 'ghost' : 'outline'}
+            size={editing ? 'sm' : 'icon'}
           >
-            {editing ? "Edit" : "+"}
+            {editing ? 'Edit' : '+'}
           </Button>
         )}
       </DialogTrigger>
       <DialogContent>
-        <DialogHeader className="px-5 pt-5">
-          <DialogTitle>{editing ? "Edit" : "Create"} Daily Quest</DialogTitle>
+        <DialogHeader className='px-5 pt-5'>
+          <DialogTitle>{editing ? 'Edit' : 'Create'} Daily Quest</DialogTitle>
           <DialogDescription>
-            {editing ? "Edit your daily quest" : "Create a new daily quest"}
+            {editing ? 'Edit your daily quest' : 'Create a new daily quest'}
           </DialogDescription>
         </DialogHeader>
-        <div className="px-5 pb-5">
+        <div className='px-5 pb-5'>
           <DailyQuestForm closeModal={closeModal} dailyQuest={dailyQuest} />
         </div>
       </DialogContent>

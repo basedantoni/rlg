@@ -1,6 +1,6 @@
-import { db } from '@/db/drizzle';
-import { dailyQuests, DailyQuestSortOptions } from '@/db/schema/dailyQuests';
-import { createUserFilter, createOrderBy } from '@/db/utils';
+import { db } from '#/db/drizzle';
+import { dailyQuests, DailyQuestSortOptions } from '#/db/schema/dailyQuests';
+import { createUserFilter, createOrderBy } from '#/db/utils';
 
 export const getDailyQuests = async (queryParams: DailyQuestSortOptions) => {
   // Column mapping function specific to dailyQuests

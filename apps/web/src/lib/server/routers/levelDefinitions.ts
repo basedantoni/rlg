@@ -1,7 +1,7 @@
-import { getLevelDefinitionByLevel } from "@/lib/api/levelDefinitions/queries";
+import { getLevelDefinitionByLevel } from '#/lib/api/levelDefinitions/queries';
 
-import { router, protectedProcedure } from "../trpc";
-import { levelDefinitionLevelSchema } from "@/db/schema";
+import { router, protectedProcedure } from '../trpc';
+import { levelDefinitionLevelSchema } from '#/db/schema';
 
 export const levelDefinitionsRouter = router({
   getLevelDefinitionByLevel: protectedProcedure

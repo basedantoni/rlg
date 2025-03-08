@@ -1,4 +1,4 @@
-import { trpc } from '@/lib/trpc/api';
+import { trpc } from '#/lib/trpc/api';
 
 export default async function CategoriesPage() {
   const [categories] = await Promise.all([trpc.categories.getAll()]);

@@ -2,11 +2,11 @@
 
 import { Layers2 } from 'lucide-react';
 import { DynamicIcon, IconName } from 'lucide-react/dynamic';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Card } from '#/components/ui/card';
+import { Button } from '#/components/ui/button';
 import { toast } from 'sonner';
 
-import { trpc } from '@/lib/trpc/client';
+import { trpc } from '#/lib/trpc/client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';

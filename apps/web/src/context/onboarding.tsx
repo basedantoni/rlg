@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { NewDailyQuest } from "@/db/schema/dailyQuests";
-import { NewQuest } from "@/db/schema/quests";
-import { createContext, useContext, useState, ReactNode } from "react";
+import { NewDailyQuest } from '#/db/schema/dailyQuests';
+import { NewQuest } from '#/db/schema/quests';
+import { createContext, useContext, useState, ReactNode } from 'react';
 
 type OnboardingContextType = {
   quests: Array<NewQuest>;
@@ -12,7 +12,7 @@ type OnboardingContextType = {
 };
 
 const OnboardingContext = createContext<OnboardingContextType | undefined>(
-  undefined,
+  undefined
 );
 
 export function OnboardingProvider({ children }: { children: ReactNode }) {
@@ -39,7 +39,7 @@ export function useOnboardingContext() {
   const context = useContext(OnboardingContext);
   if (!context) {
     throw new Error(
-      "useOnboardingContext must be within an OnboardingProvider",
+      'useOnboardingContext must be within an OnboardingProvider'
     );
   }
   return context;

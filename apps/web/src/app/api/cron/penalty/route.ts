@@ -1,7 +1,7 @@
-import { getAllActiveAgreementsWithMissedQuests } from '@/lib/api/accountabilityAgreements/queries';
-import { db } from '@/db/drizzle';
-import { penalties } from '@/db/schema/penalties';
-import { accountabilityAgreements } from '@/db/schema/accountabilityAgreements';
+import { getAllActiveAgreementsWithMissedQuests } from '#/lib/api/accountabilityAgreements/queries';
+import { db } from '#/db/drizzle';
+import { penalties } from '#/db/schema/penalties';
+import { accountabilityAgreements } from '#/db/schema/accountabilityAgreements';
 import { eq } from 'drizzle-orm';
 
 export async function GET() {

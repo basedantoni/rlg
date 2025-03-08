@@ -1,4 +1,4 @@
-import { db } from '@/db/drizzle';
+import { db } from '#/db/drizzle';
 import { eq } from 'drizzle-orm';
 import {
   DailyQuestId,
@@ -8,9 +8,9 @@ import {
   NewDailyQuest,
   UpdateDailyQuestParams,
   updateDailyQuestSchema,
-} from '@/db/schema/dailyQuests';
-import { getUserAuth } from '@/lib/auth/utils';
-import { calculateNextDueDate } from '@/lib/utils';
+} from '#/db/schema/dailyQuests';
+import { getUserAuth } from '#/lib/auth/utils';
+import { calculateNextDueDate } from '#/lib/utils';
 import { nanoid } from 'nanoid';
 import { isBefore } from 'date-fns';
 

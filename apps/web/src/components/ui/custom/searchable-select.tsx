@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { Input } from '#/components/ui/input';
+import { Button } from '#/components/ui/button';
 import { Plus } from 'lucide-react';
 import {
   Select,
@@ -10,7 +10,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '#/components/ui/select';
 
 interface SearchableSelectProps<T> {
   items: T[];

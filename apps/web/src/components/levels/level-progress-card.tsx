@@ -1,5 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
+import { Card, CardContent, CardHeader, CardTitle } from '#/components/ui/card';
+import { Progress } from '#/components/ui/progress';
 
 interface LevelProgressCardProps {
   currentXP: number;
@@ -18,8 +18,8 @@ export function LevelProgressCard({
         <CardTitle>Level Progress</CardTitle>
       </CardHeader>
       <CardContent>
-        <Progress value={progress} className="w-full" />
-        <div className="mt-2 text-sm text-muted-foreground">
+        <Progress value={progress} className='w-full' />
+        <div className='mt-2 text-sm text-muted-foreground'>
           {currentXP} / {nextLevelXP} XP to next level
         </div>
       </CardContent>

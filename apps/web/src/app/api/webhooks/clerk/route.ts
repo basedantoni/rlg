@@ -1,15 +1,15 @@
-import { Webhook } from "svix";
-import { headers } from "next/headers";
-import { UserJSON, WebhookEvent } from "@clerk/nextjs/server";
-import { env } from "@/lib/env.mjs";
-import { createUser, deleteUser, updateUser } from "@/lib/api/users/mutations";
+import { Webhook } from 'svix';
+import { headers } from 'next/headers';
+import { UserJSON, WebhookEvent } from '@clerk/nextjs/server';
+import { env } from '#/lib/env.mjs';
+import { createUser, deleteUser, updateUser } from '#/lib/api/users/mutations';
 
 export async function POST(req: Request) {
   const SIGNING_SECRET = env.CLERK_SIGNING_SECRET as string;
 
   if (!SIGNING_SECRET) {
     throw new Error(
-      "Error: please add SIGNING_SECRET from Clerk dahsboard to .env or .env.local",
+      'Error: please add SIGNING_SECRET from Clerk dahsboard to .env or .env.local'
     );
   }
 
@@ -18,12 +18,12 @@ export async function POST(req: Request) {
 
   // Get headers
   const headerPayload = await headers();
-  const svix_id = headerPayload.get("svix-id");
-  const svix_timestamp = headerPayload.get("svix-timestamp");
-  const svix_signature = headerPayload.get("svix-signature");
+  const svix_id = headerPayload.get('svix-id');
+  const svix_timestamp = headerPayload.get('svix-timestamp');
+  const svix_signature = headerPayload.get('svix-signature');
 
   if (!svix_id || !svix_timestamp || !svix_signature) {
-    return new Response("Error: Missing Svix Headers", {
+    return new Response('Error: Missing Svix Headers', {
       status: 400,
     });
   }
@@ -37,14 +37,14 @@ export async function POST(req: Request) {
   // Verify payload with headers
   try {
     evt = wh.verify(body, {
-      "svix-id": svix_id,
-      "svix-timestamp": svix_timestamp,
-      "svix-signature": svix_signature,
+      'svix-id': svix_id,
+      'svix-timestamp': svix_timestamp,
+      'svix-signature': svix_signature,
     }) as WebhookEvent;
   } catch (err) {
-    const message = (err as Error).message ?? "Could not verify webhook";
+    const message = (err as Error).message ?? 'Could not verify webhook';
     console.error(message);
-    return new Response("Error: Verification error", {
+    return new Response('Error: Verification error', {
       status: 400,
     });
   }
@@ -53,10 +53,10 @@ export async function POST(req: Request) {
   const { id, first_name: firstName } = evt.data as UserJSON;
   const eventType = evt.type;
   console.log(`Received webhook with ID ${id} and event type of ${eventType}`);
-  console.log("Webhook payload:", body);
+  console.log('Webhook payload:', body);
 
   switch (eventType) {
-    case "user.created":
+    case 'user.created':
       await createUser({
         id,
         name: firstName,
@@ -66,15 +66,15 @@ export async function POST(req: Request) {
         updatedAt: new Date().toUTCString(),
       });
       break;
-    case "user.updated":
+    case 'user.updated':
       await updateUser(id, {
         name: firstName,
         updatedAt: new Date().toUTCString(),
       });
       break;
-    case "user.deleted":
+    case 'user.deleted':
       await deleteUser(id);
       break;
   }
-  return new Response("Webhook received", { status: 200 });
+  return new Response('Webhook received', { status: 200 });
 }

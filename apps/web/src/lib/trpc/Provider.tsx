@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { makeQueryClient } from "@/lib/trpc/query-client";
-import { loggerLink, unstable_httpBatchStreamLink } from "@trpc/client";
-import React, { useState } from "react";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { makeQueryClient } from '#/lib/trpc/query-client';
+import { loggerLink, unstable_httpBatchStreamLink } from '@trpc/client';
+import React, { useState } from 'react';
 
-import { trpc } from "./client";
-import { getUrl } from "./utils";
+import { trpc } from './client';
+import { getUrl } from './utils';
 
-import superjson from "superjson";
+import superjson from 'superjson';
 
 let clientQueryClientSingleton: QueryClient;
 function getQueryClient() {
-  if (typeof window === "undefined") {
+  if (typeof window === 'undefined') {
     // Server: always make a new query client
     return makeQueryClient();
   }
@@ -37,8 +37,8 @@ export default function TrpcProvider({
       links: [
         loggerLink({
           enabled: (op) =>
-            process.env.NODE_ENV === "development" ||
-            (op.direction === "down" && op.result instanceof Error),
+            process.env.NODE_ENV === 'development' ||
+            (op.direction === 'down' && op.result instanceof Error),
         }),
         unstable_httpBatchStreamLink({
           transformer: superjson,
@@ -46,12 +46,12 @@ export default function TrpcProvider({
           headers() {
             return {
               cookie: cookies,
-              "x-trpc-source": "react",
+              'x-trpc-source': 'react',
             };
           },
         }),
       ],
-    }),
+    })
   );
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>

@@ -1,6 +1,6 @@
 'use client';
 
-import { Quests, insertQuestParams, NewQuestParams } from '@/db/schema/quests';
+import { Quests, insertQuestParams, NewQuestParams } from '#/db/schema/quests';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -13,11 +13,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
+} from '#/components/ui/form';
 import { Input } from '../ui/input';
 
 import { useRouter } from 'next/navigation';
-import { trpc } from '@/lib/trpc/client';
+import { trpc } from '#/lib/trpc/client';
 import { toast } from 'sonner';
 import { Select, SelectContent, SelectTrigger, SelectItem } from '../ui/select';
 import { SelectValue } from '@radix-ui/react-select';

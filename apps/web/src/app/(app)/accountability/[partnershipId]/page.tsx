@@ -1,6 +1,6 @@
-import AgreementForm from '../../../../components/accountability/agreement-form';
-import PartnershipCard from '../../../../components/accountability/partnership-card';
-import PartnershipForm from '../../../../components/accountability/partnership-form';
+import AgreementForm from '#/components/accountability/agreement-form';
+import PartnershipCard from '#/components/accountability/partnership-card';
+import PartnershipForm from '#/components/accountability/partnership-form';
 
 import {
   Card,
@@ -8,9 +8,9 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { getUserAuth } from '@/lib/auth/utils';
-import { trpc } from '@/lib/trpc/api';
+} from '#/components/ui/card';
+import { getUserAuth } from '#/lib/auth/utils';
+import { trpc } from '#/lib/trpc/api';
 import { format } from 'date-fns';
 
 export default async function AccountabilityIdPage({

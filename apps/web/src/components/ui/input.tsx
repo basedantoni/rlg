@@ -1,19 +1,20 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { cn } from "@/lib/utils";
+import { cn } from '#/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 const inputVariants = cva(
-  "text-foreground flex w-full rounded-md bg-transparent px-3 py-1 transition-colors placeholder:text-muted-foreground md:text-sm",
+  'text-foreground flex w-full rounded-md bg-transparent px-3 py-1 transition-colors placeholder:text-muted-foreground md:text-sm',
   {
     variants: {
       variant: {
-        default: "h-9 text-base border border-input shadow-xs focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground disabled:cursor-not-allowed disabled:opacity-50",
-        ghost: "px-0 focus-visible:outline-hidden",
+        default:
+          'h-9 text-base border border-input shadow-xs focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground disabled:cursor-not-allowed disabled:opacity-50',
+        ghost: 'px-0 focus-visible:outline-hidden',
       },
     },
     defaultVariants: {
-      variant: "default",
+      variant: 'default',
     },
   }
 );
@@ -34,6 +35,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     );
   }
 );
-Input.displayName = "Input";
+Input.displayName = 'Input';
 
 export { Input };

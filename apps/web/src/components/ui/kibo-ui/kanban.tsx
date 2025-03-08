@@ -1,7 +1,7 @@
 'use client';
 
-import { Card } from '@/components/ui/card';
-import { Checkbox } from '@/components/ui/checkbox';
+import { Card } from '#/components/ui/card';
+import { Checkbox } from '#/components/ui/checkbox';
 import {
   DndContext,
   DragOverlay,
@@ -17,8 +17,8 @@ import type { DragEndEvent } from '@dnd-kit/core';
 import type { ReactNode } from 'react';
 import { useId, useState } from 'react';
 import { Calendar, RefreshCw } from 'lucide-react';
-import { getDueDateColor, formatDueDate } from '@/lib/utils';
-import { cn } from '@/lib/utils';
+import { getDueDateColor, formatDueDate } from '#/lib/utils';
+import { cn } from '#/lib/utils';
 
 export type BoardName = 'open' | 'completed';
 export type Status = {

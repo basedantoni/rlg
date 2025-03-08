@@ -1,6 +1,6 @@
 'use client';
 
-import { trpc } from '@/lib/trpc/client';
+import { trpc } from '#/lib/trpc/client';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -8,12 +8,12 @@ import {
   AccountabilityPartnershipWithAgreement,
   insertAccountabilityPartnershipParams,
   NewAccountabilityPartnershipParams,
-} from '@/db/schema/accountabilityPartnerships';
+} from '#/db/schema/accountabilityPartnerships';
 import { z } from 'zod';
 import { toast } from 'sonner';
 
-import { Button } from '@/components/ui/button';
-import { Form } from '@/components/ui/form';
+import { Button } from '#/components/ui/button';
+import { Form } from '#/components/ui/form';
 
 interface PartnershipFormProps {
   partnership?: AccountabilityPartnershipWithAgreement;

@@ -1,4 +1,4 @@
-import { db } from "@/db/drizzle";
+import { db } from '#/db/drizzle';
 import {
   NewCategoryParams,
   insertCategorySchema,
@@ -7,14 +7,14 @@ import {
   UpdateCategoryParams,
   updateCategorySchema,
   categoryIdSchema,
-} from "@/db/schema/categories";
-import { getUserAuth } from "@/lib/auth/utils";
-import { and, eq } from "drizzle-orm";
+} from '#/db/schema/categories';
+import { getUserAuth } from '#/lib/auth/utils';
+import { and, eq } from 'drizzle-orm';
 
 export const createCategory = async (category: NewCategoryParams) => {
   const { session } = await getUserAuth();
   if (!session?.user.id) {
-    throw new Error("User is not authenticated");
+    throw new Error('User is not authenticated');
   }
 
   const newCategory = insertCategorySchema.parse({
@@ -26,7 +26,7 @@ export const createCategory = async (category: NewCategoryParams) => {
     const [c] = await db.insert(categories).values(newCategory).returning();
     return { category: c };
   } catch (err) {
-    const message = (err as Error).message ?? "Error, please try again";
+    const message = (err as Error).message ?? 'Error, please try again';
     console.error(message);
     throw { error: message };
   }
@@ -34,12 +34,12 @@ export const createCategory = async (category: NewCategoryParams) => {
 
 export const updateCategory = async (
   id: CategoryId,
-  category: UpdateCategoryParams,
+  category: UpdateCategoryParams
 ) => {
   const { session } = await getUserAuth();
   const { id: categoryId } = categoryIdSchema.parse({ id });
   if (!session?.user.id) {
-    throw new Error("User is not authenticated");
+    throw new Error('User is not authenticated');
   }
 
   const newCategory = updateCategorySchema.parse({
@@ -53,13 +53,13 @@ export const updateCategory = async (
       .where(
         and(
           eq(categories.id, categoryId!),
-          eq(categories.userId, session.user.id),
-        ),
+          eq(categories.userId, session.user.id)
+        )
       )
       .returning();
     return { category: c };
   } catch (err) {
-    const message = (err as Error).message ?? "Error, please try again";
+    const message = (err as Error).message ?? 'Error, please try again';
     console.error(message);
     throw { error: message };
   }
@@ -69,19 +69,19 @@ export const deleteCategory = async (id: CategoryId) => {
   const { session } = await getUserAuth();
   const { id: postId } = categoryIdSchema.parse({ id });
   if (!session?.user.id) {
-    throw new Error("User is not authenticated");
+    throw new Error('User is not authenticated');
   }
 
   try {
     const [c] = await db
       .delete(categories)
       .where(
-        and(eq(categories.id, postId!), eq(categories.userId, session.user.id)),
+        and(eq(categories.id, postId!), eq(categories.userId, session.user.id))
       )
       .returning();
     return { post: c };
   } catch (err) {
-    const message = (err as Error).message ?? "Error, please try again";
+    const message = (err as Error).message ?? 'Error, please try again';
     console.error(message);
     throw { error: message };
   }

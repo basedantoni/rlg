@@ -1,10 +1,10 @@
 'use client';
 
-import PartnershipForm from '@/components/accountability/partnership-form';
-import { AccountabilityPartnershipWithAgreement } from '@/db/schema/accountabilityPartnerships';
+import PartnershipForm from '#/components/accountability/partnership-form';
+import { AccountabilityPartnershipWithAgreement } from '#/db/schema/accountabilityPartnerships';
 import { useState } from 'react';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '#/components/ui/button';
 import {
   Dialog,
   DialogTrigger,
@@ -12,7 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from '@/components/ui/dialog';
+} from '#/components/ui/dialog';
 import { Plus } from 'lucide-react';
 
 const PartnershipModal = ({

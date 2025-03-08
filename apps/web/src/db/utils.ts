@@ -1,4 +1,4 @@
-import { getUserAuth } from '@/lib/auth/utils';
+import { getUserAuth } from '#/lib/auth/utils';
 import { asc, desc, SQL } from 'drizzle-orm';
 import { eq } from 'drizzle-orm';
 import { SQLiteColumn } from 'drizzle-orm/sqlite-core';

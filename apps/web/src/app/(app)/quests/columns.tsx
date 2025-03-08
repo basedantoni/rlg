@@ -1,7 +1,7 @@
 'use client';
 
 import { ColumnDef } from '@tanstack/react-table';
-import { Quests } from '@/db/schema/quests';
+import { Quests } from '#/db/schema/quests';
 import {
   Activity,
   Calendar,
@@ -11,10 +11,10 @@ import {
   CircleDot,
 } from 'lucide-react';
 import { format } from 'date-fns';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { ActivityRing } from '@/components/ui/activity-ring';
-import { CompleteDailyQuest } from '@/db/schema/dailyQuests';
+import { Badge } from '#/components/ui/badge';
+import { Button } from '#/components/ui/button';
+import { ActivityRing } from '#/components/ui/activity-ring';
+import { CompleteDailyQuest } from '#/db/schema/dailyQuests';
 
 type QuestWithDailyQuests = Quests & {
   dailyQuests: CompleteDailyQuest[];

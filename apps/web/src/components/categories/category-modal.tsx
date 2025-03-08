@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import CategoryForm from "@/components/categories/category-form";
-import { Category } from "@/db/schema/categories";
-import { useState } from "react";
+import CategoryForm from '#/components/categories/category-form';
+import { Category } from '#/db/schema/categories';
+import { useState } from 'react';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '#/components/ui/button';
 import {
   Dialog,
   DialogTrigger,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Plus } from "lucide-react";
+} from '#/components/ui/dialog';
+import { Plus } from 'lucide-react';
 
 const CategoryModal = ({
   category,
@@ -37,27 +37,27 @@ const CategoryModal = ({
           </Button>
         ) : onboarding ? (
           <Button
-            className="[&_svg]:size-8 w-24 h-24 gap-1 flex flex-col items-center justify-center"
-            variant="ghost"
-            size="icon"
+            className='[&_svg]:size-8 w-24 h-24 gap-1 flex flex-col items-center justify-center'
+            variant='ghost'
+            size='icon'
           >
             <Plus size={32} strokeWidth={1} />
-            <p className="text-xs">New</p>
+            <p className='text-xs'>New</p>
           </Button>
         ) : (
           <Button
-            variant={editing ? "ghost" : "outline"}
-            size={editing ? "sm" : "icon"}
+            variant={editing ? 'ghost' : 'outline'}
+            size={editing ? 'sm' : 'icon'}
           >
-            {editing ? "Edit" : "+"}
+            {editing ? 'Edit' : '+'}
           </Button>
         )}
       </DialogTrigger>
       <DialogContent>
-        <DialogHeader className="px-5 pt-5">
-          <DialogTitle>{editing ? "Edit" : "Create"} Category</DialogTitle>
+        <DialogHeader className='px-5 pt-5'>
+          <DialogTitle>{editing ? 'Edit' : 'Create'} Category</DialogTitle>
         </DialogHeader>
-        <div className="px-5 pb-5">
+        <div className='px-5 pb-5'>
           <CategoryForm closeModal={closeModal} category={category} />
         </div>
       </DialogContent>
