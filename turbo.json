@@ -1,18 +1,12 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
+  "globalEnv": ["NODE_ENV", "TURSO_DATABASE_URL", "TURSO_AUTH_TOKEN"],
   "ui": "tui",
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "env": [
-        "NODE_ENV",
-        "TURSO_DATABASE_URL",
-        "TURSO_AUTH_TOKEN",
-        "CLERK_SECRET_KEY",
-        "CLERK_SIGNING_SECRET",
-        "BASE_URL"
-      ],
+      "env": ["CLERK_SECRET_KEY", "CLERK_SIGNING_SECRET", "BASE_URL"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
@@ -25,14 +19,7 @@
     "dev": {
       "cache": false,
       "persistent": true,
-      "env": [
-        "NODE_ENV",
-        "TURSO_DATABASE_URL",
-        "TURSO_AUTH_TOKEN",
-        "CLERK_SECRET_KEY",
-        "CLERK_SIGNING_SECRET",
-        "BASE_URL"
-      ],
+      "env": ["CLERK_SECRET_KEY", "CLERK_SIGNING_SECRET", "BASE_URL"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"]
     }
   }

@@ -7,9 +7,9 @@ import {
   questIdSchema,
   insertQuestSchema,
   quests,
-  db,
 } from '@repo/db';
 import { getUserAuth } from '#lib/auth/utils';
+import { db } from '#db/config';
 
 export const createQuest = async (quest: NewQuestParams) => {
   const { session } = await getUserAuth();

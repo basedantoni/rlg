@@ -7,8 +7,8 @@ import {
   NewDailyQuest,
   UpdateDailyQuestParams,
   updateDailyQuestSchema,
-  db,
 } from '@repo/db';
+import { db } from '#db/config';
 import { getUserAuth } from '#lib/auth/utils';
 import { calculateNextDueDate } from '#lib/utils';
 import { nanoid } from 'nanoid';

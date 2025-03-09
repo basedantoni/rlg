@@ -1,5 +1,6 @@
-import { categories, db } from '@repo/db';
+import { categories } from '@repo/db';
 import { createUserFilter } from '#db/utils';
+import { db } from '#db/config';
 
 export const getCategories = async () => {
   const userFilter = await createUserFilter(categories);

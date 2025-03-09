@@ -1,5 +1,6 @@
 import { getAllActiveAgreementsWithMissedQuests } from '#lib/api/accountabilityAgreements/queries';
-import { penalties, accountabilityAgreements, db } from '@repo/db';
+import { penalties, accountabilityAgreements } from '@repo/db';
+import { db } from '#db/config';
 import { eq } from 'drizzle-orm';
 
 export async function GET() {

@@ -1,4 +1,5 @@
-import { accountabilityPartnerships, dailyQuests, db } from '@repo/db';
+import { accountabilityPartnerships, dailyQuests } from '@repo/db';
+import { db } from '#db/config';
 import { getUserAuth } from '#lib/auth/utils';
 import { and, eq, gt, lt, or } from 'drizzle-orm';
 

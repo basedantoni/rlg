@@ -1,10 +1,10 @@
 import {
   AccountabilityPartnershipId,
   accountabilityPartnerships,
-  db,
 } from '@repo/db';
 import { getUserAuth } from '#lib/auth/utils';
 import { eq, or } from 'drizzle-orm';
+import { db } from '#db/config';
 
 export const getAccountabilityPartnerships = async () => {
   const { session } = await getUserAuth();

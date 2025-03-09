@@ -1,6 +1,7 @@
 import { getUserAuth } from '#lib/auth/utils';
 import { eq, and, gte, lt } from 'drizzle-orm';
-import { AccountabilityAgreementId, penalties, db } from '@repo/db';
+import { AccountabilityAgreementId, penalties } from '@repo/db';
+import { db } from '#db/config';
 
 export const getPenaltyToday = async ({
   agreementId,

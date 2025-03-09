@@ -6,10 +6,10 @@ import {
   UpdateCategoryParams,
   updateCategorySchema,
   categoryIdSchema,
-  db,
 } from '@repo/db';
 import { getUserAuth } from '#lib/auth/utils';
 import { and, eq } from 'drizzle-orm';
+import { db } from '#db/config';
 
 export const createCategory = async (category: NewCategoryParams) => {
   const { session } = await getUserAuth();

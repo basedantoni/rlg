@@ -1,3 +1,4 @@
+// TODO: Move to db package
 import { getUserAuth } from '#lib/auth/utils';
 import { asc, desc, SQL } from 'drizzle-orm';
 import { eq } from 'drizzle-orm';

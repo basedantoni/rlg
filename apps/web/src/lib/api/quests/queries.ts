@@ -1,4 +1,5 @@
-import { quests, db } from '@repo/db';
+import { quests } from '@repo/db';
+import { db } from '#db/config';
 import { createUserFilter } from '#db/utils';
 
 export const getQuests = async () => {

@@ -1,5 +1,6 @@
-import { dailyQuests, DailyQuestSortOptions, db } from '@repo/db';
+import { dailyQuests, DailyQuestSortOptions } from '@repo/db';
 import { createUserFilter, createOrderBy } from '#db/utils';
+import { db } from '#db/config';
 
 export const getDailyQuests = async (queryParams: DailyQuestSortOptions) => {
   // Column mapping function specific to dailyQuests

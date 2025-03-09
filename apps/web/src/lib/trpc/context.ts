@@ -1,4 +1,4 @@
-import { db } from '@repo/db';
+import { db } from '#db/config';
 import { getUserAuth } from '#lib/auth/utils';
 
 export const createTRPCContext = async (opts: { headers: Headers }) => {

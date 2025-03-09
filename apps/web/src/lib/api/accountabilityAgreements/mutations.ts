@@ -6,8 +6,8 @@ import {
   insertAccountabilityAgreementSchema,
   updateAccountabilityAgreementSchema,
   accountabilityAgreementIdSchema,
-  db,
 } from '@repo/db';
+import { db } from '#db/config';
 import { getUserAuth } from '#lib/auth/utils';
 import { eq } from 'drizzle-orm';
 
