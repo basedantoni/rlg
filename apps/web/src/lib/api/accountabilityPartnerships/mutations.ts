@@ -1,4 +1,3 @@
-import { db } from '#db/drizzle';
 import {
   NewAccountabilityPartnership,
   AccountabilityPartnershipId,
@@ -7,7 +6,8 @@ import {
   insertAccountabilityPartnershipSchema,
   updateAccountabilityPartnershipSchema,
   accountabilityPartnershipIdSchema,
-} from '#db/schema/accountabilityPartnerships';
+  db,
+} from '@repo/db';
 import { getUserAuth } from '#lib/auth/utils';
 import { eq } from 'drizzle-orm';
 

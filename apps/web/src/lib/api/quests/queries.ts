@@ -1,5 +1,4 @@
-import { db } from '#db/drizzle';
-import { quests } from '#db/schema/quests';
+import { quests, db } from '@repo/db';
 import { createUserFilter } from '#db/utils';
 
 export const getQuests = async () => {

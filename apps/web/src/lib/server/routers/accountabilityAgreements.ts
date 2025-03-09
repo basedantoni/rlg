@@ -3,7 +3,7 @@ import {
   insertAccountabilityAgreementParams,
   updateAccountabilityAgreementParams,
   accountabilityAgreementIdSchema,
-} from '#db/schema/accountabilityAgreements';
+} from '@repo/db';
 import {
   createAccountabilityAgreement,
   updateAccountabilityAgreement,

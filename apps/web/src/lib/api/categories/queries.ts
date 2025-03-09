@@ -1,5 +1,4 @@
-import { db } from '#db/drizzle';
-import { categories } from '#db/schema/categories';
+import { categories, db } from '@repo/db';
 import { createUserFilter } from '#db/utils';
 
 export const getCategories = async () => {

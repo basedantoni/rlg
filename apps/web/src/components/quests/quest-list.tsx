@@ -3,7 +3,7 @@
 import QuestModal from '#components/quests/quest-modal';
 import QuestForm from '#components/quests/quest-form';
 
-import { CompleteQuest } from '#db/schema/quests';
+import { CompleteQuest } from '@repo/db';
 import { useState } from 'react';
 import { trpc } from '#lib/trpc/client';
 

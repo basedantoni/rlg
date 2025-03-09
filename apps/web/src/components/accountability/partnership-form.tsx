@@ -8,7 +8,7 @@ import {
   AccountabilityPartnershipWithAgreement,
   insertAccountabilityPartnershipParams,
   NewAccountabilityPartnershipParams,
-} from '#db/schema/accountabilityPartnerships';
+} from '@repo/db';
 import { z } from 'zod';
 import { toast } from 'sonner';
 

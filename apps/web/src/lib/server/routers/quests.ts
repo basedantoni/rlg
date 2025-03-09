@@ -4,11 +4,7 @@ import {
   getQuestsWithDailyQuests,
 } from '#lib/api/quests/queries';
 import { protectedProcedure, router } from '#lib/server/trpc';
-import {
-  questIdSchema,
-  insertQuestParams,
-  updateQuestParams,
-} from '#db/schema/quests';
+import { questIdSchema, insertQuestParams, updateQuestParams } from '@repo/db';
 import {
   createQuest,
   deleteQuest,

@@ -1,6 +1,4 @@
-import { db } from '#db/drizzle';
-import { accountabilityPartnerships } from '#db/schema/accountabilityPartnerships';
-import { dailyQuests } from '#db/schema/dailyQuests';
+import { accountabilityPartnerships, dailyQuests, db } from '@repo/db';
 import { getUserAuth } from '#lib/auth/utils';
 import { and, eq, gt, lt, or } from 'drizzle-orm';
 

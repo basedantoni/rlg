@@ -1,15 +1,13 @@
-import { db } from '#db/drizzle';
 import {
   AccountabilityAgreementId,
+  NewAccountabilityAgreement,
+  UpdateAccountabilityAgreementParams,
   accountabilityAgreements,
   insertAccountabilityAgreementSchema,
   updateAccountabilityAgreementSchema,
-} from '#db/schema/accountabilityAgreements';
-import {
-  NewAccountabilityAgreement,
-  UpdateAccountabilityAgreementParams,
   accountabilityAgreementIdSchema,
-} from '#db/schema/accountabilityAgreements';
+  db,
+} from '@repo/db';
 import { getUserAuth } from '#lib/auth/utils';
 import { eq } from 'drizzle-orm';
 

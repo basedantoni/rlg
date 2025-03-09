@@ -38,8 +38,7 @@ import {
 } from 'lucide-react';
 
 import type { DragEndEvent } from '@dnd-kit/core';
-import { CompleteDailyQuest } from '#db/schema/dailyQuests';
-import { DailyQuestId } from '#db/schema/dailyQuests';
+import { CompleteDailyQuest, DailyQuestId } from '@repo/db';
 import { Status } from '#components/ui/kibo-ui/kanban';
 import { UseMutateFunction } from '@tanstack/react-query';
 

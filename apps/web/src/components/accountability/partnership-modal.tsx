@@ -1,7 +1,7 @@
 'use client';
 
 import PartnershipForm from '#components/accountability/partnership-form';
-import { AccountabilityPartnershipWithAgreement } from '#db/schema/accountabilityPartnerships';
+import { AccountabilityPartnershipWithAgreement } from '@repo/db';
 import { useState } from 'react';
 
 import { Button } from '#components/ui/button';

@@ -1,7 +1,7 @@
 'use client';
 
 import QuestForm from '#components/quests/quest-form';
-import { Quests } from '#db/schema/quests';
+import { Quests } from '@repo/db';
 import { useState } from 'react';
 
 import { Button } from '#components/ui/button';

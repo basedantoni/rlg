@@ -1,15 +1,15 @@
 import { router, protectedProcedure } from '../trpc';
 import {
+  accountabilityAgreementIdSchema,
   insertPenaltyParams,
   penaltyIdSchema,
   updatePenaltyParams,
-} from '#db/schema/penalties';
+} from '@repo/db';
 import {
   createPenalty,
   updatePenalty,
   deletePenalty,
 } from '#lib/api/penalties/mutations';
-import { accountabilityAgreementIdSchema } from '#db/schema/accountabilityAgreements';
 import { getPenaltyToday, getPenaltyCount } from '#lib/api/penalties/queries';
 
 export const penaltiesRouter = router({

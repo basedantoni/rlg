@@ -1,7 +1,7 @@
 'use client';
 
 import DailyQuestForm from '#components/dailyQuests/daily-quest-form';
-import { DailyQuests } from '#db/schema/dailyQuests';
+import { DailyQuests } from '@repo/db';
 import { useState } from 'react';
 
 import { Button } from '#components/ui/button';

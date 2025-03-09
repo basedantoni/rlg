@@ -1,8 +1,8 @@
-import { db } from '#db/drizzle';
 import {
   AccountabilityPartnershipId,
   accountabilityPartnerships,
-} from '#db/schema/accountabilityPartnerships';
+  db,
+} from '@repo/db';
 import { getUserAuth } from '#lib/auth/utils';
 import { eq, or } from 'drizzle-orm';
 

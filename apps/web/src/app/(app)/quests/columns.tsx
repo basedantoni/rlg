@@ -1,7 +1,7 @@
 'use client';
 
 import { ColumnDef } from '@tanstack/react-table';
-import { Quests } from '#db/schema/quests';
+import { Quests, CompleteDailyQuest } from '@repo/db';
 import {
   Activity,
   Calendar,
@@ -14,7 +14,6 @@ import { format } from 'date-fns';
 import { Badge } from '#components/ui/badge';
 import { Button } from '#components/ui/button';
 import { ActivityRing } from '#components/ui/activity-ring';
-import { CompleteDailyQuest } from '#db/schema/dailyQuests';
 
 type QuestWithDailyQuests = Quests & {
   dailyQuests: CompleteDailyQuest[];

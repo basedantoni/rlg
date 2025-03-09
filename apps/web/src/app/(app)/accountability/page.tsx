@@ -16,7 +16,7 @@ import {
 import {
   AccountabilityPartnershipWithUsers,
   AccountabilityPartnershipWithAgreement,
-} from '#db/schema/accountabilityPartnerships';
+} from '@repo/db';
 import { env } from '#lib/env.mjs';
 import { format } from 'date-fns';
 

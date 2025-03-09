@@ -7,7 +7,23 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@libsql/client':
+        specifier: ^0.14.0
+        version: 0.14.0
+      drizzle-orm:
+        specifier: ^0.38.2
+        version: 0.38.4(@libsql/client@0.14.0)(@types/react@19.0.10)(react@19.0.0)
+      drizzle-seed:
+        specifier: ^0.3.0
+        version: 0.3.1(drizzle-orm@0.38.4(@libsql/client@0.14.0)(@types/react@19.0.10)(react@19.0.0))
+      drizzle-zod:
+        specifier: ^0.6.0
+        version: 0.6.1(drizzle-orm@0.38.4(@libsql/client@0.14.0)(@types/react@19.0.10)(react@19.0.0))(zod@3.24.2)
     devDependencies:
+      drizzle-kit:
+        specifier: ^0.30.1
+        version: 0.30.5
       prettier:
         specifier: ^3.5.3
         version: 3.5.3
@@ -66,9 +82,6 @@ importers:
       '@hookform/resolvers':
         specifier: ^3.10.0
         version: 3.10.0(react-hook-form@7.54.2(react@19.0.0))
-      '@libsql/client':
-        specifier: ^0.14.0
-        version: 0.14.0
       '@radix-ui/react-alert-dialog':
         specifier: ^1.1.6
         version: 1.1.6(@types/react-dom@19.0.4(@types/react@19.0.10))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -111,6 +124,9 @@ importers:
       '@radix-ui/react-tooltip':
         specifier: ^1.1.8
         version: 1.1.8(@types/react-dom@19.0.4(@types/react@19.0.10))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@repo/db':
+        specifier: workspace:*
+        version: link:../../packages/db
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
@@ -153,15 +169,6 @@ importers:
       dotenv:
         specifier: ^16.4.7
         version: 16.4.7
-      drizzle-orm:
-        specifier: ^0.38.2
-        version: 0.38.4(@libsql/client@0.14.0)(@types/react@19.0.10)(react@19.0.0)
-      drizzle-seed:
-        specifier: ^0.3.0
-        version: 0.3.1(drizzle-orm@0.38.4(@libsql/client@0.14.0)(@types/react@19.0.10)(react@19.0.0))
-      drizzle-zod:
-        specifier: ^0.6.0
-        version: 0.6.1(drizzle-orm@0.38.4(@libsql/client@0.14.0)(@types/react@19.0.10)(react@19.0.0))(zod@3.24.2)
       lucide-react:
         specifier: ^0.474.0
         version: 0.474.0(react@19.0.0)
@@ -229,9 +236,6 @@ importers:
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.5.3)
-      drizzle-kit:
-        specifier: ^0.30.1
-        version: 0.30.5
       eslint:
         specifier: ^9.17.0
         version: 9.22.0(jiti@2.4.2)
@@ -247,6 +251,34 @@ importers:
       tailwindcss:
         specifier: ^4.0.0
         version: 4.0.12
+      tsx:
+        specifier: ^4.19.2
+        version: 4.19.3
+      typescript:
+        specifier: ^5
+        version: 5.8.2
+
+  packages/db:
+    dependencies:
+      dotenv:
+        specifier: ^16.4.7
+        version: 16.4.7
+      nanoid:
+        specifier: ^5.0.9
+        version: 5.1.3
+      zod:
+        specifier: ^3.24.1
+        version: 3.24.2
+    devDependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@types/node':
+        specifier: ^20
+        version: 20.17.24
+      eslint:
+        specifier: ^9.17.0
+        version: 9.22.0(jiti@2.4.2)
       tsx:
         specifier: ^4.19.2
         version: 4.19.3
@@ -5404,7 +5436,7 @@ snapshots:
 
   '@types/ws@8.18.0':
     dependencies:
-      '@types/node': 20.17.24
+      '@types/node': 22.13.9
 
   '@typescript-eslint/eslint-plugin@8.26.0(@typescript-eslint/parser@8.26.0(eslint@9.22.0(jiti@2.4.2))(typescript@5.8.2))(eslint@9.22.0(jiti@2.4.2))(typescript@5.8.2)':
     dependencies:

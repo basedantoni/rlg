@@ -1,5 +1,4 @@
-import { AccountabilityPartnershipWithUsers } from '#db/schema/accountabilityPartnerships';
-import { Users } from '#db/schema/users';
+import { AccountabilityPartnershipWithUsers, Users } from '@repo/db';
 
 /**
  * Determines which user in a partnership is the current user and which is the partner

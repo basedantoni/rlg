@@ -1,5 +1,7 @@
-import { db } from "../drizzle";
-import { levelDefinitions } from "../schema/levelDefinitions";
+import 'dotenv/config';
+
+import { db } from '../database';
+import { levelDefinitions } from '../schema';
 
 const base = 50;
 const rate = 1.05;
@@ -25,3 +27,15 @@ export const defineLevelTresholds = async () => {
     });
   }
 };
+
+const runSeed = async (): Promise<void> => {
+  await defineLevelTresholds();
+
+  console.log('⏳ Seeding...');
+};
+
+runSeed().catch((err) => {
+  console.error('❌ Seeding failed');
+  console.error(err);
+  process.exit(1);
+});

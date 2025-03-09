@@ -5,9 +5,9 @@ import {
   PenaltyId,
   updatePenaltySchema,
   UpdatePenaltyParams,
-} from '#db/schema/penalties';
+  db,
+} from '@repo/db';
 import { getUserAuth } from '#lib/auth/utils';
-import { db } from '#db/drizzle';
 import { eq } from 'drizzle-orm';
 
 export const createPenalty = async (penalty: NewPenalty) => {

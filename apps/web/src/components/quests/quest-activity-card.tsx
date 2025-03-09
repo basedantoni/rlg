@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '#components/ui/card';
 import { ActivityRing } from '#components/ui/activity-ring';
-import { CompleteDailyQuest } from '#db/schema/dailyQuests';
+import { CompleteDailyQuest } from '@repo/db';
 import { Badge } from '#components/ui/badge';
 import { CircleDot } from 'lucide-react';
 

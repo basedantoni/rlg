@@ -1,4 +1,3 @@
-import { db } from '#db/drizzle';
 import {
   NewCategoryParams,
   insertCategorySchema,
@@ -7,7 +6,8 @@ import {
   UpdateCategoryParams,
   updateCategorySchema,
   categoryIdSchema,
-} from '#db/schema/categories';
+  db,
+} from '@repo/db';
 import { getUserAuth } from '#lib/auth/utils';
 import { and, eq } from 'drizzle-orm';
 

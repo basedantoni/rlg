@@ -1,10 +1,6 @@
 'use client';
 
-import {
-  Category,
-  insertCategoryParams,
-  NewCategoryParams,
-} from '#db/schema/categories';
+import { Category, insertCategoryParams, NewCategoryParams } from '@repo/db';
 import { useRouter } from 'next/navigation';
 import { ControllerRenderProps, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';

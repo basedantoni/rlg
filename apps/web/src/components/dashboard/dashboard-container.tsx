@@ -5,7 +5,7 @@ import DailyQuestKanban from '#components/dailyQuests/daily-quest-kanban';
 import ViewOptionsPopover, {
   SortDirection,
 } from '#components/ui/custom/view-options-popover';
-import { CompleteDailyQuest } from '#db/schema/dailyQuests';
+import { CompleteDailyQuest } from '@repo/db';
 import { trpc } from '#lib/trpc/client';
 import { useState } from 'react';
 

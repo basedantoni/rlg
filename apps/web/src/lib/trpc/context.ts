@@ -1,4 +1,4 @@
-import { db } from '#db/drizzle';
+import { db } from '@repo/db';
 import { getUserAuth } from '#lib/auth/utils';
 
 export const createTRPCContext = async (opts: { headers: Headers }) => {

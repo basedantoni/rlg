@@ -1,4 +1,3 @@
-import { getUser } from '#lib/api/users/queries';
 import { sql, relations } from 'drizzle-orm';
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 import {
@@ -42,7 +41,7 @@ export const insertUserSchema = createInsertSchema(users).omit({
   createdAt: true,
   updatedAt: true,
 });
-export const insertUserParams = baseSchema;
+export const insertUserParams: z.ZodType<Partial<Users>> = baseSchema;
 
 export const updateUserSchema = createUpdateSchema(users).omit({
   id: true,
@@ -58,5 +57,19 @@ export type NewUserParams = z.infer<typeof insertUserParams>;
 export type UpdateUserParams = z.infer<typeof updateUserParams>;
 export type UserId = z.infer<typeof userIdSchema>['id'];
 
+// TODO: Move this type into web app
+type getUser = Promise<{
+  user:
+    | {
+        id: string;
+        name: string | null;
+        xp: number | null;
+        level: number | null;
+        createdAt: string | null;
+        updatedAt: string | null;
+      }
+    | undefined;
+}>;
+
 // this type infers the return from getQuests() - meaining it will include joins
-export type CompleteUser = Awaited<ReturnType<typeof getUser>>['user'];
+export type CompleteUser = Awaited<getUser>['user'];

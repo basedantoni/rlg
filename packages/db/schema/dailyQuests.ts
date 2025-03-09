@@ -1,4 +1,3 @@
-import { getDailyQuests } from '#lib/api/dailyQuests/queries';
 import { quests } from './quests';
 import { users } from './users';
 import { sql, relations } from 'drizzle-orm';
@@ -153,7 +152,30 @@ export type DailyQuestId = z.infer<typeof dailyQuestIdSchema>['id'];
 export type DailyQuestQueryParams = z.infer<typeof selectDailyQuestSchema>;
 export type DailyQuestSortOptions = z.infer<typeof sortOptionsSchema>;
 
-// this type infers the return from getQuests() - meaining it will include joins
-export type CompleteDailyQuest = Awaited<
-  ReturnType<typeof getDailyQuests>
->['dailyQuests'][number];
+// TODO: Move this type into web app
+type getDailyQuests = Promise<{
+  dailyQuests: {
+    title: string;
+    id: string;
+    createdAt: string | null;
+    updatedAt: string | null;
+    description: string | null;
+    userId: string | null;
+    questId: string | null;
+    status: 'open' | 'completed' | null;
+    dueDate: string | null;
+    recurrence:
+      | 'none'
+      | 'daily'
+      | 'workdays'
+      | 'weekends'
+      | 'weekly'
+      | 'weekly_specific'
+      | 'monthly'
+      | null;
+    weeklyDays: string | null;
+  }[];
+}>;
+
+// this type infers the return from getDailyQuests() - meaining it will include joins
+export type CompleteDailyQuest = Awaited<getDailyQuests>['dailyQuests'][number];

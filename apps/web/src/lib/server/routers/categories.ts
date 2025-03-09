@@ -8,7 +8,7 @@ import {
   categoryIdSchema,
   insertCategoryParams,
   updateCategoryParams,
-} from '#db/schema/categories';
+} from '@repo/db';
 import { getCategories } from '#lib/api/categories/queries';
 
 export const categoriesRouter = router({

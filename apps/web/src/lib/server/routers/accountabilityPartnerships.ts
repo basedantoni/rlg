@@ -2,7 +2,7 @@ import {
   accountabilityPartnershipIdSchema,
   insertAccountabilityPartnershipParams,
   updateAccountabilityPartnershipParams,
-} from '#db/schema/accountabilityPartnerships';
+} from '@repo/db';
 import { router, protectedProcedure } from '../trpc';
 import {
   createAccountabilityPartnership,

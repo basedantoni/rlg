@@ -1,5 +1,4 @@
-import { db } from '#db/drizzle';
-import { dailyQuests, DailyQuestSortOptions } from '#db/schema/dailyQuests';
+import { dailyQuests, DailyQuestSortOptions, db } from '@repo/db';
 import { createUserFilter, createOrderBy } from '#db/utils';
 
 export const getDailyQuests = async (queryParams: DailyQuestSortOptions) => {

@@ -2,7 +2,7 @@ import PenaltyToday from './penalty-today';
 import {
   AccountabilityPartnershipWithUsers,
   AccountabilityPartnershipWithAgreement,
-} from '#db/schema/accountabilityPartnerships';
+} from '@repo/db';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { getUserAuth } from '#lib/auth/utils';
 import { getPartnershipUsers } from '#lib/utils/partnership';

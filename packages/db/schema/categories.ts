@@ -1,4 +1,4 @@
-import { users } from '#db/schema/users';
+import { users } from './users';
 import { sql } from 'drizzle-orm';
 import { sqliteTable, text } from 'drizzle-orm/sqlite-core';
 import {

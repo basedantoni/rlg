@@ -1,9 +1,11 @@
 'use client';
 
 import { trpc } from '#lib/trpc/client';
-import { AccountabilityPartnershipWithAgreement } from '#db/schema/accountabilityPartnerships';
-import { AccountabilityPartnershipWithUsers } from '#db/schema/accountabilityPartnerships';
-import { Users } from '#db/schema/users';
+import {
+  AccountabilityPartnershipWithAgreement,
+  AccountabilityPartnershipWithUsers,
+  Users,
+} from '@repo/db';
 import { formatDate } from 'date-fns';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';

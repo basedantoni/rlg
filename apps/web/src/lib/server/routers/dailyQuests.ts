@@ -3,7 +3,7 @@ import {
   insertDailyQuestParams,
   updateDailyQuestParams,
   sortOptionsSchema,
-} from '#db/schema/dailyQuests';
+} from '@repo/db';
 import { protectedProcedure, router } from '#lib/server/trpc';
 import {
   createDailyQuest,

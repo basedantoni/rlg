@@ -1,4 +1,3 @@
-import { db } from '#db/drizzle';
 import {
   insertUserSchema,
   NewUserParams,
@@ -7,7 +6,8 @@ import {
   UserId,
   userIdSchema,
   users,
-} from '#db/schema/users';
+  db,
+} from '@repo/db';
 import { eq } from 'drizzle-orm';
 
 export const createUser = async (user: NewUserParams) => {

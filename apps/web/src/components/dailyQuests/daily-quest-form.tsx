@@ -4,7 +4,7 @@ import {
   DailyQuests,
   insertDailyQuestParams,
   NewDailyQuestParams,
-} from '#db/schema/dailyQuests';
+} from '@repo/db';
 import { trpc } from '#lib/trpc/client';
 import { capitalize } from '#lib/utils';
 import { useForm, Controller } from 'react-hook-form';

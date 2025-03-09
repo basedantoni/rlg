@@ -1,5 +1,5 @@
-import { users } from '#db/schema/users';
-import { categories } from '#db/schema/categories';
+import { categories } from './categories';
+import { users } from './users';
 import { relations, sql } from 'drizzle-orm';
 import { sqliteTable, text } from 'drizzle-orm/sqlite-core';
 import {
@@ -9,7 +9,6 @@ import {
 } from 'drizzle-zod';
 import { nanoid } from 'nanoid';
 import { z } from 'zod';
-import { type getQuests } from '#lib/api/quests/queries';
 import { dailyQuests } from './dailyQuests';
 
 export const quests = sqliteTable('quests', {
@@ -70,7 +69,19 @@ export type NewQuestParams = z.infer<typeof insertQuestParams>;
 export type UpdateQuestParams = z.infer<typeof updateQuestParams>;
 export type QuestId = z.infer<typeof questIdSchema>['id'];
 
+// TODO: Move this type into web app
+type getQuests = Promise<{
+  quests: {
+    title: string;
+    id: string;
+    createdAt: string | null;
+    updatedAt: string | null;
+    description: string | null;
+    userId: string | null;
+    categoryId: string | null;
+    status: 'open' | 'completed' | null;
+    dueDate: string | null;
+  }[];
+}>;
 // this type infers the return from getQuests() - meaining it will include joins
-export type CompleteQuest = Awaited<
-  ReturnType<typeof getQuests>
->['quests'][number];
+export type CompleteQuest = Awaited<getQuests>['quests'][number];

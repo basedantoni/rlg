@@ -1,6 +1,6 @@
 'use client';
 
-import { Quests, insertQuestParams, NewQuestParams } from '#db/schema/quests';
+import { Quests, insertQuestParams, NewQuestParams } from '@repo/db';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';

@@ -3,12 +3,12 @@
 import {
   AccountabilityAgreements,
   NewAccountabilityAgreementParams,
-} from '#db/schema/accountabilityAgreements';
+  insertAccountabilityAgreementParams,
+} from '@repo/db';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { insertAccountabilityAgreementParams } from '#db/schema/accountabilityAgreements';
 import { toast } from 'sonner';
 import { trpc } from '#lib/trpc/client';
 import {
