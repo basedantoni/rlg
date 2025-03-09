@@ -2,20 +2,20 @@
 
 import dynamic from 'next/dynamic';
 
-const ReactQueryDevtools = dynamic(
+const DevTool = dynamic(
   () =>
-    process.env.NODE_ENV === 'development'
-      ? import('@tanstack/react-query-devtools').then(
-          (mod) => mod.ReactQueryDevtools
-        )
-      : Promise.resolve(() => null),
-  { ssr: false }
+    import('@tanstack/react-query-devtools').then(
+      (mod) => mod.ReactQueryDevtools
+    ),
+  {
+    ssr: false,
+  }
 );
 
 export default function DevtoolsClient() {
+  // Only render in development.
   if (process.env.NODE_ENV !== 'development') {
     return null;
   }
-
-  return <ReactQueryDevtools initialIsOpen={false} />;
+  return <DevTool />;
 }
