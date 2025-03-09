@@ -44,7 +44,6 @@
     "@radix-ui/react-toggle": "^1.1.2",
     "@radix-ui/react-toggle-group": "^1.1.2",
     "@radix-ui/react-tooltip": "^1.1.8",
-    "@repo/typescript-config": "workspace:*",
     "@t3-oss/env-nextjs": "^0.11.1",
     "@tanstack/react-query": "^5.62.11",
     "@tanstack/react-table": "^8.21.2",
@@ -82,12 +81,13 @@
     "tailwindcss-animate": "^1.0.7",
     "@tailwindcss/postcss": "^4.0.0",
     "typescript": "^5",
-    "zod": "^3.24.1",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@typescript-eslint/eslint-plugin": "^8.19.0",
-    "@typescript-eslint/parser": "^8.19.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^22.13.9",
+    "@types/react": "19.0.10",
+    "@types/react-dom": "19.0.4",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
     "tsx": "^4.19.2"
