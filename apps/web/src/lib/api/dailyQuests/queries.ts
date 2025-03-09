@@ -20,6 +20,7 @@ export const getDailyQuests = async (queryParams: DailyQuestSortOptions) => {
   const orderByClause = createOrderBy(queryParams, mapDailyQuestColumn);
   const userFilter = await createUserFilter(dailyQuests);
 
+  console.log('db from query', db);
   const rows = await db.query.dailyQuests.findMany({
     orderBy: orderByClause,
     where: userFilter,

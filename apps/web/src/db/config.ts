@@ -12,4 +12,6 @@ const client =
         url: 'file:local.db',
       });
 
+console.log('client', client);
+
 export const db = createDatabase(client);
